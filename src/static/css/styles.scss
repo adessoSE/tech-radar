@@ -1,0 +1,390 @@
+$adesso-blue : #0275d8;
+$adesso-grey : #857971;
+$adesso-white : #f4f4f4;
+$white : #ffffff;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.tooltip-blip {
+    line-height: 10 !important;
+    height: 100px !important;
+    font-size: 15em !important;
+}
+body {
+    background-color: #dfeef5;
+}
+.stroke {
+    stroke:#dfeef5;
+    stroke-width:5;
+}
+
+svg {
+    display: block;
+    .innerCircleRing {
+        fill: $adesso-blue;
+    }
+    .middleCircleRing {
+        fill: #378fdd;
+    }
+    .outerCircleRing {
+        fill: #71acdf;
+    }
+    g {
+        cursor: pointer;
+        .blip-detail-sheet {
+            display: block;
+        }
+        .blipIndex {
+            fill: $adesso-grey ;
+            z-index: 1000;
+        }
+        .blipCircle {
+            fill: $white;
+            &:hover {
+                stroke: #bebebe;
+                fill: #ecf5fd;
+            }
+        }
+    }
+    .tech-path {
+        stroke: #7a7a7a;
+        fill: #7a7a7a;
+        font-size: 1.2em;
+    }
+}
+
+.blip-overlay{
+    background-color: rgba($adesso-blue, $alpha: 0.50);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000000;
+    .blip-header {
+        display: inline-block;
+        width: 100%;
+        button {
+            width:2em;
+            height: 2em;
+            font-weight: bold;
+            float: right;
+            font-size: 2em;
+            background: $adesso-white;
+            color: $adesso-blue;
+            margin-top: 1.25em;
+        } 
+        h2 {
+            float: left;
+        }
+    }
+    .blip-detail-sheet {
+        width: 80%;
+        margin: 0 auto;
+        padding: 1em 5%;
+        background: $white;
+        border: 1px solid $adesso-grey;
+        margin-top: 5%;
+    }
+}
+
+.blips-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+    height: auto;
+    position: absolute;
+    width: 100%;
+    background-color: #dfeef5 !important; 
+    box-shadow: none !important;
+    .close-button{
+        border-radius: 0 !important;
+        background-color: $adesso-blue !important;
+    }
+    .ring-list {
+        width: 30% !important;
+        margin: 2em 2em;
+    }   
+}
+
+.tech-tabs {
+    height: 7vh !important;
+}
+.quadrant-bar {
+    height: 5vh !important;
+}
+
+.radar-root {
+    background-color: #dfeef5 ;
+}
+
+.faq-container {
+    margin: 0 1em;
+}
+
+.blip-close-button-mobile {
+    display: none;
+    position: absolute;
+    right: 4em;
+    button {
+        width:2em;
+        height: 2em;
+        font-weight: bold;
+        font-size: 2em;
+        background: $adesso-white;
+        color: $adesso-blue !important;
+    }
+}
+
+@media (min-width: 1161px) {
+    .close-button {
+        display: none !important;
+    }
+    .blips-list {
+        top: 12vh;
+        height: 88vh;
+        span {
+            font-size: 1.8em;
+        }
+        h6{
+            font-size: 2em;
+            margin-left: 2em;
+            font-weight: bold;
+        }
+    }
+    .radar-root{
+        height: 93vh !important;
+    }
+    .quadrant-buttons {
+        display: none;
+    }
+    .radar-svg {
+        height: 85vh !important;
+        background-color: #dfeef5 ;
+    }
+    svg {
+        margin: 1em auto !important;
+        display: block;
+        .innerCircleRing {
+            fill: $adesso-blue;
+        }
+        .middleCircleRing {
+            fill: #378fdd;
+        }
+        .outerCircleRing {
+            fill: #71acdf;
+        }
+        g {
+            cursor: pointer;
+            .blip-detail-sheet {
+                display: block;
+            }
+            .blipIndex {
+                fill: $adesso-grey ;
+                z-index: 1000;
+            }
+            .blipCircle {
+                fill: $white;
+            }
+        }
+    }
+}
+@media (min-width: 763px) and (max-width: 1160px){
+    .radar-svg {
+        height: 88vh !important;
+        background-color: #dfeef5 ;
+    }
+    svg {
+        margin: 1em auto;
+    }
+    .quadrant-buttons {
+        display: none;
+    }
+    .close-button {
+        display: none !important;
+    }
+    .blips-list {
+        top: 12vh !important;
+        height: 88vh;
+        .ring-list {
+            width: 33% !important;
+        }
+        h6{
+            margin-left: 2em;
+            font-weight: bold;
+        }
+    }
+    .quadrant-tab, .tech-tab {
+        width: 19vw !important;
+        font-size: .7em !important;
+    }
+    .radar-root {
+        height: 80vh !important;
+    }
+    .blip-detail-sheet {
+        margin: 4em auto !important;
+        .blip-header {
+            margin: 0 0;
+            line-height: 0;
+            .blip-close-button {
+                display: none;
+            }
+            h2 {
+                font-size: 2.2em;
+            } 
+        }
+        h3 {
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+        .blip-close-button-mobile {
+            display: block;
+            right: 6em !important;
+        }
+    }
+}
+
+@media (min-width: 502px) and (max-width: 762px) {
+    .quadrant-buttons {
+        display: none !important;
+    }
+    svg {
+        margin-top: 1em;
+    }
+    .quadrant-tab, .tech-tab {
+        width: 19vw !important;
+        font-size: .7em !important;
+    }
+    .blips-list {
+        top: 12vh !important;
+        height: 88vh;
+        .ring-list {
+            width: 33% !important;
+        }
+        h6{
+            margin-left: 2em;
+            font-weight: bold;
+        }
+    }
+    .close-button {
+        display: none !important;
+    }
+    .blip-detail-sheet {
+        margin: 4em auto !important;
+        .blip-header {
+            margin: 0 0;
+            line-height: 0;
+            .blip-close-button {
+                display: none;
+            }
+            h2 {
+                font-size: 2.2em;
+            } 
+        }
+        h3 {
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+        .blip-close-button-mobile {
+            display: block;
+            
+            button {
+                
+            }
+        }
+    }
+}
+@media (max-width: 501px) and (min-width: 325px){
+    .tech-appbar {
+        width: 100vw;
+        text-align: center;
+    }
+    .quadrant-bar, .tech-tabs {
+        position: relative;
+        right: 3%;
+        width: 100% !important;
+    }
+    .quadrant-bar {
+        height: 7vh !important;
+    }
+    .tech-tabs {
+        height: 8vh !important;
+    }
+    .quadrant-tab, .tech-tab {
+        width: 19vw !important;
+        font-size: .7em !important;
+    }
+    img{
+        transform: scale(.6) !important;
+    }
+    .close-button {
+        flex: none !important;
+        display: inline-block;
+        width: 100%;
+        margin: .5em 0;
+        background-color: $adesso-blue !important;
+    }
+    .list-parent {
+        height: 100% !important;
+        position: absolute;
+        top: 14vh;
+        width: 100%;
+    }
+    .blips-list {
+        margin: .5em 0; 
+        .ring-list {
+            width: 33% !important;
+            margin: 0 !important;
+        }
+        h6{
+            margin-left: 1em;
+            font-weight: bold;
+        }
+    }
+    .quadrant-buttons button{
+        height: 12em;
+        width: 12em;
+        margin: .2em .2em !important;
+        opacity: 0;
+    }
+    .quadrant-buttons {
+        top: 26%;
+        left: 10%;
+        position: absolute;
+    }
+    svg {
+        margin-top: 1.8em;
+    }
+    .close-button {
+        display: none !important;
+    }
+    .blip-detail-sheet {
+        margin: 4em auto !important;
+        .blip-header {
+            margin: 0 0;
+            line-height: 0;
+            .blip-close-button {
+                display: none;
+            }
+            h2 {
+                font-size: 2.2em;
+            } 
+        }
+        h3 {
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+        .blip-close-button-mobile {
+            display: block;
+        }
+    }
+    
+}
+
+.tech-textfield-container {
+    margin: 1em auto;
+}
+/** GRID **/
+
