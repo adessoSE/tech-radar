@@ -125,9 +125,9 @@ svg {
 }
 
 .blip-close-button-mobile {
-    display: none;
+    display: block;
     position: absolute;
-    right: 4em;
+    right: 9em;
     button {
         width:2em;
         height: 2em;
@@ -289,10 +289,7 @@ svg {
         }
         .blip-close-button-mobile {
             display: block;
-            
-            button {
-                
-            }
+            right: 5em;
         }
     }
 }
@@ -378,6 +375,7 @@ svg {
         }
         .blip-close-button-mobile {
             display: block;
+            right: 3.5em;
         }
     }
     

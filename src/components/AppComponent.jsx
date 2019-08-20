@@ -18,11 +18,11 @@ const showJava = () => { return <JavaDataService /> },
         FAQ = () => {
             return (<div className="faq-container">
                 <h2>How can I participate?</h2>
-                <p>The data for the radar is maintained <a href="https://gitlab.com/thomas.franz/adesso-technologie-radar">here</a>.
+                <p>The data for the radar is maintained <a id="gitlab" href="https://gitlab.com/thomas.franz/adesso-technologie-radar">here</a>.
                    Make our radar better for all of us based on your experience and expertise.
                    Feel free to discuss, open issues, create merge requests.</p>
                 <h2>Radar UI</h2>
-                <p>The source code of the UI of the radar is available <a href="https://scm.adesso.de/scm/git/adesso/techradar">here</a>.</p>
+                <p>The source code of the UI of the radar is available <a id="scm" href="https://scm.adesso.de/scm/git/adesso/techradar">here</a>.</p>
             </div>);
 };
 
@@ -69,8 +69,8 @@ class AppComponent extends React.Component {
                     <Tab className="tech-tab" label={<img src={logo} className="tech-tab-img" alt="adesso's company logo"/>}  />
                     <Tab className="tech-tab" id="javaTab" label="Java" component={Link} to="/java" value={0} />
                     <Tab className="tech-tab" id="microTab" label="Microsoft" component={Link} to="/microsoft" value={1} />
-                    <Tab className="tech-tab" label="JavaScript" component={Link} to="/javascript" value={2} />
-                    <Tab className="tech-tab" label="FAQ" component={Link} to="/faq"value={3} />
+                    <Tab className="tech-tab" id="jsTab" label="JavaScript" component={Link} to="/javascript" value={2} />
+                    <Tab className="tech-tab" id="faq" label="FAQ" component={Link} to="/faq"value={3} />
                 </Tabs>
                 </AppBar>
                 </div>

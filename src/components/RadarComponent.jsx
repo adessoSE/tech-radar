@@ -219,32 +219,10 @@ class RadarComponent extends React.Component {
 
     render() {
         const radius = this.state.blipRadius, size = this.state.size,
-            centerX = this.state.centerPointX, centerY = this.state.centerPointY;
-
-        // If one technology is successfully founded and needs to be shown, render the details,
-        // otherwise, show nothing!
-        const searchedBlip = this.state.showBlipDetail ? this.renderBlip() : ''; 
-
-        return <div className="radar-root">
-                <div>        
-                    <AppBar centered position="static" color="default">
-                        <Tabs 
-                        className="quadrant-bar"
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
-                        >
-                        <Tab className="quadrant-tab" id = "alleQ" label="Alle Quadranten" value={0} />
-                        <Tab className="quadrant-tab" id = "plattform" label="Plattformen" value={1} />
-                        <Tab className="quadrant-tab" label="Methoden/ Techniken" value={2} />
-                        <Tab className="quadrant-tab" label="Frameworks & Sprachen" value={3} />
-                        <Tab className="quadrant-tab" label="Werkzeuge" value={4} />
-                        </Tabs>
-                    </AppBar>                    
-                </div>
-
+            centerX = this.state.centerPointX, centerY = this.state.centerPointY,
+            searchedBlip = this.state.showBlipDetail ? this.renderBlip() : '',
+            radarPanel = !this.state.showBlipListing ? (
+            <div>
                 <div>
                     <Container className="tech-textfield-container">
                     <TextField placeholder="Suche Technologie . . ." label="Suche Technologie . . ."variant="outlined" fullWidth={true} onChange={this.handleSearchState} onKeyPress={(e) => {
@@ -299,18 +277,18 @@ class RadarComponent extends React.Component {
                         this.state.resolvedData.map((blip, index) => {
                             return  (
                                 <MuiThemeProvider theme={theme}>
-                                <Tooltip className="tooltip-blip" title={blip.name}>
-                                    <g key={index}  onClick={ () => this.openInfoOfBox(blip)   }  >
-                                    <circle className="blipCircle" cx={blip.x}
-                                        cy={blip.y}
-                                        r={radius}
-                                    />
-                                    <text className ="blipIndex" 
-                                        x={blip.x - textPosition(index)} 
-                                        y={blip.y + 2}
-                                        fontSize={radius-1}>{index+1}</text>
-                                    </g>
-                                </Tooltip>
+                                    <Tooltip className="tooltip-blip" title={blip.name}>    
+                                        <g key={index} id={blip.name} onClick={ () => this.openInfoOfBox(blip)   }  >
+                                        <circle className="blipCircle" cx={blip.x}
+                                            cy={blip.y}
+                                            r={radius}
+                                        />
+                                        <text className ="blipIndex" 
+                                            x={blip.x - textPosition(index)} 
+                                            y={blip.y + 2}
+                                            fontSize={radius-1}>{index+1}</text>
+                                        </g>
+                                    </Tooltip>
                                 </MuiThemeProvider>
                             )
                         })
@@ -319,11 +297,38 @@ class RadarComponent extends React.Component {
                 </svg>
                 </div>
                 <div className="quadrant-buttons">
-                    <button onClick={(e) => this.handleChange(e, 1)}>1</button>
+                    <button id="mobile-plattform" onClick={(e) => this.handleChange(e, 1)}>1</button>
                     <button onClick={(e) => this.handleChange(e, 2)}>2</button>
                     <button onClick={(e) => this.handleChange(e, 3)}>3</button>
                     <button onClick={(e) => this.handleChange(e, 4)}>4</button>
                 </div>
+            </div>
+            ) : '';
+
+       
+
+        return <div className="radar-root">
+                <div>        
+                    <AppBar centered position="static" color="default">
+                        <Tabs 
+                        className="quadrant-bar"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                        >
+                        <Tab className="quadrant-tab" id = "alleQ" label="Alle Quadranten" value={0} />
+                        <Tab className="quadrant-tab" id = "plattform" label="Plattformen" value={1} />
+                        <Tab className="quadrant-tab" label="Methoden/ Techniken" value={2} />
+                        <Tab className="quadrant-tab" label="Frameworks & Sprachen" value={3} />
+                        <Tab className="quadrant-tab" label="Werkzeuge" value={4} />
+                        </Tabs>
+                    </AppBar>                    
+                </div>
+                {radarPanel}
+                
+                
                 {this.renderBlip()}
                 {this.renderBlipListing()}
         </div>

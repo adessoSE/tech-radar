@@ -37,9 +37,7 @@ const BlipDetailSheetComponent = (props) => {
                         <h2>
                             {props.name}
                         </h2>
-                        <div id="blip-close-desktop" className="blip-close-button">
-                            {props.element}
-                        </div>
+                        
                     </div>
                     <h3>
                         {props.ring} | {props.radar}
