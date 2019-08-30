@@ -33,10 +33,10 @@ describe('Testing all components ... on page Java', () => {
         cy.get('input').type('java').type('{enter}')
         cy.get('.blip-detail-sheet').should('be.visible')
         cy.get('#blip-close-mobile button').should('exist')
-        cy.get('#blip-close-mobile button').click({force: true, multiple: true});
+        cy.get('#blip-close-mobile button').click({ force: true, multiple: true });
         cy.get('.blip-detail-sheet').should('not.exist')
     });
-    
+
     it("Write jav(wrong) in input and show details, \n and closes the popup ", () => {
         cy.visit("http://localhost:3000/");
         cy.get('.blip-detail-sheet').should('not.exist')
@@ -44,7 +44,7 @@ describe('Testing all components ... on page Java', () => {
         cy.get('input').should('contain', '')
         cy.get('.blip-detail-sheet').should('not.exist')
     });
-    
+
     it("Hover on kotlin and apereance from muitooltip-popper", () => {
         cy.visit("http://localhost:3000/");
         cy.get('.MuiTooltip-popper').should('not.exist')
@@ -54,24 +54,24 @@ describe('Testing all components ... on page Java', () => {
         cy.get('#Kotlin').trigger('mouseout')
         cy.get('.MuiTooltip-popper').should('not.exist')
     });
-    
+
     it("Click on Bitbucket", () => {
         cy.visit("http://localhost:3000/");
-       
+
         cy.get('g[title="Bitbucket"]').should('exist')
         cy.get('.blip-detail-sheet').should('not.exist')
         cy.get('g[title="Bitbucket"]').click()
         cy.get('.blip-detail-sheet').should('be.visible')
         cy.get('#blip-close-mobile button').should('exist')
-        cy.get('#blip-close-mobile button').click({force: true, multiple: true}); 
+        cy.get('#blip-close-mobile button').click({ force: true, multiple: true });
         cy.get('.blip-detail-sheet').should('not.exist')
-    
+
     });
-    
-    
+
+
     it("Click on Plattform", () => {
         cy.visit("http://localhost:3000/");
-       
+
         cy.get('#plattform').should('exist')
         cy.get('.list-parent').should('not.exist')
         cy.get('#plattform').click()
@@ -83,10 +83,10 @@ describe('Testing all components ... on page Java', () => {
         cy.get('.radar-svg').should('be.visible')
         cy.get('input').should('be.visible')
     });
-    
+
     it('Click on one element in Plattform . . . ', () => {
         cy.visit("http://localhost:3000/");
-       
+
         cy.get('#plattform').should('exist')
         cy.get('.list-parent').should('not.exist')
         cy.get('#plattform').click()
@@ -101,21 +101,21 @@ describe('Testing all components ... on page Java', () => {
         cy.get('#blip-close-mobile').click()
         cy.get('.blip-detail-sheet').should('not.exist')
     })
-    
+
     it("Click on Microsoft", () => {
         cy.visit("http://localhost:3000/");
-       
+
         cy.get('#microTab').should('exist')
         cy.get('#msds').should('not.exist')
         cy.url().should('not.include', 'http://localhost:3000/microsoft')
         cy.get('#microTab').click()
-        cy.get('#msds').should('exist')  
+        cy.get('#msds').should('exist')
         cy.url().should('include', 'http://localhost:3000/microsoft')
     });
-    
+
     it("Click on Microsoft with blip-list", () => {
         cy.visit("http://localhost:3000/");
-       
+
         cy.get('#plattform').should('exist')
         cy.get('.list-parent').should('not.exist')
         cy.get('#plattform').click()
@@ -124,11 +124,11 @@ describe('Testing all components ... on page Java', () => {
         cy.get('#msds').should('not.exist')
         cy.url().should('not.include', 'http://localhost:3000/microsoft')
         cy.get('#microTab').click()
-        cy.get('#msds').should('exist')    
+        cy.get('#msds').should('exist')
         cy.url().should('include', 'http://localhost:3000/microsoft')
         cy.get('.list-parent').should('not.exist')
         cy.get('.radar-svg').should('be.visible')
-        
+
     });
 
     it('Test mobile quadrant buttons based on device width', () => {
@@ -162,7 +162,7 @@ describe('Test FAQ page ... ', () => {
         cy.get('#faq').click()
         cy.get('.faq-container').should('exist')
         cy.get('.radar-root').should('not.exist')
-        
+
         cy.get('#javaTab').should('exist')
         cy.get('#javaTab').click()
         cy.get('.faq-container').should('not.exist')
@@ -177,7 +177,8 @@ describe('Test FAQ page ... ', () => {
 
         cy.get('#scm').should('exist').and('be.visible')
         cy.get('#scm').should('have.attr', 'href')
-            .and('include', 'https://scm.adesso.de/scm/git/adesso/techradar')
+            // .and('include', 'https://scm.adesso.de/scm/git/adesso/techradar')
+            .and('include', 'https://bitbucket.adesso-group.com/scm/tr/react-techradar-mobile-team')
     })
 })
 
