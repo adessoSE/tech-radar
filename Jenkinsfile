@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image: 'node:8.16-onbuild'
+            image 'node:8.16-onbuild'
         }
         // dockerfile {
         //     filename '../Dockerfile'
@@ -19,18 +19,24 @@ pipeline {
         }
 
         stage('linting') {
-            echo 'linting app code'
+            steps {
+                echo 'linting app code'
+            }
         }
 
         stage('build react app') {
-            sh 'npm install'
-            echo 'dependencies installed'
-            sh 'npm run build'
-            echo 'react app built'
+            steps {
+                sh 'npm install'
+                echo 'dependencies installed'
+                sh 'npm run build'
+                echo 'react app built'
+            }
         }
 
         stage('testing') {
-            echo 'testing app'
+            steps {
+                echo 'testing app'
+            }
         }
 
         stage('build docker') {
@@ -41,15 +47,19 @@ pipeline {
         }
 
         // stage('deploy') {
-        //     sh ''
-        //     sh 'docker-compose up'
-        //     echo 'app deployed'
+        //     steps {
+        //         sh ''
+        //         sh 'docker-compose up'
+        //         echo 'app deployed'
+        //     }
         // }
 
         // stage('start app docker') {
-        //     sh 'docker stop react-app'
-        //     sh 'docker rm react-app'
-        //     sh 'docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -d --name=react-app react-app'
+        //     steps {
+        //         sh 'docker stop react-app'
+        //         sh 'docker rm react-app'
+        //         sh 'docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -d --name=react-app react-app'
+        //     }
         // }
     }
     post {
