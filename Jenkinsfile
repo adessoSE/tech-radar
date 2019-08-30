@@ -1,11 +1,11 @@
 pipeline {
     agent {
-        docker {
-            image 'node:8.16-onbuild'
-        }
-        // dockerfile {
-        //     filename '../Dockerfile'
+        // docker {
+        //     image 'node:8.16-onbuild'
         // }
+        dockerfile {
+            filename './docker-agent/Dockerfile'
+        }
     }
     stages {
         stage('scm checkout') {
