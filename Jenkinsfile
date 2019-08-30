@@ -1,11 +1,11 @@
 pipeline {
     agent {
-        docker {
-            image 'node:8.16-onbuild'
-        }
-        // dockerfile {
-        //     filename './docker-agent/Dockerfile'
+        // docker {
+        //     image 'node:8.16-onbuild'
         // }
+        dockerfile {
+            filename './docker-agent/Dockerfile'
+        }
     }
     stages {
         stage('scm checkout') {
@@ -62,9 +62,9 @@ pipeline {
         //     }
         // }
     }
-    post {
-        always {
-            archiveArtifacts artifacts: 'build/**'
-        }
-    }
+    // post {
+    //     always {
+    //         archiveArtifacts artifacts: 'build/**'
+    //     }
+    // }
 }
