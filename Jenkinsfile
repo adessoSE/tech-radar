@@ -41,7 +41,7 @@ pipeline {
 
         stage('build docker') {
             steps {
-                sh 'docker build -t react-app:${BUILD_NUMBER} ./build/'
+                sh 'docker build -t react-app:${BUILD_NUMBER} .'
                 echo 'docker container built'
             }
         }
