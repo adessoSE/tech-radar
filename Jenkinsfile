@@ -20,6 +20,7 @@ pipeline {
 
         stage('linting') {
             steps {
+                sh 'npm lint'
                 echo 'linting app code'
             }
         }
@@ -28,6 +29,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 echo 'dependencies installed'
+                sh 'npm audit fix'
                 sh 'npm run build'
                 echo 'react app built'
             }
@@ -56,9 +58,15 @@ pipeline {
 
         stage('start app docker') {
             steps {
+<<<<<<< HEAD
                 sh 'docker stop react-app'
                 sh 'docker rm react-app'
                 sh 'docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker-d --name=react-app react-app'
+=======
+                // sh 'docker stop react-app'
+                // sh 'docker rm react-app'
+                sh 'docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -d --name=react-app react-app'
+>>>>>>> 80cf1a1b41b6c9602b03dd401ef97c1d6b744a21
             }
         }
     }
