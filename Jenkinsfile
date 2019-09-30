@@ -54,13 +54,13 @@ pipeline {
         //     }
         // }
 
-        // stage('start app docker') {
-        //     steps {
-        //         sh 'docker stop react-app'
-        //         sh 'docker rm react-app'
-        //         sh 'docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -d --name=react-app react-app'
-        //     }
-        // }
+        stage('start app docker') {
+            steps {
+                sh 'docker stop react-app'
+                sh 'docker rm react-app'
+                sh 'docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -d --name=react-app react-app'
+            }
+        }
     }
     // post {
     //     always {
