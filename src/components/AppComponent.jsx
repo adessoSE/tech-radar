@@ -11,7 +11,7 @@ import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import logo from "../static/img/adesso.svg";
 
 const showJava = () => {
-    return <JavaDataService />;
+    return <JavaDataService/>;
   },
   showMS = () => {
     return <MSDataService />;
