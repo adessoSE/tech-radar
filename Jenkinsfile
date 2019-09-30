@@ -20,6 +20,7 @@ pipeline {
 
         stage('linting') {
             steps {
+                sh 'npm lint'
                 echo 'linting app code'
             }
         }
