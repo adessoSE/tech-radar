@@ -300,8 +300,8 @@ class RadarComponent extends React.Component {
 
         return <div className="radar-root">
                 <div>        
-                    <AppBar centered position="static" color="default">
-                        <Tabs className="quadrant-bar"
+                    <AppBar id="radar-appbar" centered position="static" color="default">
+                        <Tabs id="quadrant-bar" className="quadrant-bar"
                             value={this.state.value}
                             onChange={this.handleChange}
                             indicatorColor="primary"
