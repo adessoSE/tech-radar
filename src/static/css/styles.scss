@@ -110,12 +110,11 @@ svg {
 }
 
 .tech-tabs {
-    height: 7vh !important;
+    max-height: 7vh !important;
 }
-.quadrant-bar {
-    height: 5vh !important;
+.tech-tab-img {
+    max-height: 50px;
 }
-
 .radar-root {
     background-color: #dfeef5 ;
 }
