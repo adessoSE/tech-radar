@@ -9,7 +9,7 @@ const BlipListingComponent = (props) => {
           rethink = result.filter(element => element.ring ==='überdenken');
 
     return <div>
-        <Slide in={true} direction="down">
+        <Slide in={true} direction="left">
             <div className="list-parent">
                 <Paper className="blips-list">
                         <List className="ring-list">
