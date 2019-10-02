@@ -5,8 +5,8 @@ import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import RadarComponent from './components/RadarComponent';
-import javaJSON from './components/java-radar.json';
+import RadarComponent from '../src/components/RadarComponent';
+import javaJSON from '../src/components/java-radar.json';
 
 let container = null;
 

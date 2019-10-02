@@ -33,6 +33,7 @@ class RadarDataService extends React.Component {
 		return this.state.blips;
 	}
 
+	/* eslint-disable */
 	calculateBlipCoordinates() {
 		this.state.blipRadius = this.state.size / 80;		
 		this.state.outerRingWidth = this.state.size / 10;

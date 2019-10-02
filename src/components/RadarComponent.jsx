@@ -10,7 +10,7 @@ import {
     MuiThemeProvider,
     withStyles
 } from "@material-ui/core/styles";
-import { Button, Icon, Slide, TextField, Container } from '@material-ui/core';
+import { Button, Icon, Slide, Container } from '@material-ui/core';
 import BlipListingComponent from './BlipListingComponent';
 
 import javaJSON from './java-radar.json'
@@ -187,8 +187,10 @@ class RadarComponent extends React.Component {
                   this.setState({
                     showBlipDetail: true,
                     clickedBlip: technology
-                  })
+                  });
+                  return true;
               }
+              return false;
           })
         }
     }

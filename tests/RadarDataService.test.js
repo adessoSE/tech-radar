@@ -5,7 +5,7 @@ import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import RadarDataService from './components/dataservices/RadarDataService';
+import RadarDataService from '../src/components/dataservices/RadarDataService';
 
 let container = null;
 

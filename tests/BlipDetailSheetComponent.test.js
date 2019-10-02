@@ -5,9 +5,9 @@ import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import JavaDataService from './components/dataservices/JavaDataService';
-import BlipDetailSheetComponent from './components/BlipDetailSheetComponent';
-import javaJSON from './components/java-radar.json';
+import JavaDataService from '../src/components/dataservices/JavaDataService';
+import BlipDetailSheetComponent from '../src/components/BlipDetailSheetComponent';
+import javaJSON from '../src/components/java-radar.json';
 
 let container = null;
 

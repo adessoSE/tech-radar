@@ -2,8 +2,8 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-import AppComponent from './components/AppComponent';
-import { showJava, showMS, showJS, FAQ } from './components/AppComponent';
+import AppComponent from '../src/components/AppComponent';
+import { showJava, showMS, showJS, FAQ } from '../src/components/AppComponent';
 let container = null;
 
 beforeEach(() => {
