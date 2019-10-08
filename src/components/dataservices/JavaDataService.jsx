@@ -32,7 +32,7 @@ class JavaDataService extends RadarDataService {
     render() {
         return <>
             <RadarComponent blips={this.state.blips} />
-            </>
+        </>
     }
 }
 

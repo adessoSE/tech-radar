@@ -10,16 +10,13 @@ import {
     MuiThemeProvider,
     withStyles
 } from "@material-ui/core/styles";
-import { Button, Icon, Slide, TextField, Container } from '@material-ui/core';
+import { Button, Icon, Slide, Container } from '@material-ui/core';
 import BlipListingComponent from './BlipListingComponent';
 
 import javaJSON from './java-radar.json'
 import jsJSON from './javascript-radar.json'
 import msJSON from './microsoft-radar.json'
-
-// TODO: Used later
-import OutsideClickHandler from 'react-outside-click-handler';
-import AutoCompleteInput from './AutoCompleteInput';
+import  MuiDownShift from 'mui-downshift';
 
 const theme = createMuiTheme({
     overrides: {
@@ -34,11 +31,19 @@ const theme = createMuiTheme({
       color: "lightblue",
       backgroundColor: "green"
     }
-}, technologies = () => {
+}, suggestions = () => {
     const list = wholeList();
-    return list.map((e) => e.name)
+    let suggestions = [];
+    list.forEach((item, idx) => {
+        let suggestion = {
+            label: item.name,
+            value: idx
+        }
+        suggestions.push(suggestion);
+    });
+    return suggestions;
 }, wholeList = () => {
-    var arr = [];
+    let arr = [];
     for (let item of javaJSON) arr.push(item);
     for (let item of jsJSON) arr.push(item);
     for (let item of msJSON) arr.push(item);
@@ -84,7 +89,7 @@ class RadarComponent extends React.Component {
             showBlipListing: false,
             filteredBlips: [],
 
-            searchedTech: ''
+            filteredItems: []
         }
     }
 
@@ -134,27 +139,6 @@ class RadarComponent extends React.Component {
         this.setState({showBlipDetail: false})
     }
 
-    renderBlip() {
-        if (this.state.showBlipDetail) {
-            return <Slide in={true} direction="down" mountOnEnter unmountOnExit>
-                <div className="blip-overlay">
-                    <BlipDetailSheetComponent ref={(ele) => this.blipDetail = ele } {...this.state.clickedBlip} onOutside={() => this.removeBlip()} element={<RemoveButton onClick={() => {
-                        this.removeBlip();
-                    }} />} />
-                </div>
-            </Slide>      
-        }
-    }
-
-    renderBlipListing() {
-        if (this.state.showBlipListing) 
-            return <BlipListingComponent 
-                        {...this.state.filteredBlips} 
-                        openInfo={this.openInfoOfBox} 
-                        onClick={() => this.setState({ showBlipListing: false }) } 
-                    />
-    }
-
     handleBlipListing(value) {
         setTimeout(() => {
             var quadrantCase;
@@ -192,87 +176,97 @@ class RadarComponent extends React.Component {
         this.handleBlipListing(newValue);
     }
 
-    handleSearchState = (e) => {
-        this.setState( { searchedTech: e.target.value } )
-    }
-
-    handleSearchResult() {
-        const temp = this.state.searchedTech.toLowerCase();
-        
-        const searchedBlip = wholeList().find((e) => 
-             (e.name.toLowerCase() == temp));
-
-        if (searchedBlip !== undefined) {
-            this.setState({
-                showBlipDetail: true,
-                searchedTech: '',
-                clickedBlip: searchedBlip
-            })
-        } else {
-            this.setState({
-                showBlipDetail: false,
-                searchedTech: '',
-                clickedBlip: null
-            })
+    handleStateChange = changes => {
+        const searchValue = changes.inputValue;
+        if (typeof searchValue === 'string') {
+          const filteredItems = suggestions().filter(item => item.label.toLowerCase().includes(searchValue.toLowerCase()));
+          this.setState({ filteredItems });
+          suggestions().find((suggestion) => {
+              if (suggestion.label === searchValue) {
+                  const technology = wholeList().find((e) => (e.name === searchValue));
+                  this.setState({
+                    showBlipDetail: true,
+                    clickedBlip: technology
+                  });
+                  return true;
+              }
+              return false;
+          })
         }
     }
 
     render() {
-        const radius = this.state.blipRadius, size = this.state.size,
-            centerX = this.state.centerPointX, centerY = this.state.centerPointY,
-            searchedBlip = this.state.showBlipDetail ? this.renderBlip() : '',
+        const { filteredItems, blipRadius, size, centerPointX, centerPointY,
+            qOnePathDef, qTwoPathDef, qThreePathDef, qFourPathDef } = this.state;
+        const showBlipDetail = this.state.showBlipDetail ? (
+                <Slide in={true} direction="down" mountOnEnter unmountOnExit>
+                    <div className="blip-overlay">
+                        <BlipDetailSheetComponent ref={(ele) => this.blipDetail = ele } {...this.state.clickedBlip} onOutside={() => this.removeBlip()} element={<RemoveButton onClick={() => {
+                            this.removeBlip();
+                            }} />} 
+                        />
+                    </div>
+                </Slide> 
+            ): '',
+            showBlipList = this.state.showBlipListing ? (
+                <BlipListingComponent 
+                    {...this.state.filteredBlips} 
+                    openInfo={this.openInfoOfBox} 
+                    onClick={() => this.setState({ showBlipListing: false }) } 
+                />
+            ): '',
             radarPanel = !this.state.showBlipListing ? (
             <div>
-                <div>
-                    <Container className="tech-textfield-container">
-                    <TextField placeholder="Suche Technologie . . ." label="Suche Technologie . . ."variant="outlined" fullWidth={true} onChange={this.handleSearchState} onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                            this.handleSearchResult();
-                            e.target.value = '';
-                        }
-                    }}>
-                    </TextField>
+                <div id="autocomplete-div">
+                    <Container>
+                        <MuiDownShift 
+                            items={filteredItems}
+                            onStateChange={this.handleStateChange}
+                            fullWidth={true}
+                            variant="outlined"
+                            getInputProps={
+                                () => ({
+                                    label: 'Suche Technologie . . . ',
+                                    helperText: 'Gebe eine Technologie ein (z.B.: JavaFX) . . '
+                                })
+                            }
+                        />
                     </Container>
-                    
-                    <div className="searched-blip">
-                        {searchedBlip}
-                    </div>
                 </div>
-
                 <div className="radar-svg">
                 <svg id="radarplot" height="90%"  viewBox="0 0 500 500">
-                    <path id="q1-path" d={this.state.qOnePathDef} fill="none"/>
+                    <path id="q1-path" d={qOnePathDef} fill="none"/>
                         <text x="100px" className="tech-path">
                             <textPath href="#q1-path">
                                 Plattformen
                             </textPath>
                         </text>
 
-                    <path id="q2-path" d={this.state.qTwoPathDef}  fill="none"/>
+                    <path id="q2-path" d={qTwoPathDef}  fill="none"/>
                         <text x="110px" className="tech-path">
                             <textPath href="#q2-path">
                                 Methoden & Techniken
                             </textPath>
                         </text>
 
-                    <path id="q3-path" d={this.state.qThreePathDef} fill="none"/>
+                    <path id="q3-path" d={qThreePathDef} fill="none"/>
                         <text x="95px" className="tech-path">
                             <textPath href="#q3-path">
                                 Frameworks & Sprachen
                             </textPath>
                         </text>
 
-                    <path id="q4-path" d={this.state.qFourPathDef} fill="none"/>
+                    <path id="q4-path" d={qFourPathDef} fill="none"/>
                         <text x="125px" className="tech-path">
                             <textPath href="#q4-path">
                                 Werkzeuge
                             </textPath>
                         </text>
-                    <circle cx={centerX} cy={centerY} r={size/2}  className="outerCircleRing"/>
-                    <circle cx={centerX} cy={centerY} r={size/2.5} className="middleCircleRing" />
-                    <circle cx={centerX} cy={centerY} r={size/4} className="innerCircleRing"/>
-                    <line className="stroke" x1={0} y1={centerY} x2={size} y2={size/2}/>
-                    <line className="stroke" x1={centerX} y1={0} x2={centerX} y2={size}/>
+                    <circle cx={centerPointX} cy={centerPointY} r={size/2}  className="outerCircleRing"/>
+                    <circle cx={centerPointX} cy={centerPointY} r={size/2.5} className="middleCircleRing" />
+                    <circle cx={centerPointX} cy={centerPointY} r={size/4} className="innerCircleRing"/>
+                    <line className="stroke" x1={0} y1={centerPointY} x2={size} y2={size/2}/>
+                    <line className="stroke" x1={centerPointX} y1={0} x2={centerPointX} y2={size}/>
                     {
                         this.state.resolvedData.map((blip, index) => {
                             return  (
@@ -281,19 +275,18 @@ class RadarComponent extends React.Component {
                                         <g key={index} id={blip.name} onClick={ () => this.openInfoOfBox(blip)   }  >
                                         <circle className="blipCircle" cx={blip.x}
                                             cy={blip.y}
-                                            r={radius}
+                                            r={blipRadius}
                                         />
                                         <text className ="blipIndex" 
                                             x={blip.x - textPosition(index)} 
                                             y={blip.y + 2}
-                                            fontSize={radius-1}>{index+1}</text>
+                                            fontSize={blipRadius-1}>{index+1}</text>
                                         </g>
                                     </Tooltip>
                                 </MuiThemeProvider>
                             )
                         })
                     }
-                    
                 </svg>
                 </div>
                 <div className="quadrant-buttons">
@@ -309,28 +302,27 @@ class RadarComponent extends React.Component {
 
         return <div className="radar-root">
                 <div>        
-                    <AppBar centered position="static" color="default">
-                        <Tabs 
-                        className="quadrant-bar"
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
+                    <AppBar id="radar-appbar" centered position="static" color="default">
+                        <Tabs className="quadrant-bar"
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            indicatorColor="primary"
+                            textColor="primary"
+                            centered
                         >
-                        <Tab className="quadrant-tab" id = "alleQ" label="Alle Quadranten" value={0} />
-                        <Tab className="quadrant-tab" id = "plattform" label="Plattformen" value={1} />
-                        <Tab className="quadrant-tab" label="Methoden/ Techniken" value={2} />
-                        <Tab className="quadrant-tab" label="Frameworks & Sprachen" value={3} />
-                        <Tab className="quadrant-tab" label="Werkzeuge" value={4} />
+                            <Tab className="quadrant-tab" id = "alleQ" label="Alle Quadranten" value={0} />
+                            <Tab className="quadrant-tab" id = "plattform" label="Plattformen" value={1} />
+                            <Tab className="quadrant-tab" label="Methoden/ Techniken" value={2} />
+                            <Tab className="quadrant-tab" label="Frameworks & Sprachen" value={3} />
+                            <Tab className="quadrant-tab" label="Werkzeuge" value={4} />
                         </Tabs>
                     </AppBar>                    
                 </div>
                 {radarPanel}
                 
                 
-                {this.renderBlip()}
-                {this.renderBlipListing()}
+                {showBlipDetail}
+                {showBlipList}
         </div>
     }
 }

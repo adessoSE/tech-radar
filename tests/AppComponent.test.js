@@ -2,9 +2,8 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-import AppComponent from './components/AppComponent';
-import JavaDataService from './components/dataservices/JavaDataService';
-
+import AppComponent from '../src/components/AppComponent';
+import { showJava, showMS, showJS, FAQ } from '../src/components/AppComponent';
 let container = null;
 
 beforeEach(() => {
@@ -44,17 +43,21 @@ describe('Unit test: AppComponent', () => {
         
         act(() => {
             button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-        })
-        //expect(window.location.href).toBe('http://localhost/java')
-        //expect(container.querySelector('#javaDS')).not.toBeNull();
-
-        const showJava1 = JavaDataService.showJava
-        act(() => {
-            render(<JavaDataService id="javaDS"/>, container);
         });
 
-        expect(showJava1).not.toBeDefined();
-        //expect.stringContaining('id="javaDS"');
+        expect(showJava).toBeDefined();
+        expect(showMS).toBeDefined();
+        expect(showJS).toBeDefined();
+        expect(FAQ).toBeDefined();
+    });
+    it('check, FAQ is there', () => {
+        act(() => {
+            render(<AppComponent />, container);
+            render(FAQ(), container);
+        });
+
+        const faqPage = container.querySelector('.faq-container');
+        expect(faqPage.innerHTML).toBe('<h2>How can I participate?</h2><p>The data for the radar is maintained <a id=\"gitlab\" href=\"https://gitlab.com/thomas.franz/adesso-technologie-radar\">here</a>. Make our radar better for all of us based on your experience and expertise. Feel free to discuss, open issues, create merge requests.</p><h2>Radar UI</h2><p>The source code of the UI of the radar is available <a id=\"scm\" href=\"https://bitbucket.adesso-group.com/scm/tr/react-techradar-mobile-team\">here</a>.</p>')
     })
 })
 

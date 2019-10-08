@@ -9,10 +9,10 @@ const BlipListingComponent = (props) => {
           rethink = result.filter(element => element.ring ==='überdenken');
 
     return <div>
-        <Slide in={true} direction="down">
+        <Slide in={true} direction="left">
             <div className="list-parent">
                 <Paper className="blips-list">
-                        <List className="ring-list">
+                        <List id="machuPichu" className="ring-list">
                             <h6>Einsetzen</h6>
                             {use.map((ele, index) => {
                                 return <ListItem button key={index} onClick={() => props.openInfo(ele)}>
@@ -20,7 +20,7 @@ const BlipListingComponent = (props) => {
                                 </ListItem>
                             })}
                         </List>
-                        <List className="ring-list">
+                        <List id="rainbowMountain" className="ring-list">
                             <h6>Evaluieren</h6>
                             {evaluate.map((ele, index) => {
                                 return <ListItem button key={index} onClick={() => props.openInfo(ele)}>
@@ -28,7 +28,7 @@ const BlipListingComponent = (props) => {
                                 </ListItem>
                             })}
                         </List>
-                        <List className="ring-list">
+                        <List id="salarPlates" className="ring-list">
                             <h6>Überdenken</h6>
                             {rethink.map((ele, index) => {
                                 return <ListItem button key={index} onClick={() => props.openInfo(ele)}>

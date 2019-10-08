@@ -14,7 +14,7 @@ $white : #ffffff;
     font-size: 15em !important;
 }
 body {
-    background-color: #dfeef5;
+    
 }
 .stroke {
     stroke:#dfeef5;
@@ -110,14 +110,13 @@ svg {
 }
 
 .tech-tabs {
-    height: 7vh !important;
+    max-height: 7vh !important;
 }
-.quadrant-bar {
-    height: 5vh !important;
+.tech-tab-img {
+    max-height: 50px;
 }
-
 .radar-root {
-    background-color: #dfeef5 ;
+    background-color: #edf1f3 ;
 }
 
 .faq-container {
@@ -127,7 +126,7 @@ svg {
 .blip-close-button-mobile {
     display: block;
     position: absolute;
-    right: 9em;
+    right: 8vw;
     button {
         width:2em;
         height: 2em;
@@ -143,8 +142,7 @@ svg {
         display: none !important;
     }
     .blips-list {
-        top: 12vh;
-        height: 88vh;
+        height: 91.5vh;
         span {
             font-size: 1.8em;
         }
@@ -162,7 +160,7 @@ svg {
     }
     .radar-svg {
         height: 85vh !important;
-        background-color: #dfeef5 ;
+        background-color: #edf1f3 ;
     }
     svg {
         margin: 1em auto !important;
@@ -206,7 +204,6 @@ svg {
         display: none !important;
     }
     .blips-list {
-        top: 12vh !important;
         height: 88vh;
         .ring-list {
             width: 33% !important;
@@ -258,7 +255,6 @@ svg {
         font-size: .7em !important;
     }
     .blips-list {
-        top: 12vh !important;
         height: 88vh;
         .ring-list {
             width: 33% !important;
@@ -383,6 +379,15 @@ svg {
 
 .tech-textfield-container {
     margin: 1em auto;
+}
+
+#autocomplete-div {
+    margin: 2em 0;
+}
+
+#radar-appbar {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14) !important;
+    border-top: 1px groove #f5f5f5;
 }
 /** GRID **/
 

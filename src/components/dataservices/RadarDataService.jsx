@@ -19,7 +19,8 @@ class RadarDataService extends React.Component {
             middleRingDistance: 0,
             innerRingDistance: 0
         };
-    }
+	}
+	
     createBlipData() {
 		this.calculateBlipCoordinates();
 		for (let item of this.state.data) {
@@ -32,21 +33,8 @@ class RadarDataService extends React.Component {
 		return this.state.blips;
 	}
 
+	/* eslint-disable */
 	calculateBlipCoordinates() {
-		/* const SIZE = this.state.size;
-		this.setState({
-			blipRadius: SIZE / 80,
-			outerRingWidth: SIZE / 10,
-			middleRingWidth: SIZE / 6,
-			innerRingWidth: SIZE / 2.5,
-
-			centerPointX: SIZE / 2,
-			centerPointY: SIZE / 2,
-
-			outerRingDistance: SIZE / 2 - this.state.outerRingWidth/2,
-			middleRingDistance: SIZE / this.state.outerRingWidth - this.state.middleRingWidth/ 2,
-			innerRingDistance: this.state.innerRingWidth/2
-		}) */
 		this.state.blipRadius = this.state.size / 80;		
 		this.state.outerRingWidth = this.state.size / 10;
 		this.state.middleRingWidth = this.state.size / 6;
@@ -152,14 +140,12 @@ class RadarDataService extends React.Component {
 				break;
 		}		
 	}
-    get getData() {
-        return this.state.data;
-    }
 
-    get getState() {
-        return this.state;
-    }
-
+	render() {
+		return (
+			<></>
+		);
+	}
 }
 
 export default RadarDataService;
