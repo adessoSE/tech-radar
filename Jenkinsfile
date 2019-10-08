@@ -7,6 +7,9 @@ pipeline {
             filename './docker-agent/Dockerfile'
         }
     }
+    environment {
+        CI = 'true'
+    }
     stages {
         stage('scm checkout') {
             steps {
