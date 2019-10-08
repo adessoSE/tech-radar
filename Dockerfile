@@ -11,14 +11,13 @@
 
 FROM alpine
 
-RUN apt-get update
-RUN apt install nodejs
+RUN apk add --update npm
 RUN npm install http-server -g
 
 RUN mkdir -p /src/app
 COPY  ./build/ /src/app
 WORKDIR /src/app/build
 
-CMD ["http-server", "./"]
+CMD ["http-server", "./", "-p", "80", "-o"]
 
 EXPOSE 80
