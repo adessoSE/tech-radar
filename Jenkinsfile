@@ -35,9 +35,16 @@ pipeline {
             }
         }
 
-        stage('testing') {
+        stage('unit tests') {
             steps {
                 echo 'testing app'
+                sh 'npm run test'
+            }
+        }
+
+        stage('e2e tests') {
+            steps {
+                echo 'e2e testing app'
             }
         }
 

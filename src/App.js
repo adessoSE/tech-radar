@@ -4,7 +4,9 @@ import AppComponent from './components/AppComponent'
 
 function App() {
   return (
-    <AppComponent />
+    <div id="appJS-root">
+      <AppComponent />
+    </div>
   );
 }
 
