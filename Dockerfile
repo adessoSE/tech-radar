@@ -15,9 +15,9 @@ RUN apk add --update npm
 RUN npm install http-server -g
 
 RUN mkdir -p /src/app
-COPY  ./build/ /src/app
-WORKDIR /src/app/build
+COPY  ./build /src/app
+WORKDIR /src/app
 
-CMD ["http-server", "./", "-p", "8080"]
+CMD ["http-server", "./build", "-p", "80"]
 
-EXPOSE 8080
+EXPOSE 80
