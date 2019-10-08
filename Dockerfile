@@ -18,6 +18,6 @@ RUN mkdir -p /src/app
 COPY  ./build /src/app
 WORKDIR /src/app
 
-CMD ["http-server", "./index.html", "-p", "80"]
+CMD ["http-server", "./index.html", "-p", "8080"]
 
-EXPOSE 80
+EXPOSE 8080
