@@ -1,11 +1,11 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import React from 'react'; 
+import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import RadarDataService from '../src/components/dataservices/RadarDataService';
+import RadarDataService from '../components/dataservices/RadarDataService.jsx';
 
 let container = null;
 
@@ -29,8 +29,8 @@ describe('Unit test: RadarDataService', () => {
             blips: [],
             data: [],
 
-            size: 500, 
-            blipRadius: 0, 
+            size: 500,
+            blipRadius: 0,
             centerPointX: 0,
             centerPointY: 0,
             outerRingWidth: 0,
@@ -39,7 +39,7 @@ describe('Unit test: RadarDataService', () => {
             alphaSteps: 2,
             outerRingDistance: 0,
             middleRingDistance: 0,
-            innerRingDistance: 0 
+            innerRingDistance: 0
         }
         expect(wrapper.state()).toEqual(assertionObj);
     });

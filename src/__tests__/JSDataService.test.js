@@ -1,12 +1,12 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import React from 'react'; 
+import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import JSDataService from '../src/components/dataservices/JSDataService';
-import jsJSON from '../src/components/javascript-radar.json';
+import JSDataService from '../components/dataservices/JSDataService.jsx';
+import jsJSON from '../components/javascript-radar.json';
 
 let container = null;
 
@@ -43,11 +43,11 @@ describe('Unit test: JSDataService', () => {
             const blips = wrapper.state('blips');
             for (let i = 0; i < blips.length; i++) {
                 let currentBlip = blips[i];
-                let j = i+1;
+                let j = i + 1;
                 for (j; j < blips.length; j++) {
                     const nextBlip = blips[j];
-                    if (currentBlip.x === nextBlip.x && 
-                            currentBlip.y === nextBlip.y) {
+                    if (currentBlip.x === nextBlip.x &&
+                        currentBlip.y === nextBlip.y) {
                         return false;
                     }
                 }

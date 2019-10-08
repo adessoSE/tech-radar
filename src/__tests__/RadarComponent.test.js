@@ -1,12 +1,12 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import React from 'react'; 
+import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import RadarComponent from '../src/components/RadarComponent';
-import javaJSON from '../src/components/java-radar.json';
+import RadarComponent from '../components/RadarComponent.jsx';
+import javaJSON from '../components/java-radar.json';
 
 let container = null;
 
@@ -33,7 +33,7 @@ describe('Unit test: BlipListingComponent', () => {
     it('check, if there is AppBar', () => {
         const wrapper = mount(<RadarComponent {...javaJSON} />),
             appBar = wrapper.find('#radar-appbar');
-            
+
         expect(appBar.exists()).toEqual(true);
         expect(wrapper.find('#cuyInBolivia').exists()).not.toEqual(true);
     });

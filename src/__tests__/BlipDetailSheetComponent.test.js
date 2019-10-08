@@ -1,13 +1,13 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import React from 'react'; 
+import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import JavaDataService from '../src/components/dataservices/JavaDataService';
-import BlipDetailSheetComponent from '../src/components/BlipDetailSheetComponent';
-import javaJSON from '../src/components/java-radar.json';
+import JavaDataService from '../components/dataservices/JavaDataService.jsx';
+import BlipDetailSheetComponent from '../components/BlipDetailSheetComponent.jsx';
+import javaJSON from '../components/java-radar.json';
 
 let container = null;
 

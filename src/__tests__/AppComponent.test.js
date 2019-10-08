@@ -1,9 +1,9 @@
-import React from 'react'; 
+import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-import AppComponent from '../src/components/AppComponent';
-import { showJava, showMS, showJS, FAQ } from '../src/components/AppComponent';
+import AppComponent from '../components/AppComponent.jsx';
+import { showJava, showMS, showJS, FAQ } from '../components/AppComponent.jsx';
 let container = null;
 
 beforeEach(() => {
@@ -40,7 +40,7 @@ describe('Unit test: AppComponent', () => {
         });
         const button = container.querySelector('#javaTab');
         expect(button.innerHTML).toBe('<span class=\"MuiTab-wrapper\">Java</span><span class=\"MuiTouchRipple-root\"></span>');
-        
+
         act(() => {
             button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         });
