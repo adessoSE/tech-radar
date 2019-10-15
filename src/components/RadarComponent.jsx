@@ -93,7 +93,7 @@ class RadarComponent extends React.Component {
         }
     }
 
-    componentWillMount = () => {
+    UNSAFE_componentWillMount = () => {
         let arr = [];
         Promise.resolve(this.props.blips)
                 .then(function(data){
