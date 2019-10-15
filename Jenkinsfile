@@ -7,9 +7,9 @@ pipeline {
             filename './docker-agent/Dockerfile'
         }
     }
-    environment {
-        CI = 'true'
-    }
+    // environment {
+    //     CI = 'true'
+    // }
     stages {
         stage('scm checkout') {
             steps {
@@ -41,7 +41,7 @@ pipeline {
         stage('unit tests') {
             steps {
                 echo 'testing app'
-                sh 'npm run test'
+                sh 'CI=true npm test'
             }
         }
 
