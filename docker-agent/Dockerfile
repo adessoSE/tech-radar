@@ -2,7 +2,7 @@ FROM node:8.16-onbuild
 
 # Need Xvfb
 RUN apt-get update --yes
-RUN apt-get install --yes libgtk2.0-0 libnotify4 libgconf2-4 libnss3
+RUN apt-get install --yes libgtk2.0-0 libnotify4 libgconf2-4 libnss3 libxss1
 RUN apt-get install --yes xvfb
 # Need Cypress itself
 RUN npm set progress=false
