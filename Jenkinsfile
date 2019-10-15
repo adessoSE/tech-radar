@@ -7,9 +7,10 @@ pipeline {
             filename './docker-agent/Dockerfile'
         }
     }
-    // environment {
+    environment {
     //     CI = 'true'
-    // }
+        CHROME_BIN = '/bin/google-chrome'
+    }
     stages {
         stage('scm checkout') {
             steps {
@@ -41,13 +42,14 @@ pipeline {
         stage('unit tests') {
             steps {
                 echo 'testing app'
-                sh 'CI=true npm test'
+                // sh 'CI=true npm test'
             }
         }
 
         stage('e2e tests') {
             steps {
                 echo 'e2e testing app'
+                sh 'node_modules/.bin/cypress run'
             }
         }
 
