@@ -3,19 +3,13 @@ $adesso-grey : #857971;
 $adesso-white : #f4f4f4;
 $white : #ffffff;
 
-* {
-    margin: 0;
-    padding: 0;
-}
 
 .tooltip-blip {
     line-height: 10 !important;
     height: 100px !important;
     font-size: 15em !important;
 }
-body {
-    
-}
+
 .stroke {
     stroke:#dfeef5;
     stroke-width:5;
@@ -90,6 +84,7 @@ svg {
     }
 }
 
+//Generell check
 .blips-list {
     display: flex;
     flex-direction: row;
@@ -109,19 +104,6 @@ svg {
     }   
 }
 
-.tech-tabs {
-    max-height: 7vh !important;
-}
-.tech-tab-img {
-    max-height: 50px;
-}
-.radar-root {
-    background-color: #edf1f3 ;
-}
-
-.faq-container {
-    margin: 0 1em;
-}
 
 .blip-close-button-mobile {
     display: block;
@@ -137,257 +119,5 @@ svg {
     }
 }
 
-@media (min-width: 1161px) {
-    .close-button {
-        display: none !important;
-    }
-    .blips-list {
-        height: 91.5vh;
-        span {
-            font-size: 1.8em;
-        }
-        h6{
-            font-size: 2em;
-            margin-left: 2em;
-            font-weight: bold;
-        }
-    }
-    .radar-root{
-        height: 93vh !important;
-    }
-    .quadrant-buttons {
-        display: none;
-    }
-    .radar-svg {
-        height: 85vh !important;
-        background-color: #edf1f3 ;
-    }
-    svg {
-        margin: 1em auto !important;
-        display: block;
-        .innerCircleRing {
-            fill: $adesso-blue;
-        }
-        .middleCircleRing {
-            fill: #378fdd;
-        }
-        .outerCircleRing {
-            fill: #71acdf;
-        }
-        g {
-            cursor: pointer;
-            .blip-detail-sheet {
-                display: block;
-            }
-            .blipIndex {
-                fill: $adesso-grey ;
-                z-index: 1000;
-            }
-            .blipCircle {
-                fill: $white;
-            }
-        }
-    }
-}
-@media (min-width: 763px) and (max-width: 1160px){
-    .radar-svg {
-        height: 88vh !important;
-        background-color: #dfeef5 ;
-    }
-    svg {
-        margin: 1em auto;
-    }
-    .quadrant-buttons {
-        display: none;
-    }
-    .close-button {
-        display: none !important;
-    }
-    .blips-list {
-        height: 88vh;
-        .ring-list {
-            width: 33% !important;
-        }
-        h6{
-            margin-left: 2em;
-            font-weight: bold;
-        }
-    }
-    .quadrant-tab, .tech-tab {
-        width: 19vw !important;
-        font-size: .7em !important;
-    }
-    .radar-root {
-        height: 80vh !important;
-    }
-    .blip-detail-sheet {
-        margin: 4em auto !important;
-        .blip-header {
-            margin: 0 0;
-            line-height: 0;
-            .blip-close-button {
-                display: none;
-            }
-            h2 {
-                font-size: 2.2em;
-            } 
-        }
-        h3 {
-            font-size: 1.8em;
-            margin-top: 0;
-        }
-        .blip-close-button-mobile {
-            display: block;
-            right: 6em !important;
-        }
-    }
-}
 
-@media (min-width: 502px) and (max-width: 762px) {
-    .quadrant-buttons {
-        display: none !important;
-    }
-    svg {
-        margin-top: 1em;
-    }
-    .quadrant-tab, .tech-tab {
-        width: 19vw !important;
-        font-size: .7em !important;
-    }
-    .blips-list {
-        height: 88vh;
-        .ring-list {
-            width: 33% !important;
-        }
-        h6{
-            margin-left: 2em;
-            font-weight: bold;
-        }
-    }
-    .close-button {
-        display: none !important;
-    }
-    .blip-detail-sheet {
-        margin: 4em auto !important;
-        .blip-header {
-            margin: 0 0;
-            line-height: 0;
-            .blip-close-button {
-                display: none;
-            }
-            h2 {
-                font-size: 2.2em;
-            } 
-        }
-        h3 {
-            font-size: 1.8em;
-            margin-top: 0;
-        }
-        .blip-close-button-mobile {
-            display: block;
-            right: 5em;
-        }
-    }
-}
-@media (max-width: 501px) and (min-width: 325px){
-    .tech-appbar {
-        width: 100vw;
-        text-align: center;
-    }
-    .quadrant-bar, .tech-tabs {
-        position: relative;
-        right: 3%;
-        width: 100% !important;
-    }
-    .quadrant-bar {
-        height: 7vh !important;
-    }
-    .tech-tabs {
-        height: 8vh !important;
-    }
-    .quadrant-tab, .tech-tab {
-        width: 19vw !important;
-        font-size: .7em !important;
-    }
-    img{
-        transform: scale(.6) !important;
-    }
-    .close-button {
-        flex: none !important;
-        display: inline-block;
-        width: 100%;
-        margin: .5em 0;
-        background-color: $adesso-blue !important;
-    }
-    .list-parent {
-        height: 100% !important;
-        position: absolute;
-        top: 14vh;
-        width: 100%;
-    }
-    .blips-list {
-        margin: .5em 0; 
-        .ring-list {
-            width: 33% !important;
-            margin: 0 !important;
-        }
-        h6{
-            margin-left: 1em;
-            font-weight: bold;
-        }
-    }
-    .quadrant-buttons button{
-        height: 12em;
-        width: 12em;
-        margin: .2em .2em !important;
-        opacity: 0;
-    }
-    .quadrant-buttons {
-        top: 26%;
-        left: 10%;
-        position: absolute;
-    }
-    svg {
-        margin-top: 1.8em;
-    }
-    .close-button {
-        display: none !important;
-    }
-    .blip-detail-sheet {
-        margin: 4em auto !important;
-        .blip-header {
-            margin: 0 0;
-            line-height: 0;
-            .blip-close-button {
-                display: none;
-            }
-            h2 {
-                font-size: 2.2em;
-            } 
-        }
-        h3 {
-            font-size: 1.8em;
-            margin-top: 0;
-        }
-        .blip-close-button-mobile {
-            display: block;
-            right: 3.5em;
-        }
-    }
-    
-}
-
-.tech-textfield-container {
-    margin: 1em auto;
-}
-
-#autocomplete-div {
-    margin: 2em 0;
-}
-
-#radar-appbar {
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14) !important;
-    border-top: 1px groove #f5f5f5;
-}
-/** GRID **/
 

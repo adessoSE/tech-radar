@@ -1,4 +1,5 @@
 import React  from 'react';
+import RadarComponent from '../RadarComponent';
 
 class RadarDataService extends React.Component {
     constructor(props) {
@@ -18,10 +19,17 @@ class RadarDataService extends React.Component {
             outerRingDistance: 0,
             middleRingDistance: 0,
             innerRingDistance: 0
-        };
+		};
+		this.componentDidMount = this.componentDidMount.bind(this);
+		this.state.data = this.props.data;
+	}
+
+	componentDidMount() {
+        this.createBlipData();
 	}
 	
     createBlipData() {
+		
 		this.calculateBlipCoordinates();
 		for (let item of this.state.data) {
 			this.addBlip(item);
@@ -123,6 +131,7 @@ class RadarDataService extends React.Component {
 			default:
 				break;
 		}
+		
 		switch (blip.ring) {
 			case ('einsetzen'): {				
 				this.positionBlip(blip, startRadius, this.state.innerRingDistance,this.state.innerRingWidth);
@@ -143,7 +152,9 @@ class RadarDataService extends React.Component {
 
 	render() {
 		return (
-			<></>
+			
+		<RadarComponent blips={this.state.blips} /> 
+				
 		);
 	}
 }

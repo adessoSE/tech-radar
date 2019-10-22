@@ -5,18 +5,15 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';    
-import {
-    createMuiTheme,
-    MuiThemeProvider,
-    withStyles
-} from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider, withStyles } from "@material-ui/core/styles";
 import { Button, Icon, Slide, Container } from '@material-ui/core';
 import BlipListingComponent from './BlipListingComponent';
 
 import javaJSON from './java-radar.json'
 import jsJSON from './javascript-radar.json'
 import msJSON from './microsoft-radar.json'
-import  MuiDownShift from 'mui-downshift';
+
+import MuiDownShift from 'mui-downshift';
 
 const theme = createMuiTheme({
     overrides: {
@@ -196,30 +193,32 @@ class RadarComponent extends React.Component {
     }
 
     render() {
+
         const { filteredItems, blipRadius, size, centerPointX, centerPointY,
             qOnePathDef, qTwoPathDef, qThreePathDef, qFourPathDef } = this.state;
+
         const showBlipDetail = this.state.showBlipDetail ? (
                 <Slide in={true} direction="down" mountOnEnter unmountOnExit>
                     <div className="blip-overlay">
-                        <BlipDetailSheetComponent ref={(ele) => this.blipDetail = ele } {...this.state.clickedBlip} onOutside={() => this.removeBlip()} element={<RemoveButton onClick={() => {
-                            this.removeBlip();
-                            }} />} 
+                        <BlipDetailSheetComponent ref={(ele) => this.blipDetail = ele } {...this.state.clickedBlip} 
+                        element={<RemoveButton onClick={() => {this.removeBlip(); }} />} 
                         />
                     </div>
-                </Slide> 
-            ): '',
-            showBlipList = this.state.showBlipListing ? (
+                </Slide> ) : '';
+            
+        const showBlipList = this.state.showBlipListing ? (
                 <BlipListingComponent 
                     {...this.state.filteredBlips} 
                     openInfo={this.openInfoOfBox} 
-                    onClick={() => this.setState({ showBlipListing: false }) } 
-                />
-            ): '',
-            radarPanel = !this.state.showBlipListing ? (
+                    onClick={() => this.setState({ showBlipListing: false }) } /> ): '';
+                            
+        const radarPanel = !this.state.showBlipListing ? (
             <div>
+
                 <div id="autocomplete-div">
                     <Container>
                         <MuiDownShift 
+                            className="SearchLeiste"
                             items={filteredItems}
                             onStateChange={this.handleStateChange}
                             fullWidth={true}
@@ -233,8 +232,9 @@ class RadarComponent extends React.Component {
                         />
                     </Container>
                 </div>
+                
                 <div className="radar-svg">
-                <svg id="radarplot" height="90%"  viewBox="0 0 500 500">
+                <svg id="radarplot" height="100%"  viewBox="0 0 500 500">
                     <path id="q1-path" d={qOnePathDef} fill="none"/>
                         <text x="100px" className="tech-path">
                             <textPath href="#q1-path">
@@ -262,11 +262,13 @@ class RadarComponent extends React.Component {
                                 Werkzeuge
                             </textPath>
                         </text>
+
                     <circle cx={centerPointX} cy={centerPointY} r={size/2}  className="outerCircleRing"/>
                     <circle cx={centerPointX} cy={centerPointY} r={size/2.5} className="middleCircleRing" />
                     <circle cx={centerPointX} cy={centerPointY} r={size/4} className="innerCircleRing"/>
                     <line className="stroke" x1={0} y1={centerPointY} x2={size} y2={size/2}/>
                     <line className="stroke" x1={centerPointX} y1={0} x2={centerPointX} y2={size}/>
+                    
                     {
                         this.state.resolvedData.map((blip, index) => {
                             return  (
@@ -287,29 +289,32 @@ class RadarComponent extends React.Component {
                             )
                         })
                     }
+
                 </svg>
                 </div>
+                
                 <div className="quadrant-buttons">
                     <button id="mobile-plattform" onClick={(e) => this.handleChange(e, 1)}>1</button>
                     <button onClick={(e) => this.handleChange(e, 2)}>2</button>
                     <button onClick={(e) => this.handleChange(e, 3)}>3</button>
                     <button onClick={(e) => this.handleChange(e, 4)}>4</button>
                 </div>
+                
             </div>
             ) : '';
 
        
 
         return <div className="radar-root">
-                <div>        
+                <div id="toolleiste">        
                     <AppBar id="radar-appbar" centered position="static" color="default">
                         <Tabs className="quadrant-bar"
                             value={this.state.value}
                             onChange={this.handleChange}
                             indicatorColor="primary"
                             textColor="primary"
-                            centered
-                        >
+                            centered >
+
                             <Tab className="quadrant-tab" id = "alleQ" label="Alle Quadranten" value={0} />
                             <Tab className="quadrant-tab" id = "plattform" label="Plattformen" value={1} />
                             <Tab className="quadrant-tab" label="Methoden/ Techniken" value={2} />
@@ -318,9 +323,8 @@ class RadarComponent extends React.Component {
                         </Tabs>
                     </AppBar>                    
                 </div>
-                {radarPanel}
-                
-                
+
+                {radarPanel}             
                 {showBlipDetail}
                 {showBlipList}
         </div>

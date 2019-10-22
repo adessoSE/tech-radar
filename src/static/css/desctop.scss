@@ -1,0 +1,83 @@
+$adesso-blue : #0275d8;
+$adesso-grey : #857971;
+$adesso-white : #f4f4f4;
+$white : #ffffff;
+
+
+//1161px
+@media (min-width: 0px) {
+
+
+    //Suchleiste
+    #autocomplete-div {
+        margin-bottom: 0 !important;
+        position: relative;
+        top: 1vh;
+    }
+
+
+
+    //Radar SVG
+    .radar-svg {
+        height: 75vh !important;
+        background-color: #edf1f3 ;
+    }
+
+    svg {
+        margin: 1vh auto !important;
+        display: block;
+        .innerCircleRing {
+            fill: $adesso-blue;
+        }
+        .middleCircleRing {
+            fill: #378fdd;
+        }
+        .outerCircleRing {
+            fill: #71acdf;
+        }
+        g {
+            cursor: pointer;
+            .blip-detail-sheet {
+                display: block;
+            }
+            .blipIndex {
+                fill: $adesso-grey ;
+                z-index: 1000;
+            }
+            .blipCircle {
+                fill: $white;
+            }
+        }
+    }
+
+    //Listenansicht
+    .close-button {
+        display: none !important;
+    }
+    .blips-list {
+        height: 85vh;
+        position: relative;
+        top: 3.5vh;
+        width: 97vw;
+        margin-left: 1.5vw;
+        span {
+            font-size: 1.8em;
+        }
+        h6{
+            font-size: 2em;
+            margin-left: 2em;
+            font-weight: bold;
+        }
+    }
+    
+}
+
+@media (min-width: 1161px) and (max-height: 800px) {
+    .blips-list {
+        top: 5vh;
+    }
+
+    #autocomplete-div {
+        top: 3vh;
+    }
+}
