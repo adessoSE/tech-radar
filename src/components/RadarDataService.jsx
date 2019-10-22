@@ -1,5 +1,5 @@
 import React  from 'react';
-import RadarComponent from '../RadarComponent';
+import RadarComponent from './RadarComponent';
 
 class RadarDataService extends React.Component {
     constructor(props) {

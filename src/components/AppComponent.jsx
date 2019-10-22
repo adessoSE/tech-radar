@@ -1,5 +1,5 @@
 import React from "react";
-import RadarDataService from "./dataservices/RadarDataService";
+import RadarDataService from "./RadarDataService";
 import FAQ from "./FAQ";
 
 
