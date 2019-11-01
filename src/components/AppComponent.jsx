@@ -3,9 +3,9 @@ import RadarDataService from "./RadarDataService";
 import FAQ from "./FAQ";
 
 
-import javadata from './java-radar.json';
-import jsdata from './javascript-radar.json';
-import msdata from './microsoft-radar.json';
+import javaJSON from './java-radar.json';
+import jsJSON from './javascript-radar.json';
+import msJSON from './microsoft-radar.json';
 
 
 
@@ -57,7 +57,7 @@ export default class AppComponent extends React.Component {
           <div id="techleiste">
             <AppBar className="tech-appbar" title="Techradar" position="static" color="default">
               
-              <Tabs className="tech-tabs" centered value={this.state.value} onChange={this.handleChange} textColor="primary"> 
+              <Tabs className="tech-tabs" centered="true" value={this.state.value} onChange={this.handleChange} textColor="primary"> 
                 
                 <Tab
                   className="tech-tab"
@@ -103,10 +103,10 @@ export default class AppComponent extends React.Component {
             </div>
 
           <Switch>
-            <Route exact path="/" component = {() => (<RadarDataService data={javadata}/>)} />
-            <Route path="/java" component={() => (<RadarDataService data={javadata}/>)} />
-            <Route path="/microsoft" component={() => (<RadarDataService data={msdata}/>)} />
-            <Route path="/javascript" component={() => (<RadarDataService data={jsdata}/>)} />
+            <Route exact path="/" component = {() => (<RadarDataService data={javaJSON}/>)} />
+            <Route path="/java" component={() => (<RadarDataService data={javaJSON}/>)} />
+            <Route path="/microsoft" component={() => (<RadarDataService data={msJSON}/>)} />
+            <Route path="/javascript" component={() => (<RadarDataService data={jsJSON}/>)} />
             <Route path="/faq" component={FAQ} />
           </Switch>
 

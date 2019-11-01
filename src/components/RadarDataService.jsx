@@ -29,12 +29,13 @@ class RadarDataService extends React.Component {
 	}
 	
     createBlipData() {
-		
+		if(this.props.data != null){
 		this.calculateBlipCoordinates();
 		for (let item of this.state.data) {
 			this.addBlip(item);
 			this.state.blips.push(item);
 		}
+	}
 	}
 
 	getBlipData() {

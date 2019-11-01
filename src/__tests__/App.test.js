@@ -2,7 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-import App from '../App.js';
+import AppComponent from '../components/AppComponent.jsx';
 
 let container = null;
 
@@ -20,7 +20,7 @@ afterEach(() => {
 describe('Unit test: App', () => {
     it('renders App', () => {
         act(() => {
-            render(<App />, container);
+            render(<AppComponent />, container);
         });
         expect.stringContaining('<div id="appJS-root">');
     })

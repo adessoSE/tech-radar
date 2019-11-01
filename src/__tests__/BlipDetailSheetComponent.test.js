@@ -5,7 +5,8 @@ import { unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount, render } from 'enzyme';
 
-import JavaDataService from '../components/dataservices/JavaDataService.jsx';
+
+import RadarDataService from '../components/RadarDataService.jsx';
 import BlipDetailSheetComponent from '../components/BlipDetailSheetComponent.jsx';
 import javaJSON from '../components/java-radar.json';
 
