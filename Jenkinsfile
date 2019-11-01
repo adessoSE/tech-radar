@@ -42,7 +42,7 @@ pipeline {
         stage('unit tests') {
             steps {
                 echo 'testing app'
-                // sh 'CI=true npm test'
+                sh 'CI=true npm test'
             }
         }
 
