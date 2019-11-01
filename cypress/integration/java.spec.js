@@ -30,11 +30,11 @@ describe('Testing all components ... on page Java', () => {
     it("Write java in input and show details, \n and closes the popup ", () => {
         cy.visit("http://localhost:3000/");
         cy.get('.blip-detail-sheet').should('not.exist')
-        cy.get('input').type('java').type('{enter}')
+        cy.get('input').type('mongodb').type('{downarrow}{enter}')
         cy.get('.blip-detail-sheet').should('be.visible')
-        cy.get('#blip-close-mobile button').should('exist')
-        cy.get('#blip-close-mobile button').click({ force: true, multiple: true });
-        cy.get('.blip-detail-sheet').should('not.exist')
+        cy.get('.blip-close-button-mobile').should('exist')
+        cy.get('.blip-close-button-mobile').click();
+        cy.get('.blip-close-button-mobile').should('not.exist')
     });
 
     it("Write jav(wrong) in input and show details, \n and closes the popup ", () => {
@@ -106,10 +106,10 @@ describe('Testing all components ... on page Java', () => {
         cy.visit("http://localhost:3000/");
 
         cy.get('#microTab').should('exist')
-        cy.get('#msds').should('not.exist')
+        // cy.get('#msds').should('not.exist')
         cy.url().should('not.include', 'http://localhost:3000/microsoft')
         cy.get('#microTab').click()
-        cy.get('#msds').should('exist')
+        // cy.get('#msds').should('exist')
         cy.url().should('include', 'http://localhost:3000/microsoft')
     });
 
@@ -121,10 +121,10 @@ describe('Testing all components ... on page Java', () => {
         cy.get('#plattform').click()
         cy.get('.blips-list').should('be.visible')
         cy.get('#microTab').should('exist')
-        cy.get('#msds').should('not.exist')
+        // cy.get('#msds').should('not.exist')
         cy.url().should('not.include', 'http://localhost:3000/microsoft')
         cy.get('#microTab').click()
-        cy.get('#msds').should('exist')
+        // cy.get('#msds').should('exist')
         cy.url().should('include', 'http://localhost:3000/microsoft')
         cy.get('.list-parent').should('not.exist')
         cy.get('.radar-svg').should('be.visible')
@@ -135,11 +135,11 @@ describe('Testing all components ... on page Java', () => {
         cy.visit('http://localhost:3000/')
         cy.viewport(1500, 980)
 
-        cy.get('#mobile-plattform').should('not.be.visible')
+        cy.get('.quadrant-buttons').should('not.be.visible')
         cy.viewport('iphone-6')
-        cy.get('#mobile-plattform').should('be.visible')
+        cy.get('.quadrant-buttons').should('be.visible')
         cy.get('#mobile-plattform').click()
-        cy.get('#mobile-plattform').should('not.exist')
+        cy.get('.quadrant-buttons').should('not.exist')
 
         cy.get('.radar-svg').should('not.exist')
         cy.get('input').should('not.exist')

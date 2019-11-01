@@ -1,59 +1,53 @@
-$appbackground1 : #edf1f3;
-$appbackground2 : #dfeef5;
+$appbackground1: #edf1f3;
+$appbackground2: #dfeef5;
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
-#root{
-    min-height: 100vh;
-    min-width: 100vw;
-    background-color: $appbackground1;
+#root {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: $appbackground1;
 }
 
 body {
-    background-color: $appbackground1;
+  background-color: $appbackground1;
 }
 
 .faq-container {
-    margin: 0 1em;
+  margin: 0 1em;
 }
-
-
-
 
 //Oberste Tab Leiste
 .tech-tabs {
- 
-    align-items: center;
-    height: 3vh;
-    
-    
+  align-items: center;
+  height: 3vh;
 }
 
 #techleiste {
-    width: 97vw;
-    margin-left: 1.5vw;
-    margin-right: 1.5vw;
-    margin-top: 0.75vh;
-    margin-bottom: 0.75vh;
+  width: 97vw;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+  margin-top: 0.75vh;
+  margin-bottom: 0.75vh;
 }
 
 //Radarroot
-.radar-root{
-    height: 80vh !important;
+.radar-root {
+  height: 80vh !important;
 }
 
-.quadrant-buttons {
-    display: none;
-}
+// .quadrant-buttons {
+//     display: none;
+// }
 
 //ToolLeiste
 #toolleiste {
-    width: 97vw;
-    margin-left: 1.5vw;
-    margin-right: 1.5vw;
-    height: 3vh;
-    margin-bottom: 0.75vh;
+  width: 97vw;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+  height: 3vh;
+  margin-bottom: 0.75vh;
 }

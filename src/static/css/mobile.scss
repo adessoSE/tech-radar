@@ -1,153 +1,152 @@
-$adesso-blue : #0275d8;
-$adesso-grey : #857971;
-$adesso-white : #f4f4f4;
-$white : #ffffff;
+$adesso-blue: #0275d8;
+$adesso-grey: #857971;
+$adesso-white: #f4f4f4;
+$white: #ffffff;
 
-@media (min-width: 502px) and (max-width: 762px) {
-    .quadrant-buttons {
-        display: none !important;
+@media (max-width: 762px) {
+  svg {
+    margin-top: 1em;
+  }
+  .quadrant-tab,
+  .tech-tab {
+    width: 19vw !important;
+    font-size: 0.7em !important;
+  }
+  .blips-list {
+    height: 88vh;
+    .ring-list {
+      width: 33% !important;
     }
-    svg {
-        margin-top: 1em;
+    h6 {
+      margin-left: 2em;
+      font-weight: bold;
     }
-    .quadrant-tab, .tech-tab {
-        width: 19vw !important;
-        font-size: .7em !important;
+  }
+  .close-button {
+    display: none !important;
+  }
+  .blip-detail-sheet {
+    margin: 4em auto !important;
+    .blip-header {
+      margin: 0 0;
+      line-height: 0;
+      .blip-close-button {
+        display: none;
+      }
+      h2 {
+        font-size: 2.2em;
+      }
     }
-    .blips-list {
-        height: 88vh;
-        .ring-list {
-            width: 33% !important;
-        }
-        h6{
-            margin-left: 2em;
-            font-weight: bold;
-        }
+    h3 {
+      font-size: 1.8em;
+      margin-top: 0;
     }
-    .close-button {
-        display: none !important;
+    .blip-close-button-mobile {
+      display: block;
+      right: 5em;
     }
-    .blip-detail-sheet {
-        margin: 4em auto !important;
-        .blip-header {
-            margin: 0 0;
-            line-height: 0;
-            .blip-close-button {
-                display: none;
-            }
-            h2 {
-                font-size: 2.2em;
-            } 
-        }
-        h3 {
-            font-size: 1.8em;
-            margin-top: 0;
-        }
-        .blip-close-button-mobile {
-            display: block;
-            right: 5em;
-        }
-    }
+  }
 }
 
-
-@media (max-width: 501px) and (min-width: 325px){
-    .tech-appbar {
-        width: 100vw;
-        text-align: center;
+@media (max-width: 501px) and (min-width: 325px) {
+  .tech-appbar {
+    width: 100vw;
+    text-align: center;
+  }
+  .quadrant-bar,
+  .tech-tabs {
+    position: relative;
+    right: 3%;
+    width: 100% !important;
+  }
+  .quadrant-bar {
+    height: 7vh !important;
+  }
+  .tech-tabs {
+    height: 8vh !important;
+  }
+  .quadrant-tab,
+  .tech-tab {
+    width: 19vw !important;
+    font-size: 0.7em !important;
+  }
+  img {
+    transform: scale(0.6) !important;
+  }
+  .close-button {
+    flex: none !important;
+    display: inline-block;
+    width: 100%;
+    margin: 0.5em 0;
+    background-color: $adesso-blue !important;
+  }
+  .list-parent {
+    height: 100% !important;
+    position: absolute;
+    top: 14vh;
+    width: 100%;
+  }
+  .blips-list {
+    margin: 0.5em 0;
+    .ring-list {
+      width: 33% !important;
+      margin: 0 !important;
     }
-    .quadrant-bar, .tech-tabs {
-        position: relative;
-        right: 3%;
-        width: 100% !important;
+    h6 {
+      margin-left: 1em;
+      font-weight: bold;
     }
-    .quadrant-bar {
-        height: 7vh !important;
+  }
+  .quadrant-buttons button {
+    height: 12em;
+    width: 12em;
+    margin: 0.2em 0.2em !important;
+    opacity: 0;
+  }
+  .quadrant-buttons {
+    top: 26%;
+    left: 10%;
+    position: absolute;
+  }
+  svg {
+    margin-top: 1.8em;
+  }
+  .close-button {
+    display: none !important;
+  }
+  .blip-detail-sheet {
+    margin: 4em auto !important;
+    .blip-header {
+      margin: 0 0;
+      line-height: 0;
+      .blip-close-button {
+        display: none;
+      }
+      h2 {
+        font-size: 2.2em;
+      }
     }
-    .tech-tabs {
-        height: 8vh !important;
+    h3 {
+      font-size: 1.8em;
+      margin-top: 0;
     }
-    .quadrant-tab, .tech-tab {
-        width: 19vw !important;
-        font-size: .7em !important;
+    .blip-close-button-mobile {
+      display: block;
+      right: 3.5em;
     }
-    img{
-        transform: scale(.6) !important;
-    }
-    .close-button {
-        flex: none !important;
-        display: inline-block;
-        width: 100%;
-        margin: .5em 0;
-        background-color: $adesso-blue !important;
-    }
-    .list-parent {
-        height: 100% !important;
-        position: absolute;
-        top: 14vh;
-        width: 100%;
-    }
-    .blips-list {
-        margin: .5em 0; 
-        .ring-list {
-            width: 33% !important;
-            margin: 0 !important;
-        }
-        h6{
-            margin-left: 1em;
-            font-weight: bold;
-        }
-    }
-    .quadrant-buttons button{
-        height: 12em;
-        width: 12em;
-        margin: .2em .2em !important;
-        opacity: 0;
-    }
-    .quadrant-buttons {
-        top: 26%;
-        left: 10%;
-        position: absolute;
-    }
-    svg {
-        margin-top: 1.8em;
-    }
-    .close-button {
-        display: none !important;
-    }
-    .blip-detail-sheet {
-        margin: 4em auto !important;
-        .blip-header {
-            margin: 0 0;
-            line-height: 0;
-            .blip-close-button {
-                display: none;
-            }
-            h2 {
-                font-size: 2.2em;
-            } 
-        }
-        h3 {
-            font-size: 1.8em;
-            margin-top: 0;
-        }
-        .blip-close-button-mobile {
-            display: block;
-            right: 3.5em;
-        }
-    }
-    
+  }
 }
 
 .tech-textfield-container {
-    margin: 1em auto;
+  margin: 1em auto;
 }
 
 #autocomplete-div {
-    margin: 2em 0;
+  margin: 2em 0;
 }
 
 #radar-appbar {
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14) !important;
-    border-top: 1px groove #f5f5f5; 
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14) !important;
+  border-top: 1px groove #f5f5f5;
 }
