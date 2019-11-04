@@ -62,6 +62,7 @@ const theme = createMuiTheme({
 };
 
 
+
 class RadarComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -90,6 +91,7 @@ class RadarComponent extends React.Component {
         }
     }
 
+    
     UNSAFE_componentWillMount = () => {
         let arr = [];
         Promise.resolve(this.props.blips)
