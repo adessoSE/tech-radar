@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import BlipDetailSheetComponent from './BlipDetailSheetComponent';
 
 import Tooltip from '@material-ui/core/Tooltip';
@@ -23,12 +23,16 @@ const theme = createMuiTheme({
         }
       }
     }
-}), styles = {
+});
+
+const styles = {
     tooltip: {
       color: "lightblue",
       backgroundColor: "green"
     }
-}, suggestions = () => {
+}
+
+const suggestions = () => {
     const list = wholeList();
     let suggestions = [];
     list.forEach((item, idx) => {
@@ -39,19 +43,25 @@ const theme = createMuiTheme({
         suggestions.push(suggestion);
     });
     return suggestions;
-}, wholeList = () => {
+}
+
+const wholeList = () => {
     let arr = [];
     for (let item of javaJSON) arr.push(item);
     for (let item of jsJSON) arr.push(item);
     for (let item of msJSON) arr.push(item);
     return arr;
-}, RemoveButton = (props) => {
+}
+
+const RemoveButton = (props) => {
     return <Button className="closeButton" onClick={props.onClick}> 
         <Icon>
             clear
         </Icon>
     </Button>
-}, textPosition = (i) => {
+}
+
+const textPosition = (i) => {
     if (i<10) {
         return 2;
     }
@@ -309,7 +319,7 @@ class RadarComponent extends React.Component {
 
         return <div className="radar-root">
                 <div id="toolleiste">        
-                    <AppBar id="radar-appbar" centered position="static" color="default">
+                    <AppBar id="radar-appbar" position="static" color="default">
                         <Tabs className="quadrant-bar"
                             value={this.state.value}
                             onChange={this.handleChange}

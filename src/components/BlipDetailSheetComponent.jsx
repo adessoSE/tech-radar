@@ -36,7 +36,7 @@ const BlipDetailSheetComponent = props => {
   return (
     <div ref={wrapperRef} id="blip-detail-sheet">
       <Card className="blip-detail-sheet">
-        <CardMedia title={props.name}></CardMedia>
+        <CardMedia title={props.name} image= "../static/img/adesso.svg" ></CardMedia>
         <CardContent>
           <div className="blip-header">
             <h2>{props.name}</h2>

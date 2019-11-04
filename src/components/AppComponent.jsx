@@ -57,7 +57,7 @@ export default class AppComponent extends React.Component {
           <div id="techleiste">
             <AppBar className="tech-appbar" title="Techradar" position="static" color="default">
               
-              <Tabs className="tech-tabs" centered="true" value={this.state.value} onChange={this.handleChange} textColor="primary"> 
+              <Tabs className="tech-tabs" centered value={this.state.value} onChange={this.handleChange} textColor="primary"> 
                 
                 <Tab
                   className="tech-tab"

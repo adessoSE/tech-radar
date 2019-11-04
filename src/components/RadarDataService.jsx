@@ -2,6 +2,8 @@ import React  from 'react';
 import RadarComponent from './RadarComponent';
 
 class RadarDataService extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,8 +27,9 @@ class RadarDataService extends React.Component {
 	}
 
 	componentDidMount() {
-        this.createBlipData();
+		this.createBlipData();	
 	}
+
 	
     createBlipData() {
 		if(this.props.data != null){
