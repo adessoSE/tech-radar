@@ -7,13 +7,12 @@ $appbackground2: #dfeef5;
 }
 
 #root {
-  min-height: 100vh;
-  min-width: 100vw;
   background-color: $appbackground1;
 }
 
 body {
   background-color: $appbackground1;
+  min-height: 98vh;
 }
 
 .faq-container {
@@ -27,7 +26,7 @@ body {
 }
 
 #techleiste {
-  width: 97vw;
+  width: 96vw;
   margin-left: 1.5vw;
   margin-right: 1.5vw;
   margin-top: 0.75vh;
@@ -45,7 +44,7 @@ body {
 
 //ToolLeiste
 #toolleiste {
-  width: 97vw;
+  width: 96vw;
   margin-left: 1.5vw;
   margin-right: 1.5vw;
   height: 3vh;
