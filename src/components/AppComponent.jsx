@@ -18,7 +18,6 @@ import logo from "../static/img/adesso.svg";
 
 import '../static/css/styles.scss';
 import '../static/css/desctop.scss';
-import '../static/css/tablet.scss';
 import '../static/css/mobile.scss';
 
 

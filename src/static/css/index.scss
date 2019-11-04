@@ -26,11 +26,12 @@ body {
 }
 
 #techleiste {
-  width: 96vw;
+  width: 97vw;
   margin-left: 1.5vw;
   margin-right: 1.5vw;
   margin-top: 0.75vh;
   margin-bottom: 0.75vh;
+  
 }
 
 //Radarroot
@@ -38,15 +39,15 @@ body {
   height: 80vh !important;
 }
 
-// .quadrant-buttons {
-//     display: none;
-// }
-
 //ToolLeiste
 #toolleiste {
-  width: 96vw;
+  width: 97vw;
   margin-left: 1.5vw;
   margin-right: 1.5vw;
   height: 3vh;
   margin-bottom: 0.75vh;
+}
+
+#autocomplete-div {
+  margin: 2em 0;
 }

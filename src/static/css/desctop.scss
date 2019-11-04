@@ -4,7 +4,7 @@ $adesso-white: #f4f4f4;
 $white: #ffffff;
 
 //1161px
-@media (min-width: 1161px) {
+@media (min-width: 763px) {
   //Suchleiste
   #autocomplete-div {
     margin-bottom: 0 !important;
@@ -13,46 +13,22 @@ $white: #ffffff;
   }
 
   .quadrant-buttons {
-    display: none !important;
+    display: none ;
   }
 
   //Radar SVG
   .radar-svg {
-    height: 70vh !important;
+    height: 70vh;
     background-color: #edf1f3;
   }
 
   svg {
-    margin: 1vh auto !important;
-    display: block;
-    
-    .innerCircleRing {
-      fill: $adesso-blue;
-    }
-    .middleCircleRing {
-      fill: #378fdd;
-    }
-    .outerCircleRing {
-      fill: #71acdf;
-    }
-    g {
-      cursor: pointer;
-      .blip-detail-sheet {
-        display: block;
-      }
-      .blipIndex {
-        fill: $adesso-grey;
-        z-index: 1000;
-      }
-      .blipCircle {
-        fill: $white;
-      }
-    }
+    margin: 1vh auto;
   }
 
   //Listenansicht
   .close-button {
-    display: none !important;
+    display: none;
   }
   .blips-list {
     height: 83vh;
@@ -71,7 +47,7 @@ $white: #ffffff;
   }
 }
 
-@media (min-width: 1161px) and (max-height: 800px) {
+@media (min-width: 763px) and (max-height: 800px) {
   .blips-list {
     top: 5vh;
   }
@@ -85,7 +61,7 @@ $white: #ffffff;
   }
 }
 
-@media (min-width: 1161px) and (max-height: 520px) {
+@media (min-width: 763px) and (max-height: 520px) {
   .blips-list {
     top: 9vh;
   }
@@ -98,4 +74,22 @@ $white: #ffffff;
     top: 2vh;
   }
 
+}
+
+@media (max-width: 960) {
+  .quadrant-tab,
+  .tech-tab {
+    width: 19vw !important;
+    font-size: 0.7em !important;
+  }
+  .blips-list {
+    height: 88vh;
+    .ring-list {
+      width: 33% !important;
+    }
+    h6 {
+      margin-left: 2em;
+      font-weight: bold;
+    }
+  }
 }
