@@ -3,8 +3,12 @@ $adesso-grey: #857971;
 $adesso-white: #f4f4f4;
 $white: #ffffff;
 
-//1161px
-@media (min-width: 763px) {
+
+@media (max-width: 800) {
+  //TODO
+}
+
+@media (min-width: 501px) {
   //Suchleiste
   #autocomplete-div {
     margin-bottom: 0 !important;
@@ -47,7 +51,7 @@ $white: #ffffff;
   }
 }
 
-@media (min-width: 763px) and (max-height: 800px) {
+@media (min-width: 501px) and (max-height: 800px) {
   .blips-list {
     top: 5vh;
   }
@@ -61,7 +65,7 @@ $white: #ffffff;
   }
 }
 
-@media (min-width: 763px) and (max-height: 520px) {
+@media (min-width: 501px) and (max-height: 520px) {
   .blips-list {
     top: 9vh;
   }
@@ -76,20 +80,3 @@ $white: #ffffff;
 
 }
 
-@media (max-width: 960) {
-  .quadrant-tab,
-  .tech-tab {
-    width: 19vw !important;
-    font-size: 0.7em !important;
-  }
-  .blips-list {
-    height: 88vh;
-    .ring-list {
-      width: 33% !important;
-    }
-    h6 {
-      margin-left: 2em;
-      font-weight: bold;
-    }
-  }
-}
