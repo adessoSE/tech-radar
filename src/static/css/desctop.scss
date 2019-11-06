@@ -4,8 +4,15 @@ $adesso-white: #f4f4f4;
 $white: #ffffff;
 
 
-@media (max-width: 800) {
-  //TODO
+@media (max-width: 960px) {
+  .quadrant-tab,
+  .tech-tab {
+    width: 19vw;
+    font-size: 0.7em !important;
+  }
+  img {
+    transform: scale(0.7);
+  }
 }
 
 @media (min-width: 501px) {

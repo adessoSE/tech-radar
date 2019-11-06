@@ -29,7 +29,7 @@ export default class AppComponent extends React.Component {
       value: 0
     };
   }
-
+tabs
   componentDidMount = () => {
     this.initializeTab();
   };
