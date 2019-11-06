@@ -2,13 +2,13 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import { shallow, mount, render } from 'enzyme';
+// import { act } from 'react-dom/test-utils';
+import { /*shallow, */mount/*, render*/ } from 'enzyme';
 
 
-import RadarDataService from '../components/RadarDataService.jsx';
+// import RadarDataService from '../components/RadarDataService.jsx';
 import BlipDetailSheetComponent from '../components/BlipDetailSheetComponent.jsx';
-import javaJSON from '../components/java-radar.json';
+// import javaJSON from '../components/java-radar.json';
 
 let container = null;
 

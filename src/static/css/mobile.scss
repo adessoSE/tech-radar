@@ -4,13 +4,12 @@ $adesso-white: #f4f4f4;
 $white: #ffffff;
 
 @media (max-width: 500px) and (min-width: 325px) {
-
   svg {
     margin-top: 1em;
   }
 
   .tech-appbar {
-    width: 100vw;
+    width: 100% !important;
     text-align: center;
   }
   .quadrant-bar,
@@ -96,9 +95,3 @@ $white: #ffffff;
     }
   }
 }
-
-
-
-
-
-

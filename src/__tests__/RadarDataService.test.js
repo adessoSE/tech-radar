@@ -2,8 +2,8 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import { unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import { shallow, mount, render } from 'enzyme';
+// import { act } from 'react-dom/test-utils';
+import { shallow, mount/*, render*/ } from 'enzyme';
 
 import RadarDataService from '../components/RadarDataService.jsx';
 import msJSON from '../components/microsoft-radar.json';
@@ -15,7 +15,7 @@ configure({ adapter: new Adapter() });
 beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
-}); 
+});
 
 afterEach(() => {
     unmountComponentAtNode(container);
@@ -25,7 +25,7 @@ afterEach(() => {
 
 describe('Unit test: RadarDataService', () => {
     it('check all states1', () => {
-        const wrapper = shallow(<RadarDataService/>);
+        const wrapper = shallow(<RadarDataService />);
         const assertionObj = {
             blips: [],
             data: undefined,
@@ -51,7 +51,7 @@ describe('Unit test: RadarDataService', () => {
 
 describe('Unit test: MSDataService', () => {
     it('check all states2', () => {
-        const wrapper = shallow(<RadarDataService data={msJSON}/>);
+        const wrapper = shallow(<RadarDataService data={msJSON} />);
 
         expect(wrapper.state('data')).toEqual(msJSON);
         expect(wrapper.state('innerRingDistance')).toEqual(100);

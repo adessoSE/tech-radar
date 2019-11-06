@@ -15,8 +15,8 @@ pipeline {
         stage('scm checkout') {
             steps {
                 git(
-                    url: 'https://bitbucket.adesso-group.com/scm/tr/react-techradar-mobile-team.git',
-                    credentialsId: 'tech-radar-cred',
+                    url: 'https://github.com/adessoAG/tech-radar.git',
+                    credentialsId: '97893e53-8b02-438f-b91c-a91146a19ebd',
                     branch: "master"
                 )
             }
@@ -24,8 +24,8 @@ pipeline {
 
         stage('linting') {
             steps {
-                // sh 'npm lint'
                 echo 'linting app code'
+                sh 'npm run lint'
             }
         }
 

@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 
 import AppComponent from '../components/AppComponent.jsx';
 import FAQ from '../components/FAQ.jsx';
-import { showJava, showMS, showJS} from '../components/AppComponent.jsx';
+// import { showJava, showMS, showJS} from '../components/AppComponent.jsx';
 let container = null;
 
 beforeEach(() => {
@@ -46,8 +46,8 @@ describe('Unit test: AppComponent', () => {
             button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         });
 
-       // expect(showJava).toBeDefined();
-       
+        // expect(showJava).toBeDefined();
+
     });
     it('check, FAQ is there', () => {
         act(() => {
