@@ -12,15 +12,21 @@ pipeline {
         CHROME_BIN = '/bin/google-chrome'
     }
     stages {
-        stage('scm checkout') {
+        stage('NPM config') {
             steps {
-                git(
-                    url: 'https://github.com/adessoAG/tech-radar.git',
-                    credentialsId: '97893e53-8b02-438f-b91c-a91146a19ebd',
-                    branch: "master"
-                )
+                sh 'npm install'
+                echo 'dependencies installed'
             }
         }
+        // stage('scm checkout') {
+        //     steps {
+        //         git(
+        //             url: 'https://github.com/adessoAG/tech-radar.git',
+        //             credentialsId: '97893e53-8b02-438f-b91c-a91146a19ebd',
+        //             branch: "master"
+        //         )
+        //     }
+        // }
 
         stage('linting') {
             steps {
@@ -31,8 +37,8 @@ pipeline {
 
         stage('build react app') {
             steps {
-                sh 'npm install'
-                echo 'dependencies installed'
+                // sh 'npm install'
+                // echo 'dependencies installed'
                 sh 'npm audit fix'
                 sh 'npm run build'
                 echo 'react app built'
