@@ -6,9 +6,9 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
 
-beforeEach = () => {
-    cy.fixture("example").as("example");
-}
+// beforeEach = () => {
+//     cy.fixture("example").as("example");
+// }
 
 describe("Loading page...", () => {
     it("Visits Java Techradar", () => {
