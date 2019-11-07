@@ -30,6 +30,7 @@ pipeline {
 
         stage('linting') {
             steps {
+                sh 'rm -r ./build'
                 echo 'linting app code'
                 sh 'npm run lint'
             }
