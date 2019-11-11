@@ -82,8 +82,15 @@ $white: #ffffff;
   }
 
   .radar-svg {
+    position: relative;
     top: 2vh;
   }
 
 }
 
+@media (min-width: 501px) and (max-width: 575px){
+  .radar-svg {
+    height: 95vw;
+  }
+
+}
