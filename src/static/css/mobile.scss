@@ -47,16 +47,19 @@ $white: #ffffff;
   }
   
   .quadrant-buttons button {
-    height: 12em;
-    width: 12em;
-    margin: 0.2em 0.2em !important;
+    height: 49.5vw;
+    width: 49.5vw;
+    margin: 0.1vw 0.1vw;
     opacity: 0;
   }
   
   .quadrant-buttons {
-    top: 26%;
-    left: 10%;
+    border-bottom: 50vh;
+    
     position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
   }
   
   svg {

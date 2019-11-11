@@ -246,6 +246,15 @@ class RadarComponent extends React.Component {
                 </div>
                 
                 <div className="radar-svg">
+
+                <div className="quadrant-buttons">
+                    <button id="mobile-plattform" onClick={(e) => this.handleChange(e, 1)}>1</button>
+                    <button onClick={(e) => this.handleChange(e, 2)}>2</button>
+                    <button onClick={(e) => this.handleChange(e, 3)}>3</button>
+                    <button onClick={(e) => this.handleChange(e, 4)}>4</button>
+                </div>
+
+                
                 <svg id="radarplot" height="100%"  viewBox="0 0 500 500">
                     <path id="q1-path" d={qOnePathDef} fill="none"/>
                         <text x="100px" className="tech-path">
@@ -303,14 +312,13 @@ class RadarComponent extends React.Component {
                     }
 
                 </svg>
+
+                
+
+
                 </div>
                 
-                <div className="quadrant-buttons">
-                    <button id="mobile-plattform" onClick={(e) => this.handleChange(e, 1)}>1</button>
-                    <button onClick={(e) => this.handleChange(e, 2)}>2</button>
-                    <button onClick={(e) => this.handleChange(e, 3)}>3</button>
-                    <button onClick={(e) => this.handleChange(e, 4)}>4</button>
-                </div>
+                
                 
             </div>
             ) : '';
