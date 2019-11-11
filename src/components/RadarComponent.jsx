@@ -225,7 +225,7 @@ class RadarComponent extends React.Component {
                     onClick={() => this.setState({ showBlipListing: false }) } /> ): '';
                             
         const radarPanel = !this.state.showBlipListing ? (
-            <div>
+            <div id="radarcomponent">
 
                 <div id="autocomplete-div">
                     <Container>
@@ -254,7 +254,7 @@ class RadarComponent extends React.Component {
                     <button onClick={(e) => this.handleChange(e, 4)}>4</button>
                 </div>
 
-                
+
                 <svg id="radarplot" height="100%"  viewBox="0 0 500 500">
                     <path id="q1-path" d={qOnePathDef} fill="none"/>
                         <text x="100px" className="tech-path">

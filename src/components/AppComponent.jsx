@@ -66,6 +66,7 @@ export default class AppComponent extends React.Component {
             >
               <Tab
                 className="tech-tab"
+                id="imgTab"
                 label={
                   <img
                     src={logo}
