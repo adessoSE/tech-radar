@@ -64,12 +64,13 @@ svg {
             width:2em;
             height: 2em;
             font-weight: bold;
-            float: right;
+            //float: right;
             font-size: 2em;
-            background: $adesso-white;
+            //background: $adesso-white;
             color: $adesso-blue;
-            margin-top: 1.25em;
-        } 
+            //margin-top: 1.25em;
+            margin: 24px 24px;
+        }
         h2 {
             float: left;
         }
@@ -92,7 +93,7 @@ svg {
     height: auto;
     position: absolute;
     width: 100%;
-    background-color: #dfeef5 !important; 
+    background-color: #dfeef5 !important;
     box-shadow: none !important;
     .close-button{
         border-radius: 0 !important;
@@ -101,7 +102,7 @@ svg {
     .ring-list {
         width: 30% !important;
         margin: 2em 2em;
-    }   
+    }
 }
 
 
