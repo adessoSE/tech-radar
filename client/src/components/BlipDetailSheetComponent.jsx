@@ -68,7 +68,7 @@ class BlipDetailSheetComponent extends React.Component {
         <option value={3}>Nach schlecht verschieben</option>
       </select>);
     }
-    else if(this.props.ring == "¸berdenken"){
+    else if(this.props.ring == "überdenken"){
       dropdown = (<select>
         <option value={1}>Nach gut verschieben</option>
         <option value={2}>Belassen</option>
