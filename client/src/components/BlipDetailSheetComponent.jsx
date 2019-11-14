@@ -31,7 +31,6 @@ class BlipDetailSheetComponent extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.showDiscussion = this.showDiscussion.bind(this);
     this.getDropdownStatus = this.getDropdownStatus.bind(this);
-    this.getStatusTitle = this.getStatusTitle.bind(this);
   }
 
   addNewComment() {
