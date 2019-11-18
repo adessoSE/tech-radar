@@ -9,10 +9,10 @@ module.exports = (app) => {
     });
 
     app.post(`/api/comment`, async (req, res) => {
-        let product = await Comment.create(req.body);
+        let comments = await Comment.create(req.body);
         return res.status(201).send({
             error: false,
-            product
+            comment: comments
         })
     });
 };
