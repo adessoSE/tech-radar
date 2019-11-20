@@ -3,17 +3,10 @@ const Comment = mongoose.model('comments');
 
 module.exports = (app) => {
 
-    app.get(`/api/comment`, async (req, res) => {
-        let comments = await Comment.find();
+    app.get('/api/comment/', async (req, res) => {
+        console.log(req.query.radar); // TODO remove
+        let comments = await Comment.find({radar: req.query.radar});
         return res.status(200).send(comments);
-    });
-
-    app.post(`/api/comment`, async (req, res) => {
-        let comments = await Comment.create(req.body);
-        return res.status(201).send({
-            error: false,
-            comment: comments
-        })
     });
 };
 
