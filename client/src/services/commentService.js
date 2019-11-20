@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 export default {
-    getAll: async () => {
-        let res = await axios.get(`/api/comment`);
+    getByRadarType: async (radar) => {
+        let res = await axios.get(`/api/comment`, {
+            params: {
+                radar: radar
+            }
+        });
         return res.data || [];
     }
 }
