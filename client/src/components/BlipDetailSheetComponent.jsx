@@ -35,7 +35,7 @@ class BlipDetailSheetComponent extends React.Component {
 
   addNewComment() {
     const modifiedComments = this.state.comments;
-    modifiedComments.push({autor: this.state.newCommentAutor, text: this.state.newCommentText});
+    modifiedComments.push({autor: this.state.newCommentAutor, text: this.state.newCommentText, status: 3, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}});
     this.setState({
       comments: modifiedComments
     });
