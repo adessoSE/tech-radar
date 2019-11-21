@@ -14,14 +14,14 @@ class BlipDetailSheetComponent extends React.Component {
 
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       comments: new Array(
-          {autor: 'Petra', text: 'Coole Technologie'},
-          {autor: 'Bernd', text: 'Großartig'},
-          {autor: 'Franz', text: 'Toll'},
-          {autor: 'Ute', text: 'Spitze!'},
-          {autor: 'Patricia', text: 'Klasse'}
+          {autor: 'Petra', text: 'Coole Technologie', status: 1, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}},
+          {autor: 'Bernd', text: 'Groﬂartig', status: 1, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}},
+          {autor: 'Franz', text: 'Toll', status: 2, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}},
+          {autor: 'Ute', text: 'Spitze!', status: 1, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}},
+          {autor: 'Patricia', text: 'Klasse', status: 3, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}}
       ),
       newCommentAutor: "Jenny",
       newCommentText: "",
@@ -30,12 +30,12 @@ class BlipDetailSheetComponent extends React.Component {
     this.addNewComment = this.addNewComment.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.showDiscussion = this.showDiscussion.bind(this);
-
+    this.getDropdownStatus = this.getDropdownStatus.bind(this);
   }
 
   addNewComment() {
     const modifiedComments = this.state.comments;
-    modifiedComments.push({autor: this.state.newCommentAutor, text: this.state.newCommentText});
+    modifiedComments.push({autor: this.state.newCommentAutor, text: this.state.newCommentText, status: 3, zeit: {datum: "13.11.2019", uhrzeit: "12:45"}});
     this.setState({
       comments: modifiedComments
     });
@@ -54,17 +54,43 @@ class BlipDetailSheetComponent extends React.Component {
     this.setState({newCommentText: e.target.value});
   }
 
+  getDropdownStatus(){
+    let dropdown = null;
+    if(this.props.ring == "einsetzen"){
+      dropdown = (<select>
+        <option value={3}>Nach schlecht verschieben</option>
+        <option value={2}>Belassen</option>
+      </select>);
+    }
+    else if(this.props.ring == "evaluieren"){
+      dropdown = (<select>
+        <option value={1}>Nach gut verschieben</option>
+        <option value={3}>Nach schlecht verschieben</option>
+      </select>);
+    }
+    else if(this.props.ring == "überdenken"){
+      dropdown = (<select>
+        <option value={1}>Nach gut verschieben</option>
+        <option value={2}>Belassen</option>
+      </select>);
+    }
+    return dropdown;
+  }
+
   render() {
+    let stat =["Status1","Status2","Status3"]
     var commentListItems = this.state.comments.map(function (item) {
       return (
-          <div>{item.autor} | {item.text}</div>
+          <div>{item.autor} | {item.text} | {stat[item.status-1]} | {item.zeit.datum} | {item.zeit.uhrzeit} </div>
       );
     });
+
     let discussion;
     let buttonText;
     if(this.state.showDiscussion === true){
       discussion = (<div>
         {commentListItems}
+        {this.getDropdownStatus()}
         <input type="text" value={this.state.newCommentText}
                onChange={this.handleChange}/>
         <Button size="large" color="primary" onClick={this.addNewComment}>
@@ -119,56 +145,3 @@ class BlipDetailSheetComponent extends React.Component {
 
 
 export default BlipDetailSheetComponent;
-
-// function useOutsideAlerter(ref, ) {
-//     /**
-//      * Alert if clicked on outside of element
-//      */
-//     function handleClickOutside(event) {
-//       if (ref.current && !ref.current.contains(event.target)) {
-//         console.log(true)
-//         alert(true)
-//       }
-//     }
-
-//     useEffect(() => {
-//       // Bind the event listener
-//       document.addEventListener("mousedown", handleClickOutside);
-//       return () => {
-//         // Unbind the event listener on clean up
-//         document.removeEventListener("mousedown", handleClickOutside);
-//       };
-//     });
-// }
-
-// const BlipDetailSheetComponent = props => {
-//   const wrapperRef = useRef();
-//   // useOutsideAlerter(wrapperRef);
-//   return (
-//     <div ref={wrapperRef} id="blip-detail-sheet">
-//       <Card className="blip-detail-sheet">
-//         <CardMedia title={props.name}></CardMedia>
-//         <CardContent>
-//           <div className="blip-header">
-//             <h2>{props.name}</h2>
-//           </div>
-//           <h3>
-//             {props.ring} | {props.radar}
-//           </h3>
-//           {props.desc}
-//           <div></div>
-//         </CardContent>
-//         <CardActions>
-//           <Button size="large" color="primary">
-//             <Tooltip title="Merge 'n Commit!">
-//               <Icon>favorite</Icon>
-//             </Tooltip>
-//           </Button>
-//           <div id="blip-close-mobile" className="blip-close-button-mobile">
-//             {props.element}
-//           </div>
-//         </CardActions>
-//       </Card>
-//     </div>
-//   );
-// };

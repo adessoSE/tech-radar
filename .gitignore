@@ -26,3 +26,4 @@ yarn-error.log*
 properties.ini
 
 /cypress/integration/examples
+/.idea/
