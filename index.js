@@ -1,14 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const credentials = require('./properties.ini');
 
 // IMPORT MODELS
 require('./models/comment');
 
 const app = express();
+const password = credentials.database.username
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/test`);
+mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://username:password@techradarhtw-tdfaj.mongodb.net/test`);
 
 app.use(bodyParser.json());
 
