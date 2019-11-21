@@ -13,10 +13,13 @@ function App() {
     });
 
     const getComments = async () => {
-        console.log('Hallo');
         let res = await commentService.getByRadarType('microsoft');
         setcomments(res);
     };
+
+    const getCommentsDB = () => {
+        return comments;
+    }
 
     const renderComments = comment => {
         return (

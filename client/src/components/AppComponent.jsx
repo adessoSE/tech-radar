@@ -17,7 +17,6 @@ import logo from "../static/img/adesso.svg";
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
-import commentService from '../services/commentService'
 
 
 
@@ -51,8 +50,6 @@ export default class AppComponent extends React.Component {
       value: index
     });
   };
-
-
 
 
 
