@@ -1,6 +1,5 @@
 import React from "react";
 import RadarDataService from "./RadarDataService";
-import App from "../App";
 import FAQ from "./FAQ";
 
 import javaJSON from "./java-radar.json";
@@ -22,7 +21,7 @@ import "../static/css/mobile.scss";
 
 export default class AppComponent extends React.Component {
 
-  constructor(props, commentService) {
+  constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
