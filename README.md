@@ -15,7 +15,7 @@ $ npm install
 
 ### Running the application
 
-*To run this application, you must have MongoDB (name = `test`, collection = `comments`) up and running.*
+*To run this application, you must have got a `properties.ini` with the correct `username` and `password`*
 
 To run the application, use the following command:
 
