@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import RadarDataService from "./RadarDataService";
 import App from "../App";
 import FAQ from "./FAQ";
@@ -56,9 +56,7 @@ export default class AppComponent extends React.Component {
 
   render() {
     return (
-        //<App/>
       <Router>
-        <App/>
         <div id="techleiste">
           <AppBar
             className="tech-appbar"

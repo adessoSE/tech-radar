@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import BlipDetailSheetComponent from './BlipDetailSheetComponent';
 
 import Tooltip from '@material-ui/core/Tooltip';
@@ -14,7 +14,6 @@ import jsJSON from './javascript-radar.json'
 import msJSON from './microsoft-radar.json'
 
 import MuiDownShift from 'mui-downshift';
-import commentService from "../services/commentService";
 
 const theme = createMuiTheme({
     overrides: {
