@@ -1,16 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const credentials = require('./properties.ini');
+const app = express();
+
 
 // IMPORT MODELS
 require('./models/comment');
 
-const app = express();
-const password = credentials.database.username
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('properties.ini');
+var password = properties.get('main.password');
+var username = properties.get('main.username');
+
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://username:password@techradarhtw-tdfaj.mongodb.net/test`);
+mongoose.connect(process.env.MONGODB_URI || ('mongodb+srv://' + username + ':' + password + '@techradarhtw-tdfaj.mongodb.net/test'));
 
 app.use(bodyParser.json());
 
@@ -23,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 
     const path = require('path');
-    app.get('*', (req,res) => {
+    app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 
