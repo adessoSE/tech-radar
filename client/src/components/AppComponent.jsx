@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import RadarDataService from "./RadarDataService";
 import FAQ from "./FAQ";
 
@@ -16,9 +16,12 @@ import logo from "../static/img/adesso.svg";
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
+import commentService from '../services/commentService'
+
+
 
 export default class AppComponent extends React.Component {
-  constructor(props) {
+  constructor(props, commentService) {
     super(props);
     this.state = {
       isLoading: true,
@@ -46,6 +49,17 @@ export default class AppComponent extends React.Component {
       value: index
     });
   };
+
+  useEffect(() => {
+    getComments();
+  })
+
+  const getComments = async () => {
+    let res = await commentService.getByRadarType();
+    console.log(res);
+  }
+
+
 
   render() {
     return (
