@@ -1,5 +1,6 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import RadarDataService from "./RadarDataService";
+import App from "../App";
 import FAQ from "./FAQ";
 
 import javaJSON from "./java-radar.json";
@@ -21,6 +22,7 @@ import commentService from '../services/commentService'
 
 
 export default class AppComponent extends React.Component {
+
   constructor(props, commentService) {
     super(props);
     this.state = {
@@ -50,20 +52,16 @@ export default class AppComponent extends React.Component {
     });
   };
 
-  useEffect(() => {
-    getComments();
-  })
 
-  const getComments = async () => {
-    let res = await commentService.getByRadarType();
-    console.log(res);
-  }
+
 
 
 
   render() {
     return (
+        //<App/>
       <Router>
+        <App/>
         <div id="techleiste">
           <AppBar
             className="tech-appbar"

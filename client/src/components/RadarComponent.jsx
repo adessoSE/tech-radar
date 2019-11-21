@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import BlipDetailSheetComponent from './BlipDetailSheetComponent';
 
 import Tooltip from '@material-ui/core/Tooltip';
@@ -14,6 +14,7 @@ import jsJSON from './javascript-radar.json'
 import msJSON from './microsoft-radar.json'
 
 import MuiDownShift from 'mui-downshift';
+import commentService from "../services/commentService";
 
 const theme = createMuiTheme({
     overrides: {
@@ -70,8 +71,6 @@ const textPosition = (i) => {
     }
     return 5.5;
 };
-
-
 
 class RadarComponent extends React.Component {
     constructor(props) {
@@ -205,7 +204,6 @@ class RadarComponent extends React.Component {
     }
 
     render() {
-
         const { filteredItems, blipRadius, size, centerPointX, centerPointY,
             qOnePathDef, qTwoPathDef, qThreePathDef, qFourPathDef } = this.state;
 
