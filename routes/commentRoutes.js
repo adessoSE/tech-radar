@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Comment = mongoose.model('comments');
+const Comment = mongoose.model('generated_comments');
 
 module.exports = (app) => {
 

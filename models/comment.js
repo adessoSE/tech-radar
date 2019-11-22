@@ -10,7 +10,7 @@ const commentSchema = new Schema({
     radar: String,
 });
 
-mongoose.model('comments', commentSchema);
+mongoose.model('generated_comments', commentSchema);
 
 
 //TODO schema muss an unsere zwecke noch weiter angepasst werden --> zeit sollte klein string sein, meinung vermutlich sowas wie ein enum und radar auch
