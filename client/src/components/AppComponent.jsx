@@ -17,7 +17,10 @@ import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 
+
+
 export default class AppComponent extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -46,6 +49,9 @@ export default class AppComponent extends React.Component {
       value: index
     });
   };
+
+
+
 
   render() {
     return (

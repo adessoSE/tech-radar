@@ -157,7 +157,7 @@ class RadarDataService extends React.Component {
 	render() {
 		return (
 			
-		<RadarComponent blips={this.state.blips} /> 
+		<RadarComponent blips={this.state.blips} />
 				
 		);
 	}

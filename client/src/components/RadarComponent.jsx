@@ -71,8 +71,6 @@ const textPosition = (i) => {
     return 5.5;
 };
 
-
-
 class RadarComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -205,7 +203,6 @@ class RadarComponent extends React.Component {
     }
 
     render() {
-
         const { filteredItems, blipRadius, size, centerPointX, centerPointY,
             qOnePathDef, qTwoPathDef, qThreePathDef, qFourPathDef } = this.state;
 
