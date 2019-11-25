@@ -40,7 +40,6 @@ class BlipDetailSheetComponent extends React.Component {
                     technologie: item.technologie
                 })
             });
-            console.log('data', data, 'comments', comments);
             this.setState( {
                 comments: comments
             })
