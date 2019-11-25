@@ -102,7 +102,21 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     render() {
-        var commentListItems = this.state.comments.map(function (item) {
+        var commentListItems = this.state.comments
+            .sort(function compare(a, b) {
+                var partsA =a.zeit.split(', ');
+                var datesA = partsA[0].split('/');
+                var timeA = partsA[1].split(':');
+                var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
+
+                var partsB =b.zeit.split(', ');
+                var datesB = partsB[0].split('/');
+                var timeB = partsB[1].split(':');
+                var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
+
+                return dateA - dateB;
+            })
+            .map(function (item) {
             return (
                 <div>{item.autor} | {item.text} | {item.status} | {item.zeit} </div>
             );
