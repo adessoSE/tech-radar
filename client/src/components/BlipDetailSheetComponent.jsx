@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import commentService from "../services/commentService";
+import writeCommentService from "../services/writeCommentService";
 
 
 class BlipDetailSheetComponent extends React.Component {
@@ -50,6 +51,13 @@ class BlipDetailSheetComponent extends React.Component {
     addNewComment() {
         const modifiedComments = this.state.comments;
         const timestamp = new Date().toLocaleString();
+        writeCommentService.addComment({
+            autor: this.state.newCommentAutor,
+            text: this.state.newCommentText,
+            status: this.state.newMeinung,
+            zeit: timestamp,
+            technologie: this.props.name,
+            radar: this.props.radar,});
         modifiedComments.push({
             autor: this.state.newCommentAutor,
             text: this.state.newCommentText,
