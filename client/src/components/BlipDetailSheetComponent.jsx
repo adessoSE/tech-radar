@@ -57,12 +57,15 @@ class BlipDetailSheetComponent extends React.Component {
             status: this.state.newMeinung,
             zeit: timestamp,
             technologie: this.props.name,
-            radar: this.props.radar,});
+            radar: this.props.radar,
+        });
         modifiedComments.push({
             autor: this.state.newCommentAutor,
             text: this.state.newCommentText,
             status: this.state.newMeinung,
-            zeit: timestamp
+            zeit: timestamp,
+            technologie: this.props.name,
+            radar: this.props.radar,
         });
         this.setState({
             comments: modifiedComments,
