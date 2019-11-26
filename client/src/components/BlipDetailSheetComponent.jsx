@@ -56,7 +56,6 @@ class BlipDetailSheetComponent extends React.Component {
             console.log("Text darf nicht leer sein!") // TODO Fehlermeldung statt log
         }
         else {
-            console.log('meinung', this.state.newMeinung);
             const modifiedComments = this.state.comments;
             const timestamp = new Date().toLocaleString();
             writeCommentService.addComment({
