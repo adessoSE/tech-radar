@@ -1,4 +1,4 @@
-import React, {createRef, useRef /*, useEffect */} from "react";
+import React, {createRef} from "react";
 import {
     Card,
     CardMedia,
@@ -9,13 +9,14 @@ import {
 } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import commentService from "../services/commentService";
+import writeCommentService from "../services/writeCommentService";
 
 
 class BlipDetailSheetComponent extends React.Component {
     wrapperRef = createRef();
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             comments: new Array({}),
             newCommentAutor: "Jenny",
@@ -36,20 +37,27 @@ class BlipDetailSheetComponent extends React.Component {
                     autor: item.autor,
                     text: item.text,
                     status: item.meinung, //TODO
-                    zeit: item.zeit
+                    zeit: item.zeit,
+                    technologie: item.technologie
                 })
-            })
-            console.log('data', data, 'comments', comments);
+            });
             this.setState( {
                 comments: comments
             })
-        }
+        };
         this.getCommentsAll();
     }
 
     addNewComment() {
         const modifiedComments = this.state.comments;
-        const timestamp = new Date().toLocaleString();;
+        const timestamp = new Date().toLocaleString();
+        writeCommentService.addComment({
+            autor: this.state.newCommentAutor,
+            text: this.state.newCommentText,
+            status: this.state.newMeinung,
+            zeit: timestamp,
+            technologie: this.props.name,
+            radar: this.props.radar,});
         modifiedComments.push({
             autor: this.state.newCommentAutor,
             text: this.state.newCommentText,
@@ -82,17 +90,17 @@ class BlipDetailSheetComponent extends React.Component {
 
     getDropdownStatus() {
         let dropdown = null;
-        if (this.props.ring == "einsetzen") {
+        if (this.props.ring === "einsetzen") {
             dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
                 <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
                 <option value="Belassen">Belassen</option>
             </select>);
-        } else if (this.props.ring == "evaluieren") {
+        } else if (this.props.ring === "evaluieren") {
             dropdown = (<select>
                 <option value="Nach gut verschieben">Nach gut verschieben</option>
                 <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
             </select>);
-        } else if (this.props.ring == "überdenken") {
+        } else if (this.props.ring === "überdenken") {
             dropdown = (<select>
                 <option value="Nach gut verschieben">Nach gut verschieben</option>
                 <option value="Belassen">Belassen</option>
@@ -103,6 +111,7 @@ class BlipDetailSheetComponent extends React.Component {
 
     render() {
         var commentListItems = this.state.comments
+            .filter(comment => {return comment.technologie === this.props.name})
             .sort(function compare(a, b) {
                 var partsA =a.zeit.split(', ');
                 var datesA = partsA[0].split('/');
