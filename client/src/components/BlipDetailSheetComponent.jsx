@@ -37,10 +37,10 @@ class BlipDetailSheetComponent extends React.Component {
                     autor: item.autor,
                     text: item.text,
                     status: item.meinung, //TODO
-                    zeit: item.zeit
+                    zeit: item.zeit,
+                    technologie: item.technologie
                 })
             });
-            console.log('data', data, 'comments', comments);
             this.setState( {
                 comments: comments
             })
@@ -110,7 +110,9 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     render() {
-        var commentListItems = this.state.comments.map(function (item) {
+        var commentListItems = this.state.comments
+            .filter(comment => {return comment.technologie === this.props.name})
+            .map(function (item) {
             return (
                 <div>{item.autor} | {item.text} | {item.status} | {item.zeit} </div>
             );
