@@ -1,124 +1,181 @@
-$adesso-blue : #0275d8;
-$adesso-grey : #857971;
-$adesso-white : #f4f4f4;
-$white : #ffffff;
+$adesso-blue: #0275d8;
+$adesso-grey: #857971;
+$adesso-white: #f4f4f4;
+$white: #ffffff;
 
 
 .tooltip-blip {
-    line-height: 10 !important;
-    height: 100px !important;
-    font-size: 15em !important;
+  line-height: 10 !important;
+  height: 100px !important;
+  font-size: 15em !important;
 }
 
 .stroke {
-    stroke:#dfeef5;
-    stroke-width:5;
+  stroke: #dfeef5;
+  stroke-width: 5;
 }
 
 svg {
-    display: block;
-    .innerCircleRing {
-        fill: $adesso-blue;
+  display: block;
+
+  .innerCircleRing {
+    fill: $adesso-blue;
+  }
+
+  .middleCircleRing {
+    fill: #378fdd;
+  }
+
+  .outerCircleRing {
+    fill: #71acdf;
+  }
+
+  g {
+    cursor: pointer;
+
+    .blip-detail-sheet {
+      display: block;
     }
-    .middleCircleRing {
-        fill: #378fdd;
+
+    .blipIndex {
+      fill: $adesso-grey;
+      z-index: 1000;
     }
-    .outerCircleRing {
-        fill: #71acdf;
+
+    .blipCircle {
+      fill: $white;
+
+      &:hover {
+        stroke: #bebebe;
+        fill: #ecf5fd;
+      }
     }
-    g {
-        cursor: pointer;
-        .blip-detail-sheet {
-            display: block;
-        }
-        .blipIndex {
-            fill: $adesso-grey ;
-            z-index: 1000;
-        }
-        .blipCircle {
-            fill: $white;
-            &:hover {
-                stroke: #bebebe;
-                fill: #ecf5fd;
-            }
-        }
-    }
-    .tech-path {
-        stroke: #7a7a7a;
-        fill: #7a7a7a;
-        font-size: 1.2em;
-    }
+  }
+
+  .tech-path {
+    stroke: #7a7a7a;
+    fill: #7a7a7a;
+    font-size: 1.2em;
+  }
 }
 
-.blip-overlay{
-    background-color: rgba($adesso-blue, $alpha: 0.50);
+.blip-overlay {
+  background-color: rgba($adesso-blue, $alpha: 0.50);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000000;
+
+  .blip-header {
+    display: inline-block;
     width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1000000;
-    .blip-header {
-        display: inline-block;
-        width: 100%;
-        button {
-            width:2em;
-            height: 2em;
-            font-weight: bold;
-            //float: right;
-            font-size: 2em;
-            //background: $adesso-white;
-            color: $adesso-blue;
-            //margin-top: 1.25em;
-            margin: 24px 24px;
-        }
-        h2 {
-            float: left;
-        }
+
+    button {
+      width: 2em;
+      height: 2em;
+      font-weight: bold;
+      //float: right;
+      font-size: 2em;
+      //background: $adesso-white;
+      color: $adesso-blue;
+      //margin-top: 1.25em;
+      margin: 0px 24px;
     }
-    .blip-detail-sheet {
-        width: 80%;
-        margin: 0 auto;
-        padding: 1em 5%;
-        background: $white;
-        border: 1px solid $adesso-grey;
-        margin-top: 5%;
+
+    h2 {
+      float: left;
+      margin: 0px;
+      padding: 4px 0px;
     }
+
+    h3 {
+      margin: 10px 0px;
+    }
+  }
+
+  .blip-detail-sheet {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1em 5%;
+    background: $white;
+    border: 1px solid $adesso-grey;
+    margin-top: 5%;
+  }
 }
 
 //Generell check
 .blips-list {
-    display: flex;
-    flex-direction: row;
-    overflow-x: hidden;
-    height: auto;
-    position: absolute;
-    width: 100%;
-    background-color: #dfeef5 !important;
-    box-shadow: none !important;
-    .close-button{
-        border-radius: 0 !important;
-        background-color: $adesso-blue !important;
-    }
-    .ring-list {
-        width: 30% !important;
-        margin: 2em 2em;
-    }
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  height: auto;
+  position: absolute;
+  width: 100%;
+  background-color: #dfeef5 !important;
+  box-shadow: none !important;
+
+  .close-button {
+    border-radius: 0 !important;
+    background-color: $adesso-blue !important;
+  }
+
+  .ring-list {
+    width: 30% !important;
+    margin: 2em 2em;
+  }
 }
 
 
 .blip-close-button-mobile {
-    display: block;
-    position: absolute;
-    right: 8vw;
-    button {
-        width:2em;
-        height: 2em;
-        font-weight: bold;
-        font-size: 2em;
-        background: $adesso-white;
-        color: $adesso-blue !important;
-    }
+  display: block;
+  position: absolute;
+  right: 8vw;
+
+  button {
+    width: 2em;
+    height: 2em;
+    font-weight: bold;
+    font-size: 2em;
+    background: $adesso-white;
+    color: $adesso-blue !important;
+  }
+}
+.discussionItem{
+  padding: 10px 0px;
+}
+.discussionContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr ;
+  padding: 2px 0px;
+  .name{
+    font-weight: bold;
+  }
+  .meinung{
+    color: grey;
+  }
+  .timestamp{
+    float: right;
+    color: grey;
+  }
+  .inputText{
+    width: 80%;
+    min-height: 38.8px;
+    margin-left: 10px;
+  }
+  .sendButton{
+    float: right;
+  }
+}
+.desc{
+  padding-bottom: 15px;
+}
+.diskussionButton{
+  padding: 8px 0px !important;
 }
 
 
+.blip-overlay{
+  overflow-y: auto;
+}
 

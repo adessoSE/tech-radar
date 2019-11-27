@@ -23,6 +23,8 @@ class BlipDetailSheetComponent extends React.Component {
             newCommentText: "",
             newMeinung: "",
             showDiscussion: false,
+            valid: false,
+            clicked: false
         };
         this.addNewComment = this.addNewComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -41,7 +43,7 @@ class BlipDetailSheetComponent extends React.Component {
                     technologie: item.technologie
                 })
             });
-            this.setState( {
+            this.setState({
                 comments: comments
             })
         };
@@ -49,13 +51,11 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     addNewComment() {
-        if (this.state.newMeinung === "") {
-            console.log("Meinung darf nicht leer sein!") // TODO Fehlermeldung statt log
-        }
-        else if (this.state.newCommentText === "") {
-            console.log("Text darf nicht leer sein!") // TODO Fehlermeldung statt log
-        }
-        else {
+        this.setState({clicked: true});
+        if (this.state.newMeinung === "" || this.state.newCommentText == "") {
+            this.setState({valid: false});
+        } else {
+            this.setState({valid: true});
             const modifiedComments = this.state.comments;
             const timestamp = new Date().toLocaleString();
             writeCommentService.addComment({
@@ -92,10 +92,20 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     handleChange(e) {
+        if (e.target.value == "") {
+            this.setState({valid: false})
+        } else if (e.target.value != "" && this.state.newMeinung != "") {
+            this.setState({valid: true})
+        }
         this.setState({newCommentText: e.target.value});
     }
 
     handleNewMeinung(e) {
+        if (e.target.value == "") {
+            this.setState({valid: false})
+        } else if (e.target.value != "" && this.state.newCommentText != "") {
+            this.setState({valid: true})
+        }
         this.setState({newMeinung: e.target.value});
     }
 
@@ -109,13 +119,13 @@ class BlipDetailSheetComponent extends React.Component {
             </select>);
         } else if (this.props.ring === "evaluieren") {
             dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
-                <option value="">Bitte Meinung angeben!</option>
+                <option default>Bitte Meinung angeben!</option>
                 <option value="Nach gut verschieben">Nach gut verschieben</option>
                 <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
             </select>);
         } else if (this.props.ring === "überdenken") {
             dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
-                <option value="">Bitte Meinung angeben!</option>
+                <option default>Bitte Meinung angeben!</option>
                 <option value="Nach gut verschieben">Nach gut verschieben</option>
                 <option value="Belassen">Belassen</option>
             </select>);
@@ -125,14 +135,16 @@ class BlipDetailSheetComponent extends React.Component {
 
     render() {
         var commentListItems = this.state.comments
-            .filter(comment => {return comment.technologie === this.props.name})
+            .filter(comment => {
+                return comment.technologie === this.props.name
+            })
             .sort(function compare(a, b) {
-                var partsA =a.zeit.split(', ');
+                var partsA = a.zeit.split(', ');
                 var datesA = partsA[0].split('/');
                 var timeA = partsA[1].split(':');
                 var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
 
-                var partsB =b.zeit.split(', ');
+                var partsB = b.zeit.split(', ');
                 var datesB = partsB[0].split('/');
                 var timeB = partsB[1].split(':');
                 var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
@@ -140,43 +152,65 @@ class BlipDetailSheetComponent extends React.Component {
                 return dateA - dateB;
             })
             .map(function (item) {
-            return (
-                <div>{item.autor} | {item.text} | {item.meinung} | {item.zeit} </div>
-            );
-        });
-
+                return (<div className="discussionItem">
+                    <div className="discussionContainer">
+                        <div className="name">{item.autor}</div>
+                        <div>{item.text}</div>
+                    </div>
+                    <div className="discussionContainer">
+                        <div></div>
+                        <div>
+                            <span className="meinung">Meinung: {item.meinung}</span>
+                            <span className="timestamp">gesendet: {item.zeit}</span>
+                        </div>
+                    </div>
+                 </div>
+                );
+            });
+        let error;
+        if (this.state.valid == false && this.state.clicked == true) {
+            error = (<div>Bitte alle Felder ausfüllen.</div>);
+        } else {
+            error = ""
+        }
+        ;
         let discussion;
-        let buttonText;
+        let discussionButton;
         if (this.state.showDiscussion === true) {
             discussion = (<div>
-                {commentListItems}
-                {this.getDropdownStatus()}
-                <input type="text" value={this.state.newCommentText}
-                       onChange={this.handleChange}/>
-                <Button size="large" color="primary" onClick={this.addNewComment}>
-                    Send
-                </Button>
+                <div >{commentListItems}</div>
+                <div>{error}</div>
+                <div className="discussionContainer">
+                    {this.getDropdownStatus()}
+                    <span><input type="text" value={this.state.newCommentText}
+                           onChange={this.handleChange} className="inputText"/>
+                    <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
+                        Senden
+                    </Button></span>
+                </div>
             </div>);
-            buttonText = (<span>
-                Collapse all
-            </span>)
+            discussionButton = (
+                <Button className="diskussionButton" size="large" color="primary" onClick={this.showDiscussion}>
+                    Einklappen <Icon>expand_less</Icon>
+                </Button>)
         } else {
             discussion = null;
-            buttonText = (<span>
-                Show Discussion
-            </span>)
+            discussionButton = (
+                <Button className="diskussionButton" size="large" color="primary" onClick={this.showDiscussion}>
+                    Diskussion anzeigen <Icon>expand_more</Icon>
+                </Button>)
         }
 
         // useOutsideAlerter(wrapperRef);
         return (
             <div ref={this.wrapperRef} id="blip-detail-sheet">
-                <Card className="blip-detail-sheet">
+                <Card className="dialog blip-detail-sheet ">
                     <CardActions>
                         <div id="blip-close-mobile" className="blip-close-button-mobile">
                             {this.props.element}
                         </div>
                     </CardActions>
-                    <CardMedia title={this.props.name}></CardMedia>
+                    <CardMedia title={this.props.name} className="cardBody"></CardMedia>
                     <CardContent>
                         <div className="blip-header">
                             <h2>{this.props.name}</h2>
@@ -185,15 +219,12 @@ class BlipDetailSheetComponent extends React.Component {
                                     <Icon>favorite</Icon>
                                 </Tooltip>
                             </Button>
+                            <h3>{this.props.ring} | {this.props.radar}</h3>
                         </div>
-                        <h3>
-                            {this.props.ring} | {this.props.radar}
-                        </h3>
-                        {this.props.desc}
-                        {/*this.props.showDiscussion &&*/}
-                        <Button size="large" color="primary" onClick={this.showDiscussion}>
-                            {buttonText}
-                        </Button>
+
+                        <div className="desc">{this.props.desc}</div>
+                        {discussionButton}
+
                         {discussion}
                     </CardContent>
                 </Card>
