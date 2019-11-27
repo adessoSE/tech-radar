@@ -36,7 +36,7 @@ class BlipDetailSheetComponent extends React.Component {
                 comments.push({
                     autor: item.autor,
                     text: item.text,
-                    status: item.meinung, //TODO
+                    meinung: item.meinung,
                     zeit: item.zeit,
                     technologie: item.technologie
                 })
@@ -49,27 +49,38 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     addNewComment() {
-        const modifiedComments = this.state.comments;
-        const timestamp = new Date().toLocaleString();
-        writeCommentService.addComment({
-            autor: this.state.newCommentAutor,
-            text: this.state.newCommentText,
-            status: this.state.newMeinung,
-            zeit: timestamp,
-            technologie: this.props.name,
-            radar: this.props.radar,});
-        modifiedComments.push({
-            autor: this.state.newCommentAutor,
-            text: this.state.newCommentText,
-            status: this.state.newMeinung,
-            zeit: timestamp
-        });
-        this.setState({
-            comments: modifiedComments,
-            newCommentAutor: "Jenny", //ToDo
-            newCommentText: "",
-            newMeinung: ""
-        });
+        if (this.state.newMeinung === "") {
+            console.log("Meinung darf nicht leer sein!") // TODO Fehlermeldung statt log
+        }
+        else if (this.state.newCommentText === "") {
+            console.log("Text darf nicht leer sein!") // TODO Fehlermeldung statt log
+        }
+        else {
+            const modifiedComments = this.state.comments;
+            const timestamp = new Date().toLocaleString();
+            writeCommentService.addComment({
+                autor: this.state.newCommentAutor,
+                text: this.state.newCommentText,
+                meinung: this.state.newMeinung,
+                zeit: timestamp,
+                technologie: this.props.name,
+                radar: this.props.radar,
+            });
+            modifiedComments.push({
+                autor: this.state.newCommentAutor,
+                text: this.state.newCommentText,
+                meinung: this.state.newMeinung,
+                zeit: timestamp,
+                technologie: this.props.name,
+                radar: this.props.radar,
+            });
+            this.setState({
+                comments: modifiedComments,
+                newCommentAutor: "Jenny", //ToDo
+                newCommentText: "",
+                newMeinung: ""
+            });
+        }
     }
 
     showDiscussion() {
@@ -92,16 +103,19 @@ class BlipDetailSheetComponent extends React.Component {
         let dropdown = null;
         if (this.props.ring === "einsetzen") {
             dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
+                <option value="">Bitte Meinung angeben!</option>
                 <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
                 <option value="Belassen">Belassen</option>
             </select>);
         } else if (this.props.ring === "evaluieren") {
-            dropdown = (<select>
+            dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
+                <option value="">Bitte Meinung angeben!</option>
                 <option value="Nach gut verschieben">Nach gut verschieben</option>
                 <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
             </select>);
         } else if (this.props.ring === "überdenken") {
-            dropdown = (<select>
+            dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
+                <option value="">Bitte Meinung angeben!</option>
                 <option value="Nach gut verschieben">Nach gut verschieben</option>
                 <option value="Belassen">Belassen</option>
             </select>);
@@ -127,7 +141,7 @@ class BlipDetailSheetComponent extends React.Component {
             })
             .map(function (item) {
             return (
-                <div>{item.autor} | {item.text} | {item.status} | {item.zeit} </div>
+                <div>{item.autor} | {item.text} | {item.meinung} | {item.zeit} </div>
             );
         });
 
