@@ -10,6 +10,10 @@ import {
 import Icon from "@material-ui/core/Icon";
 import commentService from "../services/commentService";
 import writeCommentService from "../services/writeCommentService";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 class BlipDetailSheetComponent extends React.Component {
@@ -109,26 +113,54 @@ class BlipDetailSheetComponent extends React.Component {
         this.setState({newMeinung: e.target.value});
     }
 
+    // Dropdown wird erstellt mit Optionen angepasst an die Position der Technologie im Ring
     getDropdownStatus() {
         let dropdown = null;
         if (this.props.ring === "einsetzen") {
-            dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
-                <option value="">Bitte Meinung angeben!</option>
-                <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
-                <option value="Belassen">Belassen</option>
-            </select>);
+            dropdown = (<div><FormControl>
+                <InputLabel id="demo-customized-select-label">Wähle...</InputLabel>
+                <Select
+                    labelId="demo-customized-select-label"
+                    id="demo-customized-select"
+                    value={this.state.value}
+                    onChange={this.handleNewMeinung}
+                    className="meinungDropdown"
+                >
+                    <MenuItem value="Belassen">Nein, bei Einsetzen belassen!</MenuItem>
+                    <MenuItem value="Nach Evaluieren verschieben">Ja, nach Evaluieren verschieben!</MenuItem>
+                    <MenuItem value="Nach Überdenken verschieben">Ja, nach Überdenken verschieben!</MenuItem>
+                </Select>
+            </FormControl></div>);
         } else if (this.props.ring === "evaluieren") {
-            dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
-                <option default>Bitte Meinung angeben!</option>
-                <option value="Nach gut verschieben">Nach gut verschieben</option>
-                <option value="Nach schlecht verschieben">Nach schlecht verschieben</option>
-            </select>);
+            dropdown = (<div><FormControl>
+                <InputLabel id="demo-customized-select-label">Wähle...</InputLabel>
+                <Select
+                    labelId="demo-customized-select-label"
+                    id="demo-customized-select"
+                    value={this.state.value}
+                    onChange={this.handleNewMeinung}
+                    className="meinungDropdown"
+                >
+                    <MenuItem value="Belassen">Nein, bei Evaluieren belassen!</MenuItem>
+                    <MenuItem value="Nach Überdenken verschieben">Ja, nach Überdenken verschieben!</MenuItem>
+                    <MenuItem value="Nach Einsetzen verschieben">Ja, nach Einsetzen verschieben!</MenuItem>
+                </Select>
+            </FormControl></div>);
         } else if (this.props.ring === "überdenken") {
-            dropdown = (<select value={this.state.value} onChange={this.handleNewMeinung}>
-                <option default>Bitte Meinung angeben!</option>
-                <option value="Nach gut verschieben">Nach gut verschieben</option>
-                <option value="Belassen">Belassen</option>
-            </select>);
+            dropdown = (<div><FormControl>
+                <InputLabel id="demo-customized-select-label">Wähle...</InputLabel>
+                <Select
+                    labelId="demo-customized-select-label"
+                    id="demo-customized-select"
+                    value={this.state.value}
+                    onChange={this.handleNewMeinung}
+                    className="meinungDropdown"
+                >
+                    <MenuItem value="Belassen">Nein, bei Überdenken belassen!</MenuItem>
+                    <MenuItem value="Nach Evaluieren verschieben">Ja, nach Evaluieren verschieben!</MenuItem>
+                    <MenuItem value="Nach Einsetzen verschieben">Ja, nach Einsetzen verschieben!</MenuItem>
+                </Select>
+            </FormControl></div>);
         }
         return dropdown;
     }
@@ -153,18 +185,18 @@ class BlipDetailSheetComponent extends React.Component {
             })
             .map(function (item) {
                 return (<div className="discussionItem">
-                    <div className="discussionContainer">
-                        <div className="name">{item.autor}</div>
-                        <div>{item.text}</div>
-                    </div>
-                    <div className="discussionContainer">
-                        <div></div>
-                        <div>
-                            <span className="meinung">Meinung: {item.meinung}</span>
-                            <span className="timestamp">gesendet: {item.zeit}</span>
+                        <div className="discussionContainer">
+                            <div className="name">{item.autor}</div>
+                            <div>{item.text}</div>
+                        </div>
+                        <div className="discussionContainer">
+                            <div></div>
+                            <div>
+                                <span className="meinung">Meinung: {item.meinung}</span>
+                                <span className="timestamp">gesendet: {item.zeit}</span>
+                            </div>
                         </div>
                     </div>
-                 </div>
                 );
             });
         let error;
@@ -178,12 +210,16 @@ class BlipDetailSheetComponent extends React.Component {
         let discussionButton;
         if (this.state.showDiscussion === true) {
             discussion = (<div>
-                <div >{commentListItems}</div>
+                <div>{commentListItems}</div>
                 <div>{error}</div>
+                <hr/>
+                <h4>Beteilige dich an der Diskussion</h4>
                 <div className="discussionContainer">
-                    {this.getDropdownStatus()}
-                    <span><input type="text" value={this.state.newCommentText}
-                           onChange={this.handleChange} className="inputText"/>
+
+                    <span>Möchtest du, dass die Technologie im Radar verschoben wird?
+                        {this.getDropdownStatus()}</span>
+                    <span><textarea type="text" value={this.state.newCommentText}
+                                    onChange={this.handleChange} className="inputText"/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
                     </Button></span>
