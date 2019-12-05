@@ -28,7 +28,13 @@ class BlipDetailSheetComponent extends React.Component {
             newMeinung: "",
             showDiscussion: false,
             valid: false,
-            clicked: false
+            clicked: false,
+            meinungArr: ["Nach Evaluieren verschieben!",
+                "Nach Überdenken verschieben!",
+                "Nach Einsetzen verschieben!",
+                "In Einsetzen belassen!",
+                "In Evaluieren belassen!",
+                "In Überdenken belassen!"]
         };
         this.addNewComment = this.addNewComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +48,7 @@ class BlipDetailSheetComponent extends React.Component {
                 comments.push({
                     autor: item.autor,
                     text: item.text,
-                    meinung: item.meinung,
+                    meinung: this.state.meinungArr[item.meinung+1],
                     zeit: item.zeit,
                     technologie: item.technologie
                 })
@@ -73,7 +79,7 @@ class BlipDetailSheetComponent extends React.Component {
             modifiedComments.push({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
-                meinung: this.state.newMeinung,
+                meinung: this.state.meinungArr[this.state.newMeinung+1],
                 zeit: timestamp,
                 technologie: this.props.name,
                 radar: this.props.radar,
@@ -105,12 +111,17 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     handleNewMeinung(e) {
-        if (e.target.value == "") {
-            this.setState({valid: false})
-        } else if (e.target.value != "" && this.state.newCommentText != "") {
-            this.setState({valid: true})
+        this.setState({newMeinung: e.target.value})
+        if (this.state.newMeinung == "") {
+            this.setState({
+                valid: false
+            })
+        } else if (this.state.newMeinung != "" && this.state.newCommentText != "") {
+            this.setState({
+                valid: true
+            })
+            console.log(e.target.value)
         }
-        this.setState({newMeinung: e.target.value});
     }
 
     // Dropdown wird erstellt mit Optionen angepasst an die Position der Technologie im Ring
@@ -122,13 +133,13 @@ class BlipDetailSheetComponent extends React.Component {
                 <Select
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
-                    value={this.state.value}
+                    value={this.state.newMeinung}
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value="Belassen">Nein, in Einsetzen belassen!</MenuItem>
-                    <MenuItem value="Nach Evaluieren verschieben">Ja, nach Evaluieren verschieben!</MenuItem>
-                    <MenuItem value="Nach Überdenken verschieben">Ja, nach Überdenken verschieben!</MenuItem>
+                    <MenuItem value={4}>In Einsetzen belassen!</MenuItem>
+                    <MenuItem value={1}>Nach Evaluieren verschieben!</MenuItem>
+                    <MenuItem value={2}>Nach Überdenken verschieben!</MenuItem>
                 </Select>
             </FormControl></div>);
         } else if (this.props.ring === "evaluieren") {
@@ -141,9 +152,9 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value="Belassen">Nein, in Evaluieren belassen!</MenuItem>
-                    <MenuItem value="Nach Überdenken verschieben">Ja, nach Überdenken verschieben!</MenuItem>
-                    <MenuItem value="Nach Einsetzen verschieben">Ja, nach Einsetzen verschieben!</MenuItem>
+                    <MenuItem value={5}>In Evaluieren belassen!</MenuItem>
+                    <MenuItem value={2}>Nach Überdenken verschieben!</MenuItem>
+                    <MenuItem value={3}>Nach Einsetzen verschieben!</MenuItem>
                 </Select>
             </FormControl></div>);
         } else if (this.props.ring === "überdenken") {
@@ -156,9 +167,9 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value="Belassen">Nein, in Überdenken belassen!</MenuItem>
-                    <MenuItem value="Nach Evaluieren verschieben">Ja, nach Evaluieren verschieben!</MenuItem>
-                    <MenuItem value="Nach Einsetzen verschieben">Ja, nach Einsetzen verschieben!</MenuItem>
+                    <MenuItem value={6}>In Überdenken belassen!</MenuItem>
+                    <MenuItem value={1}>Nach Evaluieren verschieben!</MenuItem>
+                    <MenuItem value={3}>Nach Einsetzen verschieben!</MenuItem>
                 </Select>
             </FormControl></div>);
         }
@@ -218,7 +229,7 @@ class BlipDetailSheetComponent extends React.Component {
 
                     <span>Möchtest Du, dass diese Technologie innerhalb des Radars verschoben wird?
                         {this.getDropdownStatus()}</span>
-                    <span><textarea type="text" value={this.state.newCommentText}
+                    <span><textarea type="text" value={this.state.newCommentText} maxlength="500"
                                     onChange={this.handleChange} className="inputText" placeholder="Hinterlasse Deinen Kommentar hier..."/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
