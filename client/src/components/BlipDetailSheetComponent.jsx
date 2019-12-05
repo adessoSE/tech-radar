@@ -57,12 +57,11 @@ class BlipDetailSheetComponent extends React.Component {
         } else {
             this.setState({valid: true});
             const modifiedComments = this.state.comments;
-            const timestamp = new Date().toLocaleString();
             writeCommentService.addComment({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
                 meinung: this.state.newMeinung,
-                zeit: timestamp,
+                zeit: new Date(),
                 technologie: this.props.name,
                 radar: this.props.radar,
             });
@@ -70,7 +69,7 @@ class BlipDetailSheetComponent extends React.Component {
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
                 meinung: this.state.newMeinung,
-                zeit: timestamp,
+                zeit: new Date(),
                 technologie: this.props.name,
                 radar: this.props.radar,
             });
