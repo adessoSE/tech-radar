@@ -182,7 +182,7 @@ class BlipDetailSheetComponent extends React.Component {
                 <div>{error}</div>
                 <div className="discussionContainer">
                     {this.getDropdownStatus()}
-                    <span><input type="text" value={this.state.newCommentText}
+                    <span><input type="text" maxLength="500" value={this.state.newCommentText}
                            onChange={this.handleChange} className="inputText"/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
