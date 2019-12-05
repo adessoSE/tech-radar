@@ -48,7 +48,7 @@ class BlipDetailSheetComponent extends React.Component {
                 comments.push({
                     autor: item.autor,
                     text: item.text,
-                    meinung: this.state.meinungArr[item.meinung+1],
+                    meinung: this.state.meinungArr[item.meinung-1],
                     zeit: item.zeit,
                     technologie: item.technologie
                 })
@@ -79,7 +79,7 @@ class BlipDetailSheetComponent extends React.Component {
             modifiedComments.push({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
-                meinung: this.state.meinungArr[this.state.newMeinung+1],
+                meinung: this.state.meinungArr[this.state.newMeinung-1],
                 zeit: timestamp,
                 technologie: this.props.name,
                 radar: this.props.radar,
@@ -229,7 +229,7 @@ class BlipDetailSheetComponent extends React.Component {
 
                     <span>Möchtest Du, dass diese Technologie innerhalb des Radars verschoben wird?
                         {this.getDropdownStatus()}</span>
-                    <span><textarea type="text" value={this.state.newCommentText} maxlength="500"
+                    <span><textarea type="text" value={this.state.newCommentText} maxLength="500"
                                     onChange={this.handleChange} className="inputText" placeholder="Hinterlasse Deinen Kommentar hier..."/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
