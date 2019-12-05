@@ -126,7 +126,7 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value="Belassen">Nein, bei Einsetzen belassen!</MenuItem>
+                    <MenuItem value="Belassen">Nein, in Einsetzen belassen!</MenuItem>
                     <MenuItem value="Nach Evaluieren verschieben">Ja, nach Evaluieren verschieben!</MenuItem>
                     <MenuItem value="Nach Überdenken verschieben">Ja, nach Überdenken verschieben!</MenuItem>
                 </Select>
@@ -141,7 +141,7 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value="Belassen">Nein, bei Evaluieren belassen!</MenuItem>
+                    <MenuItem value="Belassen">Nein, in Evaluieren belassen!</MenuItem>
                     <MenuItem value="Nach Überdenken verschieben">Ja, nach Überdenken verschieben!</MenuItem>
                     <MenuItem value="Nach Einsetzen verschieben">Ja, nach Einsetzen verschieben!</MenuItem>
                 </Select>
@@ -156,7 +156,7 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value="Belassen">Nein, bei Überdenken belassen!</MenuItem>
+                    <MenuItem value="Belassen">Nein, in Überdenken belassen!</MenuItem>
                     <MenuItem value="Nach Evaluieren verschieben">Ja, nach Evaluieren verschieben!</MenuItem>
                     <MenuItem value="Nach Einsetzen verschieben">Ja, nach Einsetzen verschieben!</MenuItem>
                 </Select>
@@ -213,13 +213,13 @@ class BlipDetailSheetComponent extends React.Component {
                 <div>{commentListItems}</div>
                 <div>{error}</div>
                 <hr/>
-                <h4>Beteilige dich an der Diskussion</h4>
+                <h4>Beteilige Dich an der Diskussion</h4>
                 <div className="discussionContainer">
 
-                    <span>Möchtest du, dass die Technologie im Radar verschoben wird?
+                    <span>Möchtest Du, dass diese Technologie innerhalb des Radars verschoben wird?
                         {this.getDropdownStatus()}</span>
                     <span><textarea type="text" value={this.state.newCommentText}
-                                    onChange={this.handleChange} className="inputText"/>
+                                    onChange={this.handleChange} className="inputText" placeholder="Hinterlasse Deinen Kommentar hier..."/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
                     </Button></span>
