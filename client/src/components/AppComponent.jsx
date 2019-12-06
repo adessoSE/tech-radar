@@ -79,6 +79,9 @@ export default class AppComponent extends React.Component {
                                         alt="adesso's company logo"
                                     />
                                 }
+                                component={Link}
+                                to="/java"
+                                value={0}
                             />
 
                             <Tab
