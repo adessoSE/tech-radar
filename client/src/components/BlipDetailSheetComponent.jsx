@@ -57,7 +57,7 @@ class BlipDetailSheetComponent extends React.Component {
         } else {
             this.setState({valid: true});
             var datestorage = new Date();
-            var time = datestorage.getDay() + "/" + datestorage.getMonth() + "/" + datestorage.getFullYear() + " , " + datestorage.getHours() + ":" + datestorage.getMinutes() + ":" + datestorage.getSeconds();
+            var time = datestorage.getDay() + "/" + datestorage.getMonth() + "/" + datestorage.getFullYear() + ", " + datestorage.getHours() + ":" + datestorage.getMinutes() + ":" + datestorage.getSeconds();
             const modifiedComments = this.state.comments;
             writeCommentService.addComment({
                 autor: this.state.newCommentAutor,
