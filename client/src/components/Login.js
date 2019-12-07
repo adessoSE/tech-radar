@@ -40,11 +40,11 @@ class Login extends Component {
             <form onSubmit={this.login}>
     <FormGroup controlId="email">
             <FormLabel>E-mail</FormLabel>
-            <FormControl type="email" name="E-mail" placeholder="Enter your e-mail" onChange={this.handleInputChange} />
+            <FormControl type="email" name="E-mail" placeholder="email" onChange={this.handleInputChange} />
     </FormGroup>
-        <FormGroup controlId="password" >
-            <FormLabel>Password</FormLabel>
-            <FormControl type="password" name="password" placeholder="Enter your password" onChange={this.handleInputChange} />
+        <FormGroup controlId="passwort" >
+            <FormLabel>Passwort</FormLabel>
+            <FormControl type="password" name="passwort" placeholder="passwort" onChange={this.handleInputChange} />
     </FormGroup>
         <Button type="submit" bsStyle="primary">Log In</Button>
         </form>
