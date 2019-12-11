@@ -32,7 +32,7 @@ class BlipDetailSheetComponent extends React.Component {
         this.showDiscussion = this.showDiscussion.bind(this);
         this.getDropdownStatus = this.getDropdownStatus.bind(this);
         this.getCommentsAll = async () => {
-            const data = await commentService.getByRadarType(this.props.radar);
+            const data = await commentService.getByRadarType();
             const comments = [];
             data.map(item => {
                 comments.push({
@@ -40,12 +40,13 @@ class BlipDetailSheetComponent extends React.Component {
                     text: item.text,
                     meinung: item.meinung,
                     zeit: item.zeit,
-                    technologie: item.technologie
+                    technologie: item.technologie,
+                    radar: item.radar
                 })
             });
             this.setState({
                 comments: comments
-            })
+            });
         };
         this.getCommentsAll();
     }
@@ -136,7 +137,8 @@ class BlipDetailSheetComponent extends React.Component {
     render() {
         var commentListItems = this.state.comments
             .filter(comment => {
-                return comment.technologie === this.props.name
+                return comment.technologie === this.props.name &&
+                       comment.radar === this.props.radar
             })
             .sort(function compare(a, b) {
                 var partsA = a.zeit.split(', ');
