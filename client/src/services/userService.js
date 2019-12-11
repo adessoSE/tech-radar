@@ -8,8 +8,6 @@ export default {
                 passwort: passwort
             }
         });
-        console.log(email);
-        console.log(passwort);
         return res.data || [];
     }
 }
