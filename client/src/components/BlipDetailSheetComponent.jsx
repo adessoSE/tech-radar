@@ -49,9 +49,9 @@ class BlipDetailSheetComponent extends React.Component {
             })
         };
         this.getCommentsAll();
-        // TODO delete this debugging implementation
+        // TODO delete this debugging implementation or replace with actual useful implementation
         this.test = async ()  => {
-            const datatest = await userService.getUserInfo("miriam.musterfrau@yahoo.com", "techRadar_HTW_2k19");
+            const datatest = await userService.getUserInfo("max.mustermann@gmail.com", "Adesso-Projekt-2k19");
             const test = [];
             datatest.map(item => {
                 test.push({
