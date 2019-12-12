@@ -14,7 +14,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import userService from "../services/userService";
 
 class BlipDetailSheetComponent extends React.Component {
     wrapperRef = createRef();
@@ -34,7 +34,8 @@ class BlipDetailSheetComponent extends React.Component {
                 "Nach Einsetzen verschieben!",
                 "In Einsetzen belassen!",
                 "In Evaluieren belassen!",
-                "In Überdenken belassen!"]
+                "In Überdenken belassen!"],
+            test: new Array({})
         };
         this.addNewComment = this.addNewComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +43,7 @@ class BlipDetailSheetComponent extends React.Component {
         this.showDiscussion = this.showDiscussion.bind(this);
         this.getDropdownStatus = this.getDropdownStatus.bind(this);
         this.getCommentsAll = async () => {
-            const data = await commentService.getByRadarType(this.props.radar);
+            const data = await commentService.getByRadarType();
             const comments = [];
             data.map(item => {
                 comments.push({
@@ -50,14 +51,34 @@ class BlipDetailSheetComponent extends React.Component {
                     text: item.text,
                     meinung: this.state.meinungArr[item.meinung-1],
                     zeit: item.zeit,
-                    technologie: item.technologie
+                    technologie: item.technologie,
+                    radar: item.radar
                 })
             });
             this.setState({
                 comments: comments
-            })
+            });
         };
         this.getCommentsAll();
+        // TODO delete this debugging implementation or replace with actual useful implementation
+        this.test = async ()  => {
+            const datatest = await userService.getUserInfo("max.mustermann@gmail.com", "Adesso-Projekt-2k19");
+            const test = [];
+            datatest.map(item => {
+                test.push({
+                    email: item.email,
+                    passwort: item.passwort,
+                    rolle: item.rolle,
+                    name: item.name
+                })
+            });
+            console.log(datatest);
+            console.log(test);
+            this.setState({
+                test: test
+            });
+        };
+        this.test();
     }
 
     addNewComment() {
@@ -66,13 +87,14 @@ class BlipDetailSheetComponent extends React.Component {
             this.setState({valid: false});
         } else {
             this.setState({valid: true});
+            var datestorage = new Date();
+            var time = datestorage.getDay() + "/" + datestorage.getMonth() + "/" + datestorage.getFullYear() + ", " + datestorage.getHours() + ":" + datestorage.getMinutes() + ":" + datestorage.getSeconds();
             const modifiedComments = this.state.comments;
-            const timestamp = new Date().toLocaleString();
             writeCommentService.addComment({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
                 meinung: this.state.newMeinung,
-                zeit: timestamp,
+                zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
             });
@@ -80,7 +102,7 @@ class BlipDetailSheetComponent extends React.Component {
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
                 meinung: this.state.meinungArr[this.state.newMeinung-1],
-                zeit: timestamp,
+                zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
             });
@@ -179,7 +201,8 @@ class BlipDetailSheetComponent extends React.Component {
     render() {
         var commentListItems = this.state.comments
             .filter(comment => {
-                return comment.technologie === this.props.name
+                return comment.technologie === this.props.name &&
+                       comment.radar === this.props.radar
             })
             .sort(function compare(a, b) {
                 var partsA = a.zeit.split(', ');

@@ -8,6 +8,6 @@ const userSchema = new Schema({
     rolle: String,
 });
 
-mongoose.model('user', userSchema);
+mongoose.model('users', userSchema);
 
 //ToDO Passwort eventuell verschlüsselt speichern?? Rolle als enum (User/Admin)

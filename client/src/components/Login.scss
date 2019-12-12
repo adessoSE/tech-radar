@@ -1,0 +1,33 @@
+$adesso-grey: #857971;
+$adesso-blue: #0275d8;
+$adesso-white: #f4f4f4;
+
+.Login {
+  padding: 80px 0;
+
+}
+
+.Login form {
+  margin: 0 auto;
+  max-width: 320px;
+}
+.Login input[type=email],
+input[type=password]
+{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid $adesso-grey;
+}
+
+.Login button {
+  width: 4em;
+  height: 2em;
+  font-size: 1em;
+  background: $adesso-white;
+  color: $adesso-blue !important;
+  width: 100%;
+
+
+}
