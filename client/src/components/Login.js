@@ -27,16 +27,19 @@ class Login extends Component {
         let name = event.target.name;
         let value = event.target.value;
         this.setState({[name]: value});
-        // console.log(this.state.email);
+        //console.log(this.state.email);
         //console.log(this.state.passwort);
     }
 
-    async verifyUserInput() {
-        console.log("hallo");
+    verifyUserInput = async () => {
+        console.log(this.state.email);
+        console.log(this.state.passwort);
         const datatest = await userService.getUserInfo(this.state.email, this.state.passwort);
-        console.log(datatest);
-    }
+        if(datatest===[]) {
 
+        }
+        console.log(datatest);
+    };
 
     render() {
         return (
@@ -52,7 +55,7 @@ class Login extends Component {
                             <FormControl type="password" name="passwort" placeholder="passwort"
                                          onChange={this.handleInputChange}/>
                         </FormGroup>
-                        <Button type="submit" onClick={this.verifyUserInput} bsStyle="primary">Log In</Button>
+                        <Button type="submit" onClick={this.verifyUserInput} bsstyle="primary">Log In</Button>
                     </form>
                 </Row>
             </div>
