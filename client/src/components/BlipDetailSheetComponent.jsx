@@ -42,6 +42,9 @@ class BlipDetailSheetComponent extends React.Component {
         this.handleNewMeinung = this.handleNewMeinung.bind(this);
         this.showDiscussion = this.showDiscussion.bind(this);
         this.getDropdownStatus = this.getDropdownStatus.bind(this);
+        this.getBalken = this.getBalken.bind(this);
+        this.getCount = this.getCount.bind(this);
+        this.getStyle = this.getStyle.bind(this);
         this.getCommentsAll = async () => {
             const data = await commentService.getByRadarType();
             const comments = [];
@@ -49,7 +52,7 @@ class BlipDetailSheetComponent extends React.Component {
                 comments.push({
                     autor: item.autor,
                     text: item.text,
-                    meinung: this.state.meinungArr[item.meinung-1],
+                    meinung: this.state.meinungArr[item.meinung - 1],
                     zeit: item.zeit,
                     technologie: item.technologie,
                     radar: item.radar
@@ -61,7 +64,7 @@ class BlipDetailSheetComponent extends React.Component {
         };
         this.getCommentsAll();
         // TODO delete this debugging implementation or replace with actual useful implementation
-        this.test = async ()  => {
+        this.test = async () => {
             const datatest = await userService.getUserInfo("max.mustermann@gmail.com", "Adesso-Projekt-2k19");
             const test = [];
             datatest.map(item => {
@@ -101,7 +104,7 @@ class BlipDetailSheetComponent extends React.Component {
             modifiedComments.push({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
-                meinung: this.state.meinungArr[this.state.newMeinung-1],
+                meinung: this.state.meinungArr[this.state.newMeinung - 1],
                 zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
@@ -198,11 +201,66 @@ class BlipDetailSheetComponent extends React.Component {
         return dropdown;
     }
 
+    getCount(value) {
+        var countValue = this.state.comments.filter(comment => {
+            return comment.technologie === this.props.name &&
+                comment.radar === this.props.radar &&
+                comment.meinung === this.state.meinungArr[value - 1]
+        }).length;
+        return countValue;
+    }
+
+    getStyle(value) {
+        var countValue  = this.getCount(value);
+        var count = this.state.comments.filter(comment => {
+            return comment.technologie === this.props.name &&
+                comment.radar === this.props.radar
+        }).length;
+        var width = (countValue * 100 / count) + '%';
+        var style = {
+            width: width
+        };
+        return style;
+    }
+
+    getBalken() {
+        let balken;
+        if (this.props.ring === "einsetzen") {
+            balken = (<div className="balken">
+                <div className="value1 tooltip" style={this.getStyle(4)}>{this.getCount(4)}<span
+                    className="tooltiptext">In Einsetzen belassen</span></div>
+                <div className="value2 tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span className="tooltiptext">Nach Evaluieren verschieben</span>
+                </div>
+                <div className="value3 tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span className="tooltiptext">Nach Überdenken verschieben</span>
+                </div>
+            </div>);
+        } else if (this.props.ring === "evaluieren") {
+            balken = (<div className="balken">
+                <div className="value1" style={this.getStyle(5)}>{this.getCount(5)}<span
+                    className="tooltiptext">In Evaluieren belassen</span></div>
+                <div className="value2" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Nach Überdenken verschieben</span></div>
+                <div className="value3" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Nach Einsetzen verschieben</span></div>
+            </div>);
+        } else if (this.props.ring === "überdenken") {
+            balken = (<div className="balken">
+                <div className="value1" style={this.getStyle(6)}>{this.getCount(6)}<span
+                    className="tooltiptext">In Überdenken belassen</span></div>
+                <div className="value2" style={this.getStyle(1)}>{this.getCount(1)}<span
+                    className="tooltiptext">Nach Evaluieren verschieben</span></div>
+                <div className="value3" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Nach Einsetzen verschieben</span></div>
+            </div>);
+        }
+        return balken;
+    }
+
     render() {
         var commentListItems = this.state.comments
             .filter(comment => {
                 return comment.technologie === this.props.name &&
-                       comment.radar === this.props.radar
+                    comment.radar === this.props.radar
             })
             .sort(function compare(a, b) {
                 var partsA = a.zeit.split(', ');
@@ -253,7 +311,8 @@ class BlipDetailSheetComponent extends React.Component {
                     <span>Möchtest Du, dass diese Technologie innerhalb des Radars verschoben wird?
                         {this.getDropdownStatus()}</span>
                     <span><textarea type="text" value={this.state.newCommentText} maxLength="500"
-                                    onChange={this.handleChange} className="inputText" placeholder="Hinterlasse Deinen Kommentar hier..."/>
+                                    onChange={this.handleChange} className="inputText"
+                                    placeholder="Hinterlasse Deinen Kommentar hier..."/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
                     </Button></span>
@@ -293,9 +352,11 @@ class BlipDetailSheetComponent extends React.Component {
                         </div>
 
                         <div className="desc">{this.props.desc}</div>
+                        {this.getBalken()}
                         {discussionButton}
 
                         {discussion}
+
                     </CardContent>
                 </Card>
             </div>
