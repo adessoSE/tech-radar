@@ -12,5 +12,4 @@ const commentSchema = new Schema({
 
 mongoose.model('comments', commentSchema);
 
-
-//TODO schema muss an unsere zwecke noch weiter angepasst werden --> zeit sollte klein string sein, meinung vermutlich sowas wie ein enum und radar auch
+//TODO schema muss an unsere zwecke noch weiter angepasst werden --> zeit sollte kein string sein, meinung vermutlich sowas wie ein enum und radar auch
