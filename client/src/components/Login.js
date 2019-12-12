@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { Row, FormGroup, FormControl, FormLabel, Button} from 'react-bootstrap';
+import React, {Component} from "react";
+import {Row, FormGroup, FormControl, FormLabel, Button} from 'react-bootstrap';
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 import "./Login.scss"
+import userService from "../services/userService";
 
 
 class Login extends Component {
@@ -12,45 +13,50 @@ class Login extends Component {
         super(props)
 
         this.state = {
-            formData: {},
             errors: {},
             formSubmitted: false,
+            email: '',
+            passwort: '',
 
         }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.verifyUserInput = this.verifyUserInput.bind(this);
     }
 
     handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        let { formData } = this.state;
-        formData[name] = value;
-
-        this.setState({
-            formData: formData
-        });
+        let name = event.target.name;
+        let value = event.target.value;
+        this.setState({[name]: value});
+        // console.log(this.state.email);
+        //console.log(this.state.passwort);
     }
 
-    render() {
+    async verifyUserInput() {
+        console.log("hallo");
+        const datatest = await userService.getUserInfo(this.state.email, this.state.passwort);
+        console.log(datatest);
+    }
 
+
+    render() {
         return (
             <div className="Login">
                 <Row>
-            <form onSubmit={this.login}>
-    <FormGroup controlId="email">
-            <FormLabel>E-mail</FormLabel>
-            <FormControl type="email" name="E-mail" placeholder="email" onChange={this.handleInputChange} />
-    </FormGroup>
-        <FormGroup controlId="passwort" >
-            <FormLabel>Passwort</FormLabel>
-            <FormControl type="password" name="passwort" placeholder="passwort" onChange={this.handleInputChange} />
-    </FormGroup>
-        <Button type="submit" bsStyle="primary">Log In</Button>
-        </form>
-        </Row>
-        </div>
-    )
+                    <form onSubmit={this.login}>
+                        <FormGroup controlId="email">
+                            <FormLabel>E-mail</FormLabel>
+                            <input type="email" name="email" placeholder="email" onChange={this.handleInputChange}/>
+                        </FormGroup>
+                        <FormGroup controlId="passwort">
+                            <FormLabel>Passwort</FormLabel>
+                            <FormControl type="password" name="passwort" placeholder="passwort"
+                                         onChange={this.handleInputChange}/>
+                        </FormGroup>
+                        <Button type="submit" onClick={this.verifyUserInput} bsStyle="primary">Log In</Button>
+                    </form>
+                </Row>
+            </div>
+        )
     }
 }
 
