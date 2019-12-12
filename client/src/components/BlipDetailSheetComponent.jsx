@@ -148,7 +148,7 @@ class BlipDetailSheetComponent extends React.Component {
                 <Select
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
-                    value={this.state.value}
+                    value={this.state.newMeinung}
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
@@ -163,7 +163,7 @@ class BlipDetailSheetComponent extends React.Component {
                 <Select
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
-                    value={this.state.value}
+                    value={this.state.newMeinung}
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
