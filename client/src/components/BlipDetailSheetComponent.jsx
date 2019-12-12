@@ -77,13 +77,14 @@ class BlipDetailSheetComponent extends React.Component {
             this.setState({valid: false});
         } else {
             this.setState({valid: true});
+            var datestorage = new Date();
+            var time = datestorage.getDay() + "/" + datestorage.getMonth() + "/" + datestorage.getFullYear() + ", " + datestorage.getHours() + ":" + datestorage.getMinutes() + ":" + datestorage.getSeconds();
             const modifiedComments = this.state.comments;
-            const timestamp = new Date().toLocaleString();
             writeCommentService.addComment({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
                 meinung: this.state.newMeinung,
-                zeit: timestamp,
+                zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
             });
@@ -91,7 +92,7 @@ class BlipDetailSheetComponent extends React.Component {
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
                 meinung: this.state.newMeinung,
-                zeit: timestamp,
+                zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
             });
