@@ -6,6 +6,7 @@ const app = express();
 
 // IMPORT MODELS
 require('./models/comment');
+require('./models/user');
 
 var PropertiesReader = require('properties-reader');
 var properties = PropertiesReader('properties.ini');
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 
 //IMPORT ROUTES
 require('./routes/commentRoutes')(app);
+require('./routes/userRoutes')(app);
 
 
 // TODO bisher soweit ich das sehe gar nicht genutzt, entweder entfernen oder config setzen

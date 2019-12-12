@@ -10,7 +10,7 @@ import {
 import Icon from "@material-ui/core/Icon";
 import commentService from "../services/commentService";
 import writeCommentService from "../services/writeCommentService";
-
+import userService from "../services/userService";
 
 class BlipDetailSheetComponent extends React.Component {
     wrapperRef = createRef();
@@ -24,7 +24,8 @@ class BlipDetailSheetComponent extends React.Component {
             newMeinung: "",
             showDiscussion: false,
             valid: false,
-            clicked: false
+            clicked: false,
+            test: new Array({})
         };
         this.addNewComment = this.addNewComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -49,6 +50,25 @@ class BlipDetailSheetComponent extends React.Component {
             });
         };
         this.getCommentsAll();
+        // TODO delete this debugging implementation or replace with actual useful implementation
+        this.test = async ()  => {
+            const datatest = await userService.getUserInfo("max.mustermann@gmail.com", "Adesso-Projekt-2k19");
+            const test = [];
+            datatest.map(item => {
+                test.push({
+                    email: item.email,
+                    passwort: item.passwort,
+                    rolle: item.rolle,
+                    name: item.name
+                })
+            });
+            console.log(datatest);
+            console.log(test);
+            this.setState({
+                test: test
+            });
+        };
+        this.test();
     }
 
     addNewComment() {
