@@ -44,6 +44,7 @@ class BlipDetailSheetComponent extends React.Component {
         this.getDropdownStatus = this.getDropdownStatus.bind(this);
         this.getBalken = this.getBalken.bind(this);
         this.getCount = this.getCount.bind(this);
+        this.getTotalCount = this.getTotalCount.bind(this);
         this.getStyle = this.getStyle.bind(this);
         this.getCommentsAll = async () => {
             const data = await commentService.getByRadarType();
@@ -100,7 +101,7 @@ class BlipDetailSheetComponent extends React.Component {
                 zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
-            });
+            }).then(
             modifiedComments.push({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
@@ -108,7 +109,7 @@ class BlipDetailSheetComponent extends React.Component {
                 zeit: time,
                 technologie: this.props.name,
                 radar: this.props.radar,
-            });
+            }));
             this.setState({
                 comments: modifiedComments,
                 newCommentAutor: "Jenny", //ToDo
@@ -210,12 +211,16 @@ class BlipDetailSheetComponent extends React.Component {
         return countValue;
     }
 
-    getStyle(value) {
-        var countValue  = this.getCount(value);
-        var count = this.state.comments.filter(comment => {
+    getTotalCount() {
+        return this.state.comments.filter(comment => {
             return comment.technologie === this.props.name &&
                 comment.radar === this.props.radar
         }).length;
+    }
+
+    getStyle(value) {
+        var countValue = this.getCount(value);
+        var count = this.getTotalCount();
         var width = (countValue * 100 / count) + '%';
         var style = {
             width: width
@@ -224,32 +229,35 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     getBalken() {
-        let balken;
-        if (this.props.ring === "einsetzen") {
+        let balken = <div className="balken"></div>;
+        if (this.props.ring === "einsetzen" && (!(this.getCount(4) === 0 && this.getCount(1) === 0 && this.getCount(2) === 0)) && this.getTotalCount() >= 5) {
             balken = (<div className="balken">
-                <div className="value1 tooltip" style={this.getStyle(4)}>{this.getCount(4)}<span
+                <div className="innen tooltip" style={this.getStyle(4)}>{this.getCount(4)}<span
                     className="tooltiptext">In Einsetzen belassen</span></div>
-                <div className="value2 tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span className="tooltiptext">Nach Evaluieren verschieben</span>
+                <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
+                    className="tooltiptext">Nach Evaluieren verschieben</span>
                 </div>
-                <div className="value3 tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span className="tooltiptext">Nach Überdenken verschieben</span>
+                <div className="außen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Nach Überdenken verschieben</span>
                 </div>
             </div>);
-        } else if (this.props.ring === "evaluieren") {
+
+        } else if (this.props.ring === "evaluieren" && (!(this.getCount(5) === 0 && this.getCount(2) === 0 && this.getCount(3) === 0)) && this.getTotalCount() >= 5) {
             balken = (<div className="balken">
-                <div className="value1" style={this.getStyle(5)}>{this.getCount(5)}<span
+                <div className="innen tooltip" style={this.getStyle(5)}>{this.getCount(5)}<span
                     className="tooltiptext">In Evaluieren belassen</span></div>
-                <div className="value2" style={this.getStyle(2)}>{this.getCount(2)}<span
+                <div className="mitte tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
                     className="tooltiptext">Nach Überdenken verschieben</span></div>
-                <div className="value3" style={this.getStyle(3)}>{this.getCount(3)}<span
+                <div className="außen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
                     className="tooltiptext">Nach Einsetzen verschieben</span></div>
             </div>);
-        } else if (this.props.ring === "überdenken") {
+        } else if (this.props.ring === "überdenken" && (!(this.getCount(6) === 0 && this.getCount(1) === 0 && this.getCount(3) === 0)) && this.getTotalCount() >= 5) {
             balken = (<div className="balken">
-                <div className="value1" style={this.getStyle(6)}>{this.getCount(6)}<span
+                <div className="innen tooltip" style={this.getStyle(6)}>{this.getCount(6)}<span
                     className="tooltiptext">In Überdenken belassen</span></div>
-                <div className="value2" style={this.getStyle(1)}>{this.getCount(1)}<span
+                <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
                     className="tooltiptext">Nach Evaluieren verschieben</span></div>
-                <div className="value3" style={this.getStyle(3)}>{this.getCount(3)}<span
+                <div className="außen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
                     className="tooltiptext">Nach Einsetzen verschieben</span></div>
             </div>);
         }
@@ -276,6 +284,12 @@ class BlipDetailSheetComponent extends React.Component {
                 return dateA - dateB;
             })
             .map(function (item) {
+                let meinung = (item.meinung === "Nach Einsetzen verschieben!" || item.meinung === "In Einsetzen belassen!") ?
+                    <span className="meinung innen">Meinung: {item.meinung}</span> :
+                    (item.meinung === "Nach Evaluieren verschieben!" || item.meinung === "In Evaluieren belassen!") ?
+                        <span className="meinung mitte">Meinung: {item.meinung}</span> :
+                        (item.meinung === "Nach Überdenken verschieben!" || item.meinung === "In Evaluieren belassen!") ?
+                            <span className="meinung außen">Meinung: {item.meinung}</span> : ""
                 return (<div className="discussionItem">
                         <div className="discussionContainer">
                             <div className="name">{item.autor}</div>
@@ -284,8 +298,8 @@ class BlipDetailSheetComponent extends React.Component {
                         <div className="discussionContainer">
                             <div></div>
                             <div>
-                                <span className="meinung">Meinung: {item.meinung}</span>
-                                <span className="timestamp">gesendet: {item.zeit}</span>
+                                {meinung}
+                                <span className="timestamp">{item.zeit}</span>
                             </div>
                         </div>
                     </div>

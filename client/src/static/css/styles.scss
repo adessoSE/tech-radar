@@ -95,12 +95,12 @@ svg {
   }
 
   .blip-detail-sheet {
-    width: 80%;
+    width: 84%;
     margin: 0 auto;
     padding: 1em 5%;
     background: $white;
     border: 1px solid $adesso-grey;
-    margin-top: 5%;
+    margin-top: 3%;
   }
 }
 
@@ -168,6 +168,7 @@ svg {
     width: 80%;
     min-height: 38.8px;
     height: 100%;
+    padding: 5px;
   }
 
   .sendButton {
@@ -199,31 +200,26 @@ svg {
 .balken {
   width: 100%;
   display: flex;
-  .value1 {
+  .innen {
     background-color: #0275d8;
-    height: 20px;
-    text-align: center;
-    color: white;
   }
 
-  .value2 {
+  .mitte {
     background-color: #378fdd;
-    height: 20px;
-    text-align: center;
-    color: white;
   }
 
-  .value3 {
+  .außen {
     background-color: #71acdf;
-    height: 20px;
-    text-align: center;
-    color: white;
   }
 
   .tooltip {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
+
+    height: 20px;
+    text-align: center;
+    color: white;
   }
 
   .tooltip .tooltiptext {
