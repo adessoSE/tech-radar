@@ -285,21 +285,21 @@ class BlipDetailSheetComponent extends React.Component {
             })
             .map(function (item) {
                 let meinung = (item.meinung === "Nach Einsetzen verschieben!" || item.meinung === "In Einsetzen belassen!") ?
-                    <span className="meinung innen">Meinung: {item.meinung}</span> :
+                    <div className="meinung innen">{item.meinung}</div> :
                     (item.meinung === "Nach Evaluieren verschieben!" || item.meinung === "In Evaluieren belassen!") ?
-                        <span className="meinung mitte">Meinung: {item.meinung}</span> :
+                        <div className="meinung mitte">{item.meinung}</div> :
                         (item.meinung === "Nach Überdenken verschieben!" || item.meinung === "In Evaluieren belassen!") ?
-                            <span className="meinung außen">Meinung: {item.meinung}</span> : ""
+                            <div className="meinung außen">{item.meinung}</div> : ""
                 return (<div className="discussionItem">
+
                         <div className="discussionContainer">
                             <div className="name">{item.autor}</div>
-                            <div>{item.text}</div>
+                            <div>{meinung}</div>
                         </div>
                         <div className="discussionContainer">
-                            <div></div>
+                            <div><span className="timestamp">{item.zeit}</span></div>
                             <div>
-                                {meinung}
-                                <span className="timestamp">{item.zeit}</span>
+                                {item.text}
                             </div>
                         </div>
                     </div>

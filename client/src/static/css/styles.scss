@@ -145,7 +145,10 @@ svg {
 .discussionItem {
   padding: 10px 0px;
 }
-
+.meinung {
+  color: white;
+  text-align: center;
+}
 .discussionContainer {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -155,12 +158,9 @@ svg {
     font-weight: bold;
   }
 
-  .meinung {
-    color: grey;
-  }
+
 
   .timestamp {
-    float: right;
     color: grey;
   }
 
@@ -197,20 +197,22 @@ svg {
   font-size: 0.7rem !important;
 }
 
+.innen {
+  background-color: #0275d8;
+}
+
+.mitte {
+  background-color: #378fdd;
+}
+
+.außen {
+  background-color: #71acdf;
+}
+
 .balken {
   width: 100%;
   display: flex;
-  .innen {
-    background-color: #0275d8;
-  }
 
-  .mitte {
-    background-color: #378fdd;
-  }
-
-  .außen {
-    background-color: #71acdf;
-  }
 
   .tooltip {
     position: relative;
