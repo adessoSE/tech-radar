@@ -293,13 +293,13 @@ class BlipDetailSheetComponent extends React.Component {
                 return (<div className="discussionItem mitte">
 
                         <div className="discussionContainer">
-                            <div className="name">{item.autor}</div>
-                            <div>{meinung}</div>
+                            <div className="name"><p>{item.autor}</p><p><span className="timestamp">{item.zeit}</span></p></div>
+                            <div><p>{item.text}</p><p>{meinung}</p></div>
                         </div>
                         <div className="discussionContainer">
-                            <div><span className="timestamp">{item.zeit}</span></div>
+                            <div></div>
                             <div>
-                                {item.text}
+
                             </div>
                         </div>
                     </div>
