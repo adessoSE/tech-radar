@@ -290,7 +290,7 @@ class BlipDetailSheetComponent extends React.Component {
                         <div className="meinung mitte">{item.meinung}</div> :
                         (item.meinung === "Nach Überdenken verschieben!" || item.meinung === "In Evaluieren belassen!") ?
                             <div className="meinung außen">{item.meinung}</div> : ""
-                return (<div className="discussionItem">
+                return (<div className="discussionItem mitte">
 
                         <div className="discussionContainer">
                             <div className="name">{item.autor}</div>

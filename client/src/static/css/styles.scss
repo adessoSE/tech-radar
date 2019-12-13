@@ -2,6 +2,9 @@ $adesso-blue: #0275d8;
 $adesso-grey: #857971;
 $adesso-white: #f4f4f4;
 $white: #ffffff;
+$innen: #0275d8;
+$mitte: #378fdd;
+$außen: #71acdf;
 
 
 .tooltip-blip {
@@ -145,10 +148,11 @@ svg {
 .discussionItem {
   padding: 10px 0px;
 }
-.meinung {
-  color: white;
-  text-align: center;
-}
+
+//.meinung {
+//  color: white;
+//  text-align: center;
+//}
 .discussionContainer {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -157,7 +161,6 @@ svg {
   .name {
     font-weight: bold;
   }
-
 
 
   .timestamp {
@@ -197,22 +200,33 @@ svg {
   font-size: 0.7rem !important;
 }
 
-.innen {
-  background-color: #0275d8;
+.meinung.innen {
+  color: $innen;
 }
 
-.mitte {
-  background-color: #378fdd;
+.meinung.mitte {
+ color: $mitte
 }
 
-.außen {
-  background-color: #71acdf;
+.meinung.außen {
+  color: $außen;
 }
 
 .balken {
   width: 100%;
   display: flex;
 
+  .innen {
+    background-color: $innen;
+  }
+
+  .mitte {
+    background-color: $mitte;
+  }
+
+  .außen {
+    background-color: $außen;
+  }
 
   .tooltip {
     position: relative;
