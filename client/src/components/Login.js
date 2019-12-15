@@ -31,10 +31,13 @@ class Login extends Component {
         //console.log(this.state.passwort);
     }
 
-    verifyUserInput = async () => {
+
+
+    verifyUserInput = async (event) => {
         console.log(this.state.email);
         console.log(this.state.passwort);
-        const datatest = await userService.getUserInfo(this.state.email, this.state.passwort);
+        event.preventDefault();
+        const datatest = await userService.submitUser(this.state.email, this.state.passwort);
         if(datatest===[]) {
 
         }
