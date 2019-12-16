@@ -2,32 +2,44 @@ $adesso-grey: #857971;
 $adesso-blue: #0275d8;
 $adesso-white: #f4f4f4;
 
-.Login {
-  padding: 80px 0;
+.Login div {
+  padding: 40px 0;
+  background-color: #71acdf;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 
 .Login form {
   margin: 0 auto;
-  max-width: 320px;
+  max-width: 500px;
+
+
 }
-.Login input[type=email],
-input[type=password]
+.Login input[type=email]
 {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
+  width: 80%;
+  padding: 12px 10px;
+  margin: 3px 0;
+  border: 1px solid $adesso-grey;
+}
+.Login input[type=password]
+{
+  width: 80%;
+  padding: 12px 10px;
+  margin: 3px 0;
+
   border: 1px solid $adesso-grey;
 }
 
-.Login button {
-  width: 4em;
-  height: 2em;
+.Login button{
+  width: 2em;
+  height: 3em;
   font-size: 1em;
   background: $adesso-white;
-  color: $adesso-blue !important;
-  width: 100%;
-
-
+  width: 40%;
+  margin-right: -150px;
+ color: black;
 }

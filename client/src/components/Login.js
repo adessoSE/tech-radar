@@ -69,29 +69,25 @@ class Login extends Component {
 
 
     render() {
+        return (
+            <div className="Login">
 
-        return(
-          <div>
-              {this.isAuthenticated? <Redirect to={{pathname:'/'}}/> :
-                  (
+                <form>
+                    <h3 align="center" >Willkommen beim Adesso TechnologieRadar</h3>
+                        <FormGroup controlId="email">
+                            <input type="email" name="email" placeholder="Email" onChange={this.handleEmailChanged}/>
+                        </FormGroup>
+                        <FormGroup controlId="passwort">
+                            <input type="password" name="passwort" placeholder="Passwort"
+                                         onChange={this.handlePasswortChanged}/>
+                        </FormGroup>
+                    <FormGroup controlId="submit">
+                        <Button type="submit" onClick={this.verifyUserInput} bsstyle="primary">Einloggen</Button>
+                    </FormGroup>
+                    </form>
+                </div>
 
-                          <form>
-                              <FormGroup controlId="email">
-                                  <FormLabel>E-mail</FormLabel>
-                                  <input type="email" name="email" placeholder="email" onChange={this.handleEmailChanged}/>
-                              </FormGroup>
-                              <FormGroup controlId="passwort">
-                                  <FormLabel>Passwort</FormLabel>
-                                  <FormControl type="password" name="passwort" placeholder="passwort"
-                                               onChange={this.handlePasswortChanged}/>
-                              </FormGroup>
-                              <Button type="submit" onClick={this.verifyUserInput} bsstyle="primary">Log In</Button>
-                          </form>
-
-                      )
-              }
-          </div>
-        );
+        )
     }
 }
 
