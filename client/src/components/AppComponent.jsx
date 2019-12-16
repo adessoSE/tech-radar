@@ -17,6 +17,7 @@ import logo from "../static/img/adesso.svg";
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
+import ProtectedRoute  from './ProtectedRoute';
 
 
 export default class AppComponent extends React.Component {
@@ -133,28 +134,28 @@ export default class AppComponent extends React.Component {
                 </div>
 
                 <Switch>
-                    <Route
+                    <ProtectedRoute
                         exact
                         path="/"
                         component={() => <RadarDataService data={javaJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/java"
                         component={() => <RadarDataService data={javaJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/microsoft"
                         component={() => <RadarDataService data={msJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/javascript"
                         component={() => <RadarDataService data={jsJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/hottopics"
                         component={HotTopics}
                     />
-                    <Route path="/faq" component={FAQ}/>
+                    <ProtectedRoute path="/faq" component={FAQ}/>
                 </Switch>
             </Router>
         );
