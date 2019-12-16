@@ -13,10 +13,17 @@ export default {
     submitUser: async (email, passwort) => {
         let res = await axios.post('/api/user', {
             email: email,
-            passwort: passwort
-        });
+            passwort: passwort,
+
+        })
+
         return res.data || [];
     }
 
+
 }
+
+export function  isAuth(){
+    return localStorage.getItem('email');
+};
 

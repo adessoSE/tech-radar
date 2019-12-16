@@ -1,19 +1,10 @@
 import React, {Component} from "react";
-import {Row, FormGroup, FormControl, FormLabel, Button} from 'react-bootstrap';
+import { FormGroup, FormControl, Button} from 'react-bootstrap';
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 import "./Login.scss"
 import userService from "../services/userService";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
 
 class Login extends Component {
 
@@ -23,7 +14,7 @@ class Login extends Component {
         this.state = {
             email: '',
             passwort: '',
-            isAuthenticated: false
+
 
         }
         this.handleEmailChanged = this.handleEmailChanged.bind(this);
@@ -48,48 +39,41 @@ class Login extends Component {
         event.preventDefault();
         const datatest = await userService.submitUser(this.state.email, this.state.passwort);
         console.log(datatest);
-        localStorage.setItem('email', JSON.stringify(this.state.email));
-        localStorage.setItem('password', JSON.stringify(this.state.password));
+
 
         if (datatest.user != null) {
-
-            //console.log("success"),
-            this.setState({isAuthenticated:true})
-            console.log(this.state.isAuthenticated)
+            localStorage.setItem('email', JSON.stringify(this.state.email));
             this.props.history.push('/');
         }
 
         else {
-            this.setState({isAuthenticated:false})
-            console.log(this.state.isAuthenticated)
-            console.log("not working")
+            console.log("no matching")
         }
     };
 
 
-
     render() {
-        return (
+
+        return(
             <div className="Login">
-
-                <form>
-                    <h3 align="center" >Willkommen beim Adesso TechnologieRadar</h3>
-                        <FormGroup controlId="email">
-                            <input type="email" name="email" placeholder="Email" onChange={this.handleEmailChanged}/>
-                        </FormGroup>
-                        <FormGroup controlId="passwort">
-                            <input type="password" name="passwort" placeholder="Passwort"
-                                         onChange={this.handlePasswortChanged}/>
-                        </FormGroup>
-                    <FormGroup controlId="submit">
-                        <Button type="submit" onClick={this.verifyUserInput} bsstyle="primary">Einloggen</Button>
-                    </FormGroup>
-                    </form>
-                </div>
-
-        )
+                        <form onSubmit={this.verifyUserInput} >
+                            <h3 align="center" >Willkommen beim Adesso TechnologieRadar</h3>
+                            <FormGroup controlId="email">
+                                <input type="email" name="email" placeholder="email" onChange={this.handleEmailChanged}/>
+                            </FormGroup>
+                            <FormGroup controlId="passwort">
+                                <FormControl type="password" name="passwort" placeholder="passwort"
+                                             onChange={this.handlePasswortChanged}/>
+                            </FormGroup>
+                            <FormGroup controlId="submit">
+                                <Button type="submit" onClick={this.verifyUserInput} bsstyle="primary">Einloggen</Button>
+                            </FormGroup>
+                        </form>
+                }
+            </div>
+        );
     }
-}
 
+}
 
 export default Login;
