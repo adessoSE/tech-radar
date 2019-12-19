@@ -139,7 +139,7 @@ export default class AppComponent extends React.Component {
                             </Button>
                         </Tabs>
                     </AppBar>
-                    <WelcomeComponent/>
+
                 </div>
 
                 <Switch>

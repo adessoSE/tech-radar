@@ -3,15 +3,11 @@ import RadarDataService from "./RadarDataService";
 
 import CardHeader from '@material-ui/core/CardHeader';
 import Card from '@material-ui/core/Card';
-
-import {Switch, Route, Link, BrowserRouter as Router} from "react-router-dom";
-
-import logo from "../static/img/adesso.svg";
-
+import AppComponent from "./AppComponent";
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
-import ProtectedRoute  from './ProtectedRoute';
+
 
 const WelcomeComponent = (props) => {
 
@@ -20,8 +16,6 @@ const WelcomeComponent = (props) => {
                 title= {'Herzlich Willkommen , '+localStorage.getItem('name')+'. Sie sind erfolgreich eingeloggt!'}>
             </CardHeader>
         </Card>
-
-
 }
 
 export default WelcomeComponent;
