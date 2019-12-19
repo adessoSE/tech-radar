@@ -9,6 +9,7 @@ import msJSON from "./microsoft-radar.json";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
 import {Switch, Route, Link, BrowserRouter as Router} from "react-router-dom";
 
@@ -129,6 +130,9 @@ export default class AppComponent extends React.Component {
                                 to="/faq"
                                 value={3}
                             />
+                            <Button variant="contained" id="log out">
+                                Log out
+                            </Button>
                         </Tabs>
                     </AppBar>
                 </div>
