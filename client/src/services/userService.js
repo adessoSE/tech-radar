@@ -10,10 +10,11 @@ export default {
         });
         return res.data || [];
     },
-    submitUser: async (email, passwort) => {
+    submitUser: async (email, passwort,name) => {
         let res = await axios.post('/api/user', {
             email: email,
             passwort: passwort,
+            name:name
 
         })
 
@@ -26,4 +27,8 @@ export default {
 export function  isAuth(){
     return localStorage.getItem('email');
 };
+export function Logout() {
+    return localStorage.clear();
+
+}
 

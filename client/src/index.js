@@ -9,13 +9,14 @@ import { Route, Link, BrowserRouter as Router , Redirect} from 'react-router-dom
 import AppComponent from './components/AppComponent'
 import Login from './components/Login'
 import './static/css/index.scss';
+import RadarDataService from "./components/RadarDataService";
 
 
 const routing = (
     <Router>
         <div>
-            <Route path="/" component={AppComponent} />
             <Route path="/login" component={Login} />
+            <Route path="/app" component={AppComponent} />
         </div>
     </Router>
 )

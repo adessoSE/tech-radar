@@ -11,6 +11,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
+import CardHeader from '@material-ui/core/CardHeader';
+import Card from '@material-ui/core/Card';
+
 import {Switch, Route, Link, BrowserRouter as Router} from "react-router-dom";
 
 import logo from "../static/img/adesso.svg";
@@ -135,10 +138,17 @@ export default class AppComponent extends React.Component {
                             </Button>
                         </Tabs>
                     </AppBar>
+                    <Card>
+                        <CardHeader
+                            title= {'Herzlich Willkommen , '+localStorage.getItem('name')+'. Sie sind erfolgreich eingeloggt!'}>
+
+                        </CardHeader>
+
+                    </Card>
                 </div>
 
                 <Switch>
-                    <ProtectedRoute
+                    <Route
                         exact
                         path="/"
                         component={() => <RadarDataService data={javaJSON}/>}
