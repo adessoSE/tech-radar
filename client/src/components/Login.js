@@ -14,8 +14,6 @@ class Login extends Component {
         this.state = {
             email: '',
             passwort: '',
-
-
         }
         this.handleEmailChanged = this.handleEmailChanged.bind(this);
         this.handlePasswortChanged = this.handlePasswortChanged.bind(this);
@@ -43,6 +41,7 @@ class Login extends Component {
 
         if (datatest.user != null) {
             localStorage.setItem('email', JSON.stringify(this.state.email));
+            localStorage.setItem('name', datatest.user.name);
             this.props.history.push('/');
         }
 
