@@ -22,6 +22,7 @@ import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 import ProtectedRoute  from './ProtectedRoute';
+import WelcomeComponent from "./WelcomeComponent";
 
 
 export default class AppComponent extends React.Component {
@@ -138,16 +139,14 @@ export default class AppComponent extends React.Component {
                             </Button>
                         </Tabs>
                     </AppBar>
-                    <Card>
-                        <CardHeader
-                            title= {'Herzlich Willkommen , '+localStorage.getItem('name')+'. Sie sind erfolgreich eingeloggt!'}>
-
-                        </CardHeader>
-
-                    </Card>
+                    <WelcomeComponent/>
                 </div>
 
                 <Switch>
+                    <ProtectedRoute
+                        path="/welcome"
+                        component={WelcomeComponent}
+                    />
                     <Route
                         exact
                         path="/"

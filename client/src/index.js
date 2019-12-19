@@ -10,6 +10,7 @@ import AppComponent from './components/AppComponent'
 import Login from './components/Login'
 import './static/css/index.scss';
 import RadarDataService from "./components/RadarDataService";
+import WelcomeComponent from "./components/WelcomeComponent";
 
 
 const routing = (
@@ -17,6 +18,8 @@ const routing = (
         <div>
             <Route path="/login" component={Login} />
             <Route path="/app" component={AppComponent} />
+            <Route path="/welcome" component={WelcomeComponent} />
+
         </div>
     </Router>
 )
