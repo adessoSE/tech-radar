@@ -42,6 +42,7 @@ class BlipDetailSheetComponent extends React.Component {
         this.handleNewMeinung = this.handleNewMeinung.bind(this);
         this.showDiscussion = this.showDiscussion.bind(this);
         this.getDropdownStatus = this.getDropdownStatus.bind(this);
+        this.getTrailingZeroIfNeeded = this.getTrailingZeroIfNeeded.bind(this);
         this.getCommentsAll = async () => {
             const data = await commentService.getByRadarType();
             const comments = [];
@@ -81,6 +82,10 @@ class BlipDetailSheetComponent extends React.Component {
         this.test();
     }
 
+    getTrailingZeroIfNeeded(number) {
+        return number<10?'0':'';
+    }
+
     addNewComment() {
         this.setState({clicked: true});
         if (this.state.newMeinung === "" || this.state.newCommentText == "") {
@@ -88,8 +93,13 @@ class BlipDetailSheetComponent extends React.Component {
         } else {
             this.setState({valid: true});
             var datestorage = new Date();
-            var date = "";
-            date = datestorage.getDate() + "/" + (datestorage.getMonth() + 1) + "/" + datestorage.getFullYear().toString().slice(2,4) + ", " + datestorage.getHours() + ":" + datestorage.getMinutes() + ":" + datestorage.getSeconds();
+            var month = (datestorage.getMonth() + 1);
+            var date = this.getTrailingZeroIfNeeded(datestorage.getDate()) + datestorage.getDate() + "/"
+                + this.getTrailingZeroIfNeeded(month) + month + "/"
+                + datestorage.getFullYear().toString().slice(2,4) + ", "
+                + this.getTrailingZeroIfNeeded(datestorage.getHours()) + datestorage.getHours() + ":"
+                + this.getTrailingZeroIfNeeded(datestorage.getMinutes()) + datestorage.getMinutes() + ":"
+                + this.getTrailingZeroIfNeeded(datestorage.getSeconds()) + datestorage.getSeconds();
             const modifiedComments = this.state.comments;
             writeCommentService.addComment({
                 autor: this.state.newCommentAutor,
