@@ -99,7 +99,8 @@ export default class HotTopics extends React.Component {
     for (var i = 0; i < javaJSON.length; i++) {
       techs.push({
         technologie: javaJSON[i].name,
-        kommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java"),
+        kommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsWithinXDays),
+        gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsAllSorted),
         radar: "java",
         ring: javaJSON[i].ring,
         // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
@@ -108,7 +109,8 @@ export default class HotTopics extends React.Component {
     for (var j = 0; j < jsJSON.length; j++) {
       techs.push({
         technologie: jsJSON[j].name,
-        kommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript"),
+        kommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsWithinXDays),
+        gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsAllSorted),
         radar: "javascript",
         ring: jsJSON[j].ring,
         // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
@@ -117,7 +119,8 @@ export default class HotTopics extends React.Component {
     for (var k = 0; k < msJSON.length; k++) {
       techs.push({
         technologie: msJSON[k].name,
-        kommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft"),
+        kommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsWithinXDays),
+        gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsAllSorted),
         radar: "microsoft",
         ring: msJSON[k].ring,
         // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
@@ -128,8 +131,8 @@ export default class HotTopics extends React.Component {
     });
   }
 
-  getTotalCommentCountPerTechnology(technologie, radar) {
-    return this.state.commentsWithinXDays.filter(comment => {
+  getTotalCommentCountPerTechnology(technologie, radar, comments) {
+    return comments.filter(comment => {
       return comment.technologie === technologie &&
           comment.radar === radar
     }).length;
@@ -172,7 +175,7 @@ export default class HotTopics extends React.Component {
       if(!discussedTechs.includes(name) && discussedTechs.length < 5) {
         discussedTechs.push({
           technologie: name,
-          kommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar),
+          gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar, this.state.commentsAllSorted),
           radar: radar,
           ring: this.getRingForTechnology(name, radar)
           // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
