@@ -51,7 +51,7 @@ class Login extends Component {
 
         let error = '';
         if (this.state.loginSuccess === false) {
-            error = (<div className="error">Email oder Passwort nicht korrekt</div>);
+            error = (<div className="error">E-mail oder Passwort nicht korrekt</div>);
             return (
                 <div className="Login">
                     <form onSubmit={this.verifyUserInput}>
@@ -61,12 +61,12 @@ class Login extends Component {
                             <FormGroup controlId="email">
                                 <TextField error id="name" errorstyling type="email" required name="email"
                                            variant="outlined"
-                                           label="email"
+                                           label="E-mail"
                                            onChange={this.handleEmailChanged}/>
                             </FormGroup>
                             <FormGroup controlId="passwort">
                                 <TextField error id="passwort" name="passwort" required variant="outlined"
-                                           label="passwort"
+                                           label="Passwort"
                                            onChange={this.handlePasswortChanged}/>
                             </FormGroup>
 
@@ -89,12 +89,12 @@ class Login extends Component {
                             <h3 align="center">Willkommen beim Adesso Technologie Radar</h3>
                         </div>
                         <FormGroup controlId="email">
-                            <TextField id="name" errorstyling type="email" required name="email" variant="outlined"
-                                       label="email"
+                            <TextField id="name" errorstyling type="email" required name="E-mail" variant="outlined"
+                                       label="E-mail"
                                        onChange={this.handleEmailChanged}/>
                         </FormGroup>
                         <FormGroup controlId="passwort">
-                            <TextField id="passwort" name="passwort" required variant="outlined" label="passwort"
+                            <TextField id="passwort" name="passwort" required variant="outlined" label="Passwort"
                                        onChange={this.handlePasswortChanged}/>
                         </FormGroup>
                         <div className="button">
