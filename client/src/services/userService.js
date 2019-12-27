@@ -27,8 +27,5 @@ export default {
 export function  isAuth(){
     return localStorage.getItem('email');
 };
-export function Logout() {
-    return localStorage.clear();
 
-}
 

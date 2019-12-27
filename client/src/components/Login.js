@@ -44,7 +44,7 @@ class Login extends Component {
         if (datatest.user != null) {
             localStorage.setItem('email', this.state.email);
             localStorage.setItem('name', datatest.user.name);
-            this.props.history.push('/welcome');
+            this.props.history.push('/app');
         }
 
         else {
