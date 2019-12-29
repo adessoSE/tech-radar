@@ -14,8 +14,8 @@ import './static/css/index.scss';
 const routing = (
     <Router>
         <div>
-            <Route path="/" component={AppComponent} />
             <Route path="/login" component={Login} />
+            <Route  path="/app" component={AppComponent} />
         </div>
     </Router>
 )
