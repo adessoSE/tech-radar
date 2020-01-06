@@ -36,12 +36,13 @@ class Login extends Component {
         const datatest = await userService.submitUser(this.state.email, this.state.passwort);
 
         if (datatest.user != null) {
-            localStorage.setItem('email', JSON.stringify(this.state.email));
-            this.props.history.push('/');
+            localStorage.setItem('email', this.state.email);
+            localStorage.setItem('name', datatest.user.name);
+            this.props.history.push('/app');
             this.setState({loginSuccess: true})
         } else {
             this.setState({loginSuccess: false})
-            console.log("no matching")
+          console.log("no matching")
         }
     };
 
