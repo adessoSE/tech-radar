@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Redirect,withRouter } from "react-router-dom";
 import { isAuth } from '../services/userService';
 
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const ProtectedRoute = ({component: Component,...rest}) => {
     return (
@@ -12,14 +14,8 @@ const ProtectedRoute = ({component: Component,...rest}) => {
                     return <Component {...props} />;
                 } else {
                     return (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: {
-                                    from: props.location
-                                }
-                            }}
-                        />
+                        <Redirect to='/login'/>,
+                        <DialogTitle id="alert-dialog-title">{"Sie müssen eingeloggt sein!"}</DialogTitle>
                     );
                 }
             }}
