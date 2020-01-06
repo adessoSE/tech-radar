@@ -15,7 +15,6 @@ const routing = (
         <div>
             <Route path="/login" component={Login} />
             <Route  path="/app" component={AppComponent} />
-
         </div>
     </Router>
 )

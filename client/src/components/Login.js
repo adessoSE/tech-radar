@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import { FormGroup, FormControl, Button} from 'react-bootstrap';
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 import "./Login.scss"
 import userService from "../services/userService";
+import {FormGroup, Button, TextField} from '@material-ui/core';
 
 class Login extends Component {
 
@@ -14,66 +14,101 @@ class Login extends Component {
         this.state = {
             email: '',
             passwort: '',
-
+            loginSuccess: '',
         }
         this.handleEmailChanged = this.handleEmailChanged.bind(this);
         this.handlePasswortChanged = this.handlePasswortChanged.bind(this);
         this.verifyUserInput = this.verifyUserInput.bind(this);
-
-
     }
 
     handleEmailChanged(event) {
         this.setState({email: event.target.value});
 
-
     }
 
     handlePasswortChanged(event) {
         this.setState({passwort: event.target.value});
-
     }
+
 
     verifyUserInput = async (event) => {
         event.preventDefault();
         const datatest = await userService.submitUser(this.state.email, this.state.passwort);
-        console.log(datatest);
-
 
         if (datatest.user != null) {
             localStorage.setItem('email', this.state.email);
             localStorage.setItem('name', datatest.user.name);
             this.props.history.push('/app');
-        }
-
-        else {
-            console.log("no matching")
+            this.setState({loginSuccess: true})
+        } else {
+            this.setState({loginSuccess: false})
+          console.log("no matching")
         }
     };
 
 
     render() {
 
-        return(
-            <div className="Login">
-                        <form onSubmit={this.verifyUserInput} >
-                            <h3 align="center" >Willkommen beim Adesso TechnologieRadar</h3>
+        let error = '';
+        if (this.state.loginSuccess === false) {
+            error = (<div className="error">Ungültige Anmeldedaten! Versuchen Sie es erneut.</div>);
+            return (
+                <div className="Login">
+                    <form onSubmit={this.verifyUserInput}>
+                        <div className="form">
+                            <h3 align="center">Willkommen beim Adesso TechnologieRadar</h3>
+                            <div>{error}</div>
                             <FormGroup controlId="email">
-                                <input type="email" name="email" placeholder="email" onChange={this.handleEmailChanged}/>
+                                <TextField error id="name" errorstyling type="email" required name="email"
+                                           variant="outlined"
+                                           label="E-Mail"
+                                           onChange={this.handleEmailChanged}/>
                             </FormGroup>
                             <FormGroup controlId="passwort">
-                                <FormControl type="password" name="passwort" placeholder="passwort"
-                                             onChange={this.handlePasswortChanged}/>
+                                <TextField error id="passwort" name="passwort" required variant="outlined"
+                                           label="Passwort"
+                                           onChange={this.handlePasswortChanged}/>
                             </FormGroup>
+
+                            <div className="button">
+                                <FormGroup controlId="submit">
+                                    <Button variant="contained" onClick={this.verifyUserInput}
+                                            bsstyle="primary">Einloggen</Button>
+                                </FormGroup>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            );
+        }
+        return (
+            <div className="Login">
+                <form onSubmit={this.verifyUserInput}>
+                    <div className="form">
+                        <div className="header">
+                            <h3 align="center">Willkommen beim Adesso Technologie Radar</h3>
+                        </div>
+                        <FormGroup controlId="email">
+                            <TextField id="name" errorstyling type="email" required name="E-mail" variant="outlined"
+                                       label="E-Mail"
+                                       onChange={this.handleEmailChanged}/>
+                        </FormGroup>
+                        <FormGroup controlId="passwort">
+                            <TextField id="passwort" name="passwort" required variant="outlined" label="Passwort"
+                                       onChange={this.handlePasswortChanged}/>
+                        </FormGroup>
+                        <div className="button">
                             <FormGroup controlId="submit">
-                                <Button type="submit" onClick={this.verifyUserInput} bsstyle="primary">Einloggen</Button>
+                                <Button variant="contained" onClick={this.verifyUserInput}
+                                        bsstyle="primary">Einloggen</Button>
                             </FormGroup>
-                        </form>
-                }
+
+                        </div>
+                    </div>
+                </form>
             </div>
         );
     }
-
 }
 
 export default Login;
