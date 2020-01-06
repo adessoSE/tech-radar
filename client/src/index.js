@@ -8,7 +8,6 @@ import './static/css/index.scss';
 import { Route, Link, BrowserRouter as Router , Redirect} from 'react-router-dom';
 import AppComponent from './components/AppComponent'
 import Login from './components/Login'
-import './static/css/index.scss';
 
 
 const routing = (
