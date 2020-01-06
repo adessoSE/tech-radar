@@ -34,7 +34,6 @@ class Login extends Component {
     verifyUserInput = async (event) => {
         event.preventDefault();
         const datatest = await userService.submitUser(this.state.email, this.state.passwort);
-        console.log(datatest);
 
         if (datatest.user != null) {
             localStorage.setItem('email', JSON.stringify(this.state.email));
@@ -51,7 +50,7 @@ class Login extends Component {
 
         let error = '';
         if (this.state.loginSuccess === false) {
-            error = (<div className="error">E-mail oder Passwort nicht korrekt</div>);
+            error = (<div className="error">Ungültige Anmeldedaten! Versuchen Sie es erneut.</div>);
             return (
                 <div className="Login">
                     <form onSubmit={this.verifyUserInput}>
@@ -61,7 +60,7 @@ class Login extends Component {
                             <FormGroup controlId="email">
                                 <TextField error id="name" errorstyling type="email" required name="email"
                                            variant="outlined"
-                                           label="E-mail"
+                                           label="E-Mail"
                                            onChange={this.handleEmailChanged}/>
                             </FormGroup>
                             <FormGroup controlId="passwort">
@@ -90,7 +89,7 @@ class Login extends Component {
                         </div>
                         <FormGroup controlId="email">
                             <TextField id="name" errorstyling type="email" required name="E-mail" variant="outlined"
-                                       label="E-mail"
+                                       label="E-Mail"
                                        onChange={this.handleEmailChanged}/>
                         </FormGroup>
                         <FormGroup controlId="passwort">
