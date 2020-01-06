@@ -5,16 +5,17 @@ import * as serviceWorker from './serviceWorker';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import './static/css/index.scss';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router , Redirect} from 'react-router-dom';
 import AppComponent from './components/AppComponent'
 import Login from './components/Login'
 
-import './static/css/index.scss';
+
 const routing = (
     <Router>
         <div>
-            <Route path="/" component={AppComponent} />
             <Route path="/login" component={Login} />
+            <Route  path="/app" component={AppComponent} />
+
         </div>
     </Router>
 )

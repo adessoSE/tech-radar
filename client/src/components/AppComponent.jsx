@@ -9,15 +9,18 @@ import msJSON from "./microsoft-radar.json";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
-import {Switch, Route, Link, BrowserRouter as Router} from "react-router-dom";
+import {Switch, Link, BrowserRouter as Router} from "react-router-dom";
 
 import logo from "../static/img/adesso.svg";
 
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
+import ProtectedRoute  from './ProtectedRoute';
 
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 export default class AppComponent extends React.Component {
 
@@ -27,6 +30,7 @@ export default class AppComponent extends React.Component {
             isLoading: true,
             value: 0
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
     tabs;
@@ -52,6 +56,13 @@ export default class AppComponent extends React.Component {
         });
     };
 
+    handleClick(e) {
+        e.preventDefault();
+        console.log('Log out completed.');
+        localStorage.clear();
+        this.props.history.push('/login');
+    }
+
 
     render() {
         return (
@@ -63,6 +74,7 @@ export default class AppComponent extends React.Component {
                         position="static"
                         color="default"
                     >
+
                         <Tabs
                             className="tech-tabs"
                             centered
@@ -82,6 +94,9 @@ export default class AppComponent extends React.Component {
                                 component={Link}
                                 to="/java"
                                 value={0}
+                            />
+                            <Tab
+                                label={localStorage.getItem('name')}
                             />
 
                             <Tab
@@ -128,33 +143,38 @@ export default class AppComponent extends React.Component {
                                 to="/faq"
                                 value={3}
                             />
+                            <Button variant="contained" id="log out" onClick={this.handleClick}>
+                                Log out
+                            </Button>
                         </Tabs>
                     </AppBar>
+
                 </div>
 
                 <Switch>
-                    <Route
+
+                    <ProtectedRoute
                         exact
                         path="/"
                         component={() => <RadarDataService data={javaJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/java"
                         component={() => <RadarDataService data={javaJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/microsoft"
                         component={() => <RadarDataService data={msJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/javascript"
                         component={() => <RadarDataService data={jsJSON}/>}
                     />
-                    <Route
+                    <ProtectedRoute
                         path="/hottopics"
                         component={HotTopics}
                     />
-                    <Route path="/faq" component={FAQ}/>
+                    <ProtectedRoute path="/faq" component={FAQ}/>
                 </Switch>
             </Router>
         );

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-
+const cors = require('cors');
 
 // IMPORT MODELS
 require('./models/comment');
@@ -18,6 +18,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || ('mongodb+srv://' + username + ':' + password + '@techradarhtw-tdfaj.mongodb.net/test'));
 
 app.use(bodyParser.json());
+app.use(cors());
+
 
 //IMPORT ROUTES
 require('./routes/commentRoutes')(app);
