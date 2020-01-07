@@ -14,7 +14,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import userService from "../services/userService";
 
 class BlipDetailSheetComponent extends React.Component {
     wrapperRef = createRef();
@@ -23,7 +22,7 @@ class BlipDetailSheetComponent extends React.Component {
         super(props);
         this.state = {
             comments: new Array({}),
-            newCommentAutor: "Jenny",
+            newCommentAutor: localStorage.getItem("name"),
             newCommentText: "",
             newMeinung: "",
             showDiscussion: false,
@@ -61,25 +60,6 @@ class BlipDetailSheetComponent extends React.Component {
             });
         };
         this.getCommentsAll();
-        // TODO delete this debugging implementation or replace with actual useful implementation
-        this.test = async ()  => {
-            const datatest = await userService.getUserInfo("max.mustermann@gmail.com", "Adesso-Projekt-2k19");
-            const test = [];
-            datatest.map(item => {
-                test.push({
-                    email: item.email,
-                    passwort: item.passwort,
-                    rolle: item.rolle,
-                    name: item.name
-                })
-            });
-            console.log(datatest);
-            console.log(test);
-            this.setState({
-                test: test
-            });
-        };
-        this.test();
     }
 
     getTrailingZeroIfNeeded(number) {
@@ -119,7 +99,7 @@ class BlipDetailSheetComponent extends React.Component {
             });
             this.setState({
                 comments: modifiedComments,
-                newCommentAutor: "Jenny", //ToDo
+                newCommentAutor: localStorage.getItem("name"),
                 newCommentText: "",
                 newMeinung: ""
             });
@@ -155,6 +135,7 @@ class BlipDetailSheetComponent extends React.Component {
             })
             console.log(e.target.value)
         }
+        this.setState({newMeinung: e.target.value});
     }
 
     // Dropdown wird erstellt mit Optionen angepasst an die Position der Technologie im Ring

@@ -152,7 +152,6 @@ export default class AppComponent extends React.Component {
                 </div>
 
                 <Switch>
-
                     <ProtectedRoute
                         exact
                         path="/"
