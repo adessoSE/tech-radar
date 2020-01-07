@@ -1,13 +1,16 @@
-$adesso-grey: #857971;
-$adesso-blue: #0275d8;
-$adesso-white: #f4f4f4;
+$appbackground2: #dfeef5;
+$outercirclering: #71acdf;
 
 .Login form {
-  margin: 0 auto;
+  margin: 60px auto;
   padding: 20px;
   max-width: 500px;
   border-radius: 7px;
+  border-style: solid;
+  border-color: $outercirclering;
+  border-width: thin;
   align-items: center;
+  background: $appbackground2;
 }
 
 .Login textfield {
@@ -20,13 +23,13 @@ $adesso-white: #f4f4f4;
 }
 
 .form div {
-  margin: 3px;
+  margin: 3px auto;
   align-items: center;
   width: 100%;
 }
 
 .form {
-  margin-top: 60px;
+  margin: 0 auto;
   width: 80%;
 }
 
@@ -39,6 +42,7 @@ $adesso-white: #f4f4f4;
 
 .button div {
   padding-top: 10px;
+  padding-bottom: 30px;
   align-items: flex-end;
 }
 
