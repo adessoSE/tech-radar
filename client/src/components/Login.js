@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "../static/css/styles.scss";
 import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
-import "./Login.scss"
+import "../static/css/login.scss"
 import userService from "../services/userService";
 import {FormGroup, Button, TextField} from '@material-ui/core';
 
