@@ -1,0 +1,52 @@
+$appbackground2: #dfeef5;
+$outercirclering: #71acdf;
+
+.Login form {
+  margin: 60px auto;
+  padding: 20px;
+  max-width: 500px;
+  border-radius: 7px;
+  border-style: solid;
+  border-color: $outercirclering;
+  border-width: thin;
+  align-items: center;
+  background: $appbackground2;
+}
+
+.Login textfield {
+  margin: 10px;
+}
+
+.error div {
+  color: red;
+  padding-bottom: 10px;
+}
+
+.form div {
+  margin: 3px auto;
+  align-items: center;
+  width: 100%;
+}
+
+.form {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.Login button {
+  align: right;
+  width: 40%;
+  padding: 10px;
+  display: flex;
+}
+
+.button div {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  align-items: flex-end;
+}
+
+.error {
+  color: red;
+}
+
