@@ -195,13 +195,33 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     getCount(value) {
-        var countValue = this.state.comments.filter(comment => {
+        const comments = this.state.comments.filter(comment => {
             return comment.technologie === this.props.name &&
-                comment.radar === this.props.radar &&
-                comment.meinung === this.state.meinungArr[value - 1]
-        }).length;
+                comment.radar === this.props.radar
+        })
+        console.log("COMMENTS", comments)
+        var commentsOneCommentPerUser = [];
+        comments.forEach(comment => {
+             if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
+                 var commentsWithSameName = comments.filter(item => {
+                     return item.autor === comment.autor;
+                 })
+                 commentsWithSameName.sort((a, b) => {
+                     return new Date(b.zeit) - new Date(a.zeit);
+                 })
+                 commentsOneCommentPerUser.push(commentsWithSameName[0]);
+             }
+        })
+        console.log("RESULT", commentsOneCommentPerUser)
+        var countValue = commentsOneCommentPerUser.filter(comment => {
+            return comment.meinung === this.state.meinungArr[value - 1];
+        }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
+            return comment.meinung === this.state.meinungArr[value - 1];
+        }).length : 0;
+        console.log("Countvalue", countValue)
         return countValue;
     }
+
 
     getTotalCount() {
         return this.state.comments.filter(comment => {
