@@ -14,8 +14,8 @@ const ProtectedRoute = ({component: Component,...rest}) => {
                     return <Component {...props} />;
                 } else {
                     return (
-                        <Redirect to='/login'/>,
-                        <DialogTitle id="alert-dialog-title">{"Sie müssen eingeloggt sein!"}</DialogTitle>
+                        <Redirect to='/login'/>
+
                     );
                 }
             }}
