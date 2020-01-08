@@ -8,13 +8,14 @@ import './static/css/index.scss';
 import { Route, Link, BrowserRouter as Router , Redirect} from 'react-router-dom';
 import AppComponent from './components/AppComponent'
 import Login from './components/Login'
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 const routing = (
     <Router>
         <div>
             <Route path="/login" component={Login} />
-            <Route  path="/app" component={AppComponent} />
+            <ProtectedRoute  path="/" component={AppComponent} />
         </div>
     </Router>
 )

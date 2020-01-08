@@ -38,7 +38,7 @@ class Login extends Component {
         if (datatest.user != null) {
             localStorage.setItem('email', this.state.email);
             localStorage.setItem('name', datatest.user.name);
-            this.props.history.push('/app');
+            this.props.history.push('/');
             this.setState({loginSuccess: true})
         } else {
             this.setState({loginSuccess: false})
@@ -66,7 +66,7 @@ class Login extends Component {
                             </FormGroup>
                             <FormGroup controlId="passwort">
                                 <TextField error id="passwort" name="passwort" required variant="outlined"
-                                           label="Passwort"
+                                           label="Passwort" type="password"
                                            onChange={this.handlePasswortChanged}/>
                             </FormGroup>
 
@@ -95,6 +95,7 @@ class Login extends Component {
                         </FormGroup>
                         <FormGroup controlId="passwort">
                             <TextField id="passwort" name="passwort" required variant="outlined" label="Passwort"
+                                       type="password"
                                        onChange={this.handlePasswortChanged}/>
                         </FormGroup>
                         <div className="button">
