@@ -44,6 +44,7 @@ class BlipDetailSheetComponent extends React.Component {
         this.getBalken = this.getBalken.bind(this);
         this.getCount = this.getCount.bind(this);
         this.getTotalCount = this.getTotalCount.bind(this);
+        this.getTeilnehmer = this.getTeilnehmer.bind(this);
         this.getStyle = this.getStyle.bind(this);
         this.getTrailingZeroIfNeeded = this.getTrailingZeroIfNeeded.bind(this);
         this.getCommentsAll = async () => {
@@ -194,31 +195,36 @@ class BlipDetailSheetComponent extends React.Component {
         return dropdown;
     }
 
-    getCount(value) {
+    getTeilnehmer() {
         const comments = this.state.comments.filter(comment => {
             return comment.technologie === this.props.name &&
                 comment.radar === this.props.radar
-        })
-        console.log("COMMENTS", comments)
+        });
+        console.log("COMMENTS", comments);
         var commentsOneCommentPerUser = [];
         comments.forEach(comment => {
              if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
                  var commentsWithSameName = comments.filter(item => {
                      return item.autor === comment.autor;
-                 })
+                 });
                  commentsWithSameName.sort((a, b) => {
                      return new Date(b.zeit) - new Date(a.zeit);
-                 })
+                 });
                  commentsOneCommentPerUser.push(commentsWithSameName[0]);
              }
-        })
-        console.log("RESULT", commentsOneCommentPerUser)
+        });
+        console.log("RESULT", commentsOneCommentPerUser);
+        return commentsOneCommentPerUser;
+    }
+
+    getCount(value) {
+        var commentsOneCommentPerUser = this.getTeilnehmer();
         var countValue = commentsOneCommentPerUser.filter(comment => {
             return comment.meinung === this.state.meinungArr[value - 1];
         }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
             return comment.meinung === this.state.meinungArr[value - 1];
         }).length : 0;
-        console.log("Countvalue", countValue)
+        console.log("Countvalue", countValue);
         return countValue;
     }
 
@@ -232,12 +238,12 @@ class BlipDetailSheetComponent extends React.Component {
 
     getStyle(value) {
         var countValue = this.getCount(value);
-        var count = this.getTotalCount();
+        var count = this.getTeilnehmer().length;
         var width = (countValue * 100 / count) + '%';
-        var style = {
+        console.log(count);
+        return {
             width: width
         };
-        return style;
     }
 
     getBalken() {
