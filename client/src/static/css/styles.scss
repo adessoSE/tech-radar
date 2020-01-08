@@ -4,7 +4,7 @@ $adesso-white: #f4f4f4;
 $white: #ffffff;
 $innen: #0275d8;
 $mitte: #378fdd;
-$außen: #71acdf;
+$aussen: #71acdf;
 
 
 .tooltip-blip {
@@ -210,8 +210,8 @@ svg {
  color: $mitte
 }
 
-.meinung.außen {
-  color: $außen;
+.meinung.aussen {
+  color: $aussen;
 }
 
 .balken {
@@ -226,8 +226,8 @@ svg {
     background-color: $mitte;
   }
 
-  .außen {
-    background-color: $außen;
+  .aussen {
+    background-color: $aussen;
   }
 
   .tooltip {

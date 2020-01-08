@@ -249,7 +249,7 @@ class BlipDetailSheetComponent extends React.Component {
                 <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
                     className="tooltiptext">Nach Evaluieren verschieben</span>
                 </div>
-                <div className="außen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                <div className="aussen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
                     className="tooltiptext">Nach Überdenken verschieben</span>
                 </div>
             </div>);
@@ -260,7 +260,7 @@ class BlipDetailSheetComponent extends React.Component {
                     className="tooltiptext">In Evaluieren belassen</span></div>
                 <div className="mitte tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
                     className="tooltiptext">Nach Überdenken verschieben</span></div>
-                <div className="außen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                <div className="aussen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
                     className="tooltiptext">Nach Einsetzen verschieben</span></div>
             </div>);
         } else if (this.props.ring === "überdenken" && (!(this.getCount(6) === 0 && this.getCount(1) === 0 && this.getCount(3) === 0))) {
@@ -269,7 +269,7 @@ class BlipDetailSheetComponent extends React.Component {
                     className="tooltiptext">In Überdenken belassen</span></div>
                 <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
                     className="tooltiptext">Nach Evaluieren verschieben</span></div>
-                <div className="außen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                <div className="aussen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
                     className="tooltiptext">Nach Einsetzen verschieben</span></div>
             </div>);
         }
@@ -301,7 +301,7 @@ class BlipDetailSheetComponent extends React.Component {
                     (item.meinung === "Nach Evaluieren verschieben!" || item.meinung === "In Evaluieren belassen!") ?
                         <div className="meinung mitte">{item.meinung}</div> :
                         (item.meinung === "Nach Überdenken verschieben!" || item.meinung === "In Überdenken belassen!") ?
-                            <div className="meinung außen">{item.meinung}</div> : ""
+                            <div className="meinung aussen">{item.meinung}</div> : ""
                 return (<div className="discussionItem mitte">
 
                         <div className="discussionContainer">
