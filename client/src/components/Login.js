@@ -56,7 +56,7 @@ class Login extends Component {
                 <div className="Login">
                     <form onSubmit={this.verifyUserInput}>
                         <div className="form">
-                            <h3 align="center">Willkommen beim Adesso TechnologieRadar</h3>
+                            <h3 align="center">Willkommen beim adesso Technologie-Radar</h3>
                             <div>{error}</div>
                             <FormGroup controlId="email">
                                 <TextField error id="name" errorstyling type="email" required name="email"
