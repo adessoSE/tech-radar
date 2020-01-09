@@ -380,7 +380,7 @@ class BlipDetailSheetComponent extends React.Component {
                                     <Icon>favorite</Icon>
                                 </Tooltip>
                             </Button>
-                            <h3>{this.props.ring} | {this.props.radar}</h3>
+                            <h3>{this.props.ring.charAt(0).toUpperCase() + this.props.ring.slice(1)} | {this.props.radar.charAt(0).toUpperCase() + this.props.radar.slice(1)}</h3>
                         </div>
 
                         <div className="desc">{this.props.desc}</div>
