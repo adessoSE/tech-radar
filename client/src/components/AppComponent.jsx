@@ -20,8 +20,6 @@ import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 import ProtectedRoute  from './ProtectedRoute';
 
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-
 export default class AppComponent extends React.Component {
 
     constructor(props) {
