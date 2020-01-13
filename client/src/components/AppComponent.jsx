@@ -20,8 +20,6 @@ import "../static/css/desctop.scss";
 import "../static/css/mobile.scss";
 import ProtectedRoute  from './ProtectedRoute';
 
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-
 export default class AppComponent extends React.Component {
 
     constructor(props) {
@@ -144,7 +142,7 @@ export default class AppComponent extends React.Component {
                                 value={3}
                             />
                             <Button variant="contained" id="log out" onClick={this.handleClick}>
-                                Log out
+                                Logout
                             </Button>
                         </Tabs>
                     </AppBar>

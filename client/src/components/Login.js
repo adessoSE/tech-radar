@@ -56,7 +56,7 @@ class Login extends Component {
                 <div className="Login">
                     <form onSubmit={this.verifyUserInput}>
                         <div className="form">
-                            <h3 align="center">Willkommen beim Adesso TechnologieRadar</h3>
+                            <h3 align="center">Willkommen beim adesso Technologie-Radar</h3>
                             <div>{error}</div>
                             <FormGroup controlId="email">
                                 <TextField error id="name" errorstyling type="email" required name="email"
@@ -86,7 +86,7 @@ class Login extends Component {
                 <form onSubmit={this.verifyUserInput}>
                     <div className="form">
                         <div className="header">
-                            <h3 align="center">Willkommen beim Adesso Technologie Radar</h3>
+                            <h3 align="center">Willkommen beim adesso Technologie-Radar</h3>
                         </div>
                         <FormGroup controlId="email">
                             <TextField id="name" errorstyling type="email" required name="E-mail" variant="outlined"
