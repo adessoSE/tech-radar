@@ -41,6 +41,11 @@ class BlipDetailSheetComponent extends React.Component {
         this.handleNewMeinung = this.handleNewMeinung.bind(this);
         this.showDiscussion = this.showDiscussion.bind(this);
         this.getDropdownStatus = this.getDropdownStatus.bind(this);
+        this.getBalken = this.getBalken.bind(this);
+        this.getCount = this.getCount.bind(this);
+        this.getTotalCount = this.getTotalCount.bind(this);
+        this.getTeilnehmer = this.getTeilnehmer.bind(this);
+        this.getStyle = this.getStyle.bind(this);
         this.getTrailingZeroIfNeeded = this.getTrailingZeroIfNeeded.bind(this);
         this.getCommentsAll = async () => {
             const data = await commentService.getByRadarType();
@@ -49,7 +54,7 @@ class BlipDetailSheetComponent extends React.Component {
                 comments.push({
                     autor: item.autor,
                     text: item.text,
-                    meinung: this.state.meinungArr[item.meinung-1],
+                    meinung: this.state.meinungArr[item.meinung - 1],
                     zeit: item.zeit,
                     technologie: item.technologie,
                     radar: item.radar
@@ -88,15 +93,15 @@ class BlipDetailSheetComponent extends React.Component {
                 zeit: date,
                 technologie: this.props.name,
                 radar: this.props.radar,
-            });
+            }).then(
             modifiedComments.push({
                 autor: this.state.newCommentAutor,
                 text: this.state.newCommentText,
-                meinung: this.state.meinungArr[this.state.newMeinung-1],
+                meinung: this.state.meinungArr[this.state.newMeinung - 1],
                 zeit: date,
                 technologie: this.props.name,
                 radar: this.props.radar,
-            });
+            }));
             this.setState({
                 comments: modifiedComments,
                 newCommentAutor: localStorage.getItem("name"),
@@ -190,11 +195,98 @@ class BlipDetailSheetComponent extends React.Component {
         return dropdown;
     }
 
+    getTeilnehmer() {
+        const comments = this.state.comments.filter(comment => {
+            return comment.technologie === this.props.name &&
+                comment.radar === this.props.radar
+        });
+        console.log("COMMENTS", comments);
+        var commentsOneCommentPerUser = [];
+        comments.forEach(comment => {
+             if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
+                 var commentsWithSameName = comments.filter(item => {
+                     return item.autor === comment.autor;
+                 });
+                 commentsWithSameName.sort((a, b) => {
+                     return new Date(b.zeit) - new Date(a.zeit);
+                 });
+                 commentsOneCommentPerUser.push(commentsWithSameName[0]);
+             }
+        });
+        console.log("RESULT", commentsOneCommentPerUser);
+        return commentsOneCommentPerUser;
+    }
+
+    getCount(value) {
+        var commentsOneCommentPerUser = this.getTeilnehmer();
+        var countValue = commentsOneCommentPerUser.filter(comment => {
+            return comment.meinung === this.state.meinungArr[value - 1];
+        }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
+            return comment.meinung === this.state.meinungArr[value - 1];
+        }).length : 0;
+        console.log("Countvalue", countValue);
+        return countValue;
+    }
+
+
+    getTotalCount() {
+        return this.state.comments.filter(comment => {
+            return comment.technologie === this.props.name &&
+                comment.radar === this.props.radar
+        }).length;
+    }
+
+    getStyle(value) {
+        var countValue = this.getCount(value);
+        var count = this.getTeilnehmer().length;
+        var width = (countValue * 100 / count) + '%';
+        console.log(count);
+        return {
+            width: width
+        };
+    }
+
+    getBalken() {
+        let balken = <div className="balken"></div>;
+        if (this.props.ring === "einsetzen" && (!(this.getCount(4) === 0 && this.getCount(1) === 0 && this.getCount(2) === 0))) {
+            balken = (<div className="balken">
+                <div className="innen tooltip" style={this.getStyle(4)}>{this.getCount(4)}<span
+                    className="tooltiptext">In Einsetzen belassen</span></div>
+                <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
+                    className="tooltiptext">Nach Evaluieren verschieben</span>
+                </div>
+                <div className="aussen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Nach Überdenken verschieben</span>
+                </div>
+            </div>);
+
+        } else if (this.props.ring === "evaluieren" && (!(this.getCount(5) === 0 && this.getCount(2) === 0 && this.getCount(3) === 0))) {
+            balken = (<div className="balken">
+                <div className="innen tooltip" style={this.getStyle(5)}>{this.getCount(5)}<span
+                    className="tooltiptext">In Evaluieren belassen</span></div>
+                <div className="mitte tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Nach Überdenken verschieben</span></div>
+                <div className="aussen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Nach Einsetzen verschieben</span></div>
+            </div>);
+        } else if (this.props.ring === "überdenken" && (!(this.getCount(6) === 0 && this.getCount(1) === 0 && this.getCount(3) === 0))) {
+            balken = (<div className="balken">
+                <div className="innen tooltip" style={this.getStyle(6)}>{this.getCount(6)}<span
+                    className="tooltiptext">In Überdenken belassen</span></div>
+                <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
+                    className="tooltiptext">Nach Evaluieren verschieben</span></div>
+                <div className="aussen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Nach Einsetzen verschieben</span></div>
+            </div>);
+        }
+        return balken;
+    }
+
     render() {
         var commentListItems = this.state.comments
             .filter(comment => {
                 return comment.technologie === this.props.name &&
-                       comment.radar === this.props.radar
+                    comment.radar === this.props.radar
             })
             .sort(function compare(a, b) {
                 var partsA = a.zeit.split(', ');
@@ -210,16 +302,22 @@ class BlipDetailSheetComponent extends React.Component {
                 return dateA - dateB;
             })
             .map(function (item) {
-                return (<div className="discussionItem">
+                let meinung = (item.meinung === "Nach Einsetzen verschieben!" || item.meinung === "In Einsetzen belassen!") ?
+                    <div className="meinung innen">{item.meinung}</div> :
+                    (item.meinung === "Nach Evaluieren verschieben!" || item.meinung === "In Evaluieren belassen!") ?
+                        <div className="meinung mitte">{item.meinung}</div> :
+                        (item.meinung === "Nach Überdenken verschieben!" || item.meinung === "In Überdenken belassen!") ?
+                            <div className="meinung aussen">{item.meinung}</div> : ""
+                return (<div className="discussionItem mitte">
+
                         <div className="discussionContainer">
-                            <div className="name">{item.autor}</div>
-                            <div>{item.text}</div>
+                            <div className="name"><p>{item.autor}</p><p><span className="timestamp">{item.zeit}</span></p></div>
+                            <div><p>{item.text}</p><p>{meinung}</p></div>
                         </div>
                         <div className="discussionContainer">
                             <div></div>
                             <div>
-                                <span className="meinung">Meinung: {item.meinung}</span>
-                                <span className="timestamp">gesendet: {item.zeit}</span>
+
                             </div>
                         </div>
                     </div>
@@ -245,7 +343,8 @@ class BlipDetailSheetComponent extends React.Component {
                     <span>Möchtest Du, dass diese Technologie innerhalb des Radars verschoben wird?
                         {this.getDropdownStatus()}</span>
                     <span><textarea type="text" value={this.state.newCommentText} maxLength="500"
-                                    onChange={this.handleChange} className="inputText" placeholder="Hinterlasse Deinen Kommentar hier..."/>
+                                    onChange={this.handleChange} className="inputText"
+                                    placeholder="Hinterlasse Deinen Kommentar hier..."/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
                     </Button></span>
@@ -281,13 +380,15 @@ class BlipDetailSheetComponent extends React.Component {
                                     <Icon>favorite</Icon>
                                 </Tooltip>
                             </Button>
-                            <h3>{this.props.ring} | {this.props.radar}</h3>
+                            <h3>{this.props.ring.charAt(0).toUpperCase() + this.props.ring.slice(1)} | {this.props.radar.charAt(0).toUpperCase() + this.props.radar.slice(1)}</h3>
                         </div>
 
                         <div className="desc">{this.props.desc}</div>
+                        {this.getBalken()}
                         {discussionButton}
 
                         {discussion}
+
                     </CardContent>
                 </Card>
             </div>
