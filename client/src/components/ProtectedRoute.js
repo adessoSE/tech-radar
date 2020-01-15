@@ -2,9 +2,6 @@ import React from "react";
 import { Route, Redirect,withRouter } from "react-router-dom";
 import { isAuth } from '../services/userService';
 
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-
 const ProtectedRoute = ({component: Component,...rest}) => {
     return (
         <Route
