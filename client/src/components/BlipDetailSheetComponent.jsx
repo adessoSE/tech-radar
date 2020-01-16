@@ -73,7 +73,7 @@ class BlipDetailSheetComponent extends React.Component {
 
     addNewComment() {
         this.setState({clicked: true});
-        if (this.state.newMeinung === "" || this.state.newCommentText == "") {
+        if (this.state.newMeinung === "" || this.state.newCommentText === "") {
             this.setState({valid: false});
         } else {
             this.setState({valid: true});
@@ -120,24 +120,24 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     handleChange(e) {
-        if (e.target.value == "") {
+        if (e.target.value === "") {
             this.setState({valid: false})
-        } else if (e.target.value != "" && this.state.newMeinung != "") {
+        } else if (e.target.value !== "" && this.state.newMeinung !== "") {
             this.setState({valid: true})
         }
         this.setState({newCommentText: e.target.value});
     }
 
     handleNewMeinung(e) {
-        this.setState({newMeinung: e.target.value})
-        if (this.state.newMeinung == "") {
+        this.setState({newMeinung: e.target.value});
+        if (this.state.newMeinung === "") {
             this.setState({
                 valid: false
             })
-        } else if (this.state.newMeinung != "" && this.state.newCommentText != "") {
+        } else if (this.state.newMeinung !== "" && this.state.newCommentText !== "") {
             this.setState({
                 valid: true
-            })
+            });
             console.log(e.target.value)
         }
         this.setState({newMeinung: e.target.value});
@@ -334,12 +334,11 @@ class BlipDetailSheetComponent extends React.Component {
                 );
             });
         let error;
-        if (this.state.valid == false && this.state.clicked == true) {
+        if (this.state.valid === false && this.state.clicked === true) {
             error = (<div>Bitte alle Felder ausfüllen.</div>);
         } else {
             error = ""
         }
-        ;
         let discussion;
         let discussionButton;
         if (this.state.showDiscussion === true) {
