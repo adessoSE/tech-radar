@@ -26,6 +26,8 @@ export default class HotTopics extends React.Component {
     this.withinTheLastXDays = this.withinTheLastXDays.bind(this);
     this.getTop5TrendingDiscussions = this.getTop5TrendingDiscussions.bind(this);
     this.getRingForTechnology = this.getRingForTechnology.bind(this);
+    this.getTeilnehmer = this.getTeilnehmer.bind(this);
+    this.getCount = this.getCount.bind(this);
     this.getAllComments = async () => {
       const data = await commentService.getByRadarType();
       const commentsAllSorted = [];
@@ -94,6 +96,46 @@ export default class HotTopics extends React.Component {
     return(date - xDaysAgo >= 0);
   }
 
+  getCount(value) {
+    var commentsOneCommentPerUser = this.getTeilnehmer();
+    var countValue = commentsOneCommentPerUser.filter(comment => {
+      return comment.meinung === this.state.meinungArr[value - 1];
+    }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
+      return comment.meinung === this.state.meinungArr[value - 1];
+    }).length : 0;
+    return countValue;
+  }
+
+  getTeilnehmer(com, tech, radar) {
+    var comments = com.filter(comment => {
+      return comment.technologie === tech &&
+          comment.radar === radar
+    });
+    var commentsOneCommentPerUser = [];
+    comments.forEach(comment => {
+      if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
+        var commentsWithSameName = comments.filter(item => {
+          return item.autor === comment.autor;
+        });
+        commentsWithSameName.sort((a, b) => {
+          var partsA = a.zeit.split(', ');
+          var datesA = partsA[0].split('/');
+          var timeA = partsA[1].split(':');
+          var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
+
+          var partsB = b.zeit.split(', ');
+          var datesB = partsB[0].split('/');
+          var timeB = partsB[1].split(':');
+          var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
+
+          return dateB - dateA;
+        });
+        commentsOneCommentPerUser.push(commentsWithSameName[0]);
+      }
+    });
+    return commentsOneCommentPerUser;
+  }
+
   getAllTechnologies() {
     const techs = [];
     for (var i = 0; i < javaJSON.length; i++) {
@@ -103,7 +145,7 @@ export default class HotTopics extends React.Component {
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsAllSorted),
         radar: "java",
         ring: javaJSON[i].ring,
-        // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+        teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, javaJSON[i].name, "java").length,
       });
     }
     for (var j = 0; j < jsJSON.length; j++) {
@@ -113,7 +155,7 @@ export default class HotTopics extends React.Component {
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsAllSorted),
         radar: "javascript",
         ring: jsJSON[j].ring,
-        // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+        teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, jsJSON[j].name, "javascript").length,
       });
     }
     for (var k = 0; k < msJSON.length; k++) {
@@ -123,7 +165,7 @@ export default class HotTopics extends React.Component {
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsAllSorted),
         radar: "microsoft",
         ring: msJSON[k].ring,
-        // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+        teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, msJSON[k].name, "microsoft").length
       });
     }
     this.setState({
