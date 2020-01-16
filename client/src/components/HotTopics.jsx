@@ -28,6 +28,7 @@ export default class HotTopics extends React.Component {
     this.getRingForTechnology = this.getRingForTechnology.bind(this);
     this.getTeilnehmer = this.getTeilnehmer.bind(this);
     this.getCount = this.getCount.bind(this);
+    this.getLatestComment = this.getLatestComment.bind(this);
     this.getAllComments = async () => {
       const data = await commentService.getByRadarType();
       const commentsAllSorted = [];
@@ -209,6 +210,14 @@ export default class HotTopics extends React.Component {
     }
   }
 
+  getLatestComment(tech, radar) {
+    var comments = this.state.commentsAllSorted.filter(comment => {
+      return comment.technologie === tech &&
+          comment.radar === radar
+    });
+    return comments[0]
+  }
+
   getTop5LatestDiscussions() {
     var discussedTechs = [];
     for (var l = 0; l < this.state.commentsAllSorted.length; l++) {
@@ -219,8 +228,12 @@ export default class HotTopics extends React.Component {
           technologie: name,
           gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar, this.state.commentsAllSorted),
           radar: radar,
-          ring: this.getRingForTechnology(name, radar)
-          // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+          ring: this.getRingForTechnology(name, radar),
+          lastComment: this.getLatestComment(name, radar),
+          lastCommentAutor: this.getLatestComment(name, radar).autor,
+          lastCommentText: this.getLatestComment(name, radar).text,
+          lastCommentMeinung: this.getLatestComment(name, radar).meinung,
+          lastCommentTime: this.getLatestComment(name, radar).zeit
         });
       }
     }
