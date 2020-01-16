@@ -262,21 +262,21 @@ class BlipDetailSheetComponent extends React.Component {
 
         } else if (this.props.ring === "evaluieren" && (!(this.getCount(5) === 0 && this.getCount(2) === 0 && this.getCount(3) === 0))) {
             balken = (<div className="balken">
-                <div className="innen tooltip" style={this.getStyle(5)}>{this.getCount(5)}<span
-                    className="tooltiptext">In Evaluieren belassen</span></div>
-                <div className="mitte tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
-                    className="tooltiptext">Nach Überdenken verschieben</span></div>
-                <div className="aussen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                <div className="innen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
                     className="tooltiptext">Nach Einsetzen verschieben</span></div>
+                <div className="mitte tooltip" style={this.getStyle(5)}>{this.getCount(5)}<span
+                    className="tooltiptext">In Evaluieren belassen</span></div>
+                <div className="aussen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Nach Überdenken verschieben</span></div>
             </div>);
         } else if (this.props.ring === "überdenken" && (!(this.getCount(6) === 0 && this.getCount(1) === 0 && this.getCount(3) === 0))) {
             balken = (<div className="balken">
-                <div className="innen tooltip" style={this.getStyle(6)}>{this.getCount(6)}<span
-                    className="tooltiptext">In Überdenken belassen</span></div>
+                <div className="innen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Nach Einsetzen verschieben</span></div>
                 <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
                     className="tooltiptext">Nach Evaluieren verschieben</span></div>
-                <div className="aussen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
-                    className="tooltiptext">Nach Einsetzen verschieben</span></div>
+                <div className="aussen tooltip" style={this.getStyle(6)}>{this.getCount(6)}<span
+                    className="tooltiptext">In Überdenken belassen</span></div>
             </div>);
         }
         return balken;
