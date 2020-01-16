@@ -141,9 +141,9 @@ export default class AppComponent extends React.Component {
                                 to="/faq"
                                 value={3}
                             />
-                            <Button variant="contained" id="log out" onClick={this.handleClick}>
-                                Logout
-                            </Button>
+                            <Tab id="logOut" label="Logout" component={Link}  value={5} onClick={this.handleClick}>
+
+                            </Tab>
                         </Tabs>
                     </AppBar>
 
