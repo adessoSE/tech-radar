@@ -200,7 +200,6 @@ class BlipDetailSheetComponent extends React.Component {
             return comment.technologie === this.props.name &&
                 comment.radar === this.props.radar
         });
-        console.log("COMMENTS", comments);
         var commentsOneCommentPerUser = [];
         comments.forEach(comment => {
              if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
@@ -208,12 +207,23 @@ class BlipDetailSheetComponent extends React.Component {
                      return item.autor === comment.autor;
                  });
                  commentsWithSameName.sort((a, b) => {
-                     return new Date(b.zeit) - new Date(a.zeit);
+                     var partsA = a.zeit.split(', ');
+                     var datesA = partsA[0].split('/');
+                     var timeA = partsA[1].split(':');
+                     var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
+
+                     var partsB = b.zeit.split(', ');
+                     var datesB = partsB[0].split('/');
+                     var timeB = partsB[1].split(':');
+                     var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
+
+                     return dateB - dateA;
                  });
+                 console.log("Kommentare gleicher User: ", commentsWithSameName);
                  commentsOneCommentPerUser.push(commentsWithSameName[0]);
              }
         });
-        console.log("RESULT", commentsOneCommentPerUser);
+        console.log("Kommentare pro User: ", commentsOneCommentPerUser);
         return commentsOneCommentPerUser;
     }
 
@@ -224,7 +234,7 @@ class BlipDetailSheetComponent extends React.Component {
         }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
             return comment.meinung === this.state.meinungArr[value - 1];
         }).length : 0;
-        console.log("Countvalue", countValue);
+        console.log("Anzahl pro Meinung: ", countValue);
         return countValue;
     }
 
