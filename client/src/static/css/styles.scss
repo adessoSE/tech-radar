@@ -193,8 +193,14 @@ svg {
 }
 
 .desc {
-  padding-bottom: 15px;
+
+
+  h4 {
+    font-size: 25px;
+
+  }
 }
+
 
 .diskussionButton {
   padding: 8px 0px !important;
@@ -285,5 +291,6 @@ svg {
     visibility: visible;
     opacity: 1;
   }
+
 }
 
