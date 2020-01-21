@@ -3,6 +3,11 @@ import commentService from "../services/commentService";
 import javaJSON from '../components/java-radar.json';
 import jsJSON from "./javascript-radar.json";
 import msJSON from "./microsoft-radar.json";
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import "../static/css/hotTopicsStyles.scss";
+import Icon from "@material-ui/core/Icon";
 
 export default class HotTopics extends React.Component {
   constructor(props) {
@@ -97,8 +102,8 @@ export default class HotTopics extends React.Component {
     return(date - xDaysAgo >= 0);
   }
 
-  getCount(value) {
-    var commentsOneCommentPerUser = this.getTeilnehmer();
+  getCount(item, value) {
+    var commentsOneCommentPerUser = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar);
     var countValue = commentsOneCommentPerUser.filter(comment => {
       return comment.meinung === this.state.meinungArr[value - 1];
     }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
@@ -243,11 +248,101 @@ export default class HotTopics extends React.Component {
     console.log(this.state.latest); // TODO entfernen
   }
 
+  getStyle(item, value) {
+          var countValue = this.getCount(item, value);
+          var count = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar).length;
+          var width = (countValue * 100 / count) + '%';
+          console.log(count);
+          return {
+              width: width
+          };
+      }
+
+      getBalken(item) {
+          let balken = <div className="balken"></div>;
+          if (item.ring === "einsetzen" && (!(this.getCount(item, 4) === 0 && this.getCount(item, 1) === 0 && this.getCount(item,2) === 0))) {
+              balken = (<div className="balken">
+
+                  <div className="innen tooltip" style={this.getStyle(item,4)}>Einsetzen<span
+                      className="tooltiptext">{this.getCount(item,4)}</span></div>
+
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>Evaluieren<span
+                      className="tooltiptext">{this.getCount(item,1)}</span></div>
+
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>Überdenken<span
+                      className="tooltiptext">{this.getCount(item,2)}</span></div>
+              </div>);
+
+          } else if (item.ring === "evaluieren" && (!(this.getCount(item,5) === 0 && this.getCount(item,2) === 0 && this.getCount(item,3) === 0))) {
+              balken = (<div className="balken">
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>Einsetzen<span
+                      className="tooltiptext">{this.getCount(item,3)}</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,5)}>Evaluieren<span
+                      className="tooltiptext">{this.getCount(item,5)}</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>Überdenken<span
+                      className="tooltiptext">{this.getCount(item,2)}</span></div>
+              </div>);
+          } else if (item.ring === "überdenken" && (!(this.getCount(item,6) === 0 && this.getCount(item,1) === 0 && this.getCount(item,3) === 0))) {
+              balken = (<div className="balken">
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>Einsetzen<span
+                      className="tooltiptext">{this.getCount(item,3)}</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>Evaluieren<span
+                      className="tooltiptext">{this.getCount(item,1)}</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,6)}>Überdenken<span
+                      className="tooltiptext">{this.getCount(item,6)}</span></div>
+              </div>);
+          }
+          return balken;
+      }
+
+
   render() {
     return (
-        <div >
-        HotTopics
-      </div>
+        <div className="container">
+            <div className="row">
+                <h3 className="column titleT">Trending</h3>
+                <h3 className="column titleL">Latest</h3>
+            </div>
+            <div className="row">
+            <div className="card cardT">
+                {this.state.trending.map(item => {
+                    return (<div className="cardRow">
+                       <div className="box">
+                          <div className="anzahl">{item.gesamtkommentaranzahl}</div>
+                          <div className="icon"><Icon>forum</Icon></div>
+                       </div>
+                       <div className="column">
+                              <div className="trending">
+                                 <div className="title">{item.technologie}</div>
+                                 <div>{item.ring} | {item.radar} </div>
+                                 <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
+                                  <div>{this.getBalken(item)}</div>
+                              </div>
+
+                       </div>
+                    </div>)
+                                })}</div>
+            <div className="card cardL">
+                {this.state.latest.map(item => {
+                    return (<div className="cardRow">
+                        <div className="timeStamp">
+                        <div className="time">{item.lastCommentTime ? item.lastCommentTime.slice(0, -3).slice(item.lastCommentTime.indexOf(',')+1) : ""}</div>
+                        <div className="date">{item.lastCommentTime ? item.lastCommentTime.slice(0,item.lastCommentTime.indexOf(',')).slice(0,-2).replace('/','.').replace('/','.') : ""}</div>
+                        </div>
+                        <div className="column">
+                            <div className="infos">
+                                <div className="title">{item.technologie}</div>
+                                <div>{item.ring} | {item.radar} </div>
+                                <div className="autor">{item.lastCommentAutor}</div>
+                                <div className="meinung">{item.lastCommentMeinung}</div>
+                            </div>
+                            <div className="comment">{item.lastCommentText}</div>
+                        </div>
+                    </div>)
+                })}
+            </div>
+            </div>
+        </div>
     );
   }
 }
