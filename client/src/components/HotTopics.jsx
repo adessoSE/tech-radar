@@ -3,6 +3,11 @@ import commentService from "../services/commentService";
 import javaJSON from '../components/java-radar.json';
 import jsJSON from "./javascript-radar.json";
 import msJSON from "./microsoft-radar.json";
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import "../static/css/hotTopicsStyles.scss";
+import Icon from "@material-ui/core/Icon";
 
 export default class HotTopics extends React.Component {
   constructor(props) {
@@ -245,9 +250,50 @@ export default class HotTopics extends React.Component {
 
   render() {
     return (
-        <div >
-        HotTopics
-      </div>
+        <div className="container">
+            <div className="row">
+                <h3 className="column titleT">Trending</h3>
+                <h3 className="column titleL">Latest</h3>
+            </div>
+            <div className="row">
+            <div className="card cardT">
+                {this.state.trending.map(item => {
+                    return (<div className="cardRow">
+                       <div className="box">
+                          <div className="anzahl">{item.gesamtkommentaranzahl}</div>
+                          <div className="icon"><Icon>forum</Icon></div>
+                       </div>
+                       <div className="column">
+                              <div className="">
+                                 <div className="title">{item.technologie}</div>
+                                 <div>{item.ring} | {item.radar} </div>
+                                 <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
+                              </div>
+                              <div className="comment"></div>
+                       </div>
+                    </div>)
+                                })}</div>
+            <div className="card cardL">
+                {this.state.latest.map(item => {
+                    return (<div className="cardRow">
+                        <div className="timeStamp">
+                        <div className="time">{item.lastCommentTime ? item.lastCommentTime.slice(0, -3).slice(item.lastCommentTime.indexOf(',')+1) : ""}</div>
+                        <div className="date">{item.lastCommentTime ? item.lastCommentTime.slice(0,item.lastCommentTime.indexOf(',')).slice(0,-2).replace('/','.').replace('/','.') : ""}</div>
+                        </div>
+                        <div className="column">
+                            <div className="infos">
+                                <div className="title">{item.technologie}</div>
+                                <div>{item.ring} | {item.radar} </div>
+                                <div className="autor">{item.lastCommentAutor}</div>
+                                <div className="meinung">{item.lastCommentMeinung}</div>
+                            </div>
+                            <div className="comment">{item.lastCommentText}</div>
+                        </div>
+                    </div>)
+                })}
+            </div>
+            </div>
+        </div>
     );
   }
 }
