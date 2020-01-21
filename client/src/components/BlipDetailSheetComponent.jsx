@@ -156,9 +156,9 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value={4}>In Einsetzen belassen!</MenuItem>
-                    <MenuItem value={1}>Nach Evaluieren verschieben!</MenuItem>
-                    <MenuItem value={2}>Nach Überdenken verschieben!</MenuItem>
+                    <MenuItem value={4}>In Einsetzen belassen</MenuItem>
+                    <MenuItem value={1}>Nach Evaluieren verschieben</MenuItem>
+                    <MenuItem value={2}>Nach Überdenken verschieben</MenuItem>
                 </Select>
             </FormControl></div>);
         } else if (this.props.ring === "evaluieren") {
@@ -171,9 +171,9 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value={5}>In Evaluieren belassen!</MenuItem>
-                    <MenuItem value={2}>Nach Überdenken verschieben!</MenuItem>
-                    <MenuItem value={3}>Nach Einsetzen verschieben!</MenuItem>
+                    <MenuItem value={5}>In Evaluieren belassen</MenuItem>
+                    <MenuItem value={2}>Nach Überdenken verschieben</MenuItem>
+                    <MenuItem value={3}>Nach Einsetzen verschieben</MenuItem>
                 </Select>
             </FormControl></div>);
         } else if (this.props.ring === "überdenken") {
@@ -186,9 +186,9 @@ class BlipDetailSheetComponent extends React.Component {
                     onChange={this.handleNewMeinung}
                     className="meinungDropdown"
                 >
-                    <MenuItem value={6}>In Überdenken belassen!</MenuItem>
-                    <MenuItem value={1}>Nach Evaluieren verschieben!</MenuItem>
-                    <MenuItem value={3}>Nach Einsetzen verschieben!</MenuItem>
+                    <MenuItem value={6}>In Überdenken belassen</MenuItem>
+                    <MenuItem value={1}>Nach Evaluieren verschieben</MenuItem>
+                    <MenuItem value={3}>Nach Einsetzen verschieben</MenuItem>
                 </Select>
             </FormControl></div>);
         }
