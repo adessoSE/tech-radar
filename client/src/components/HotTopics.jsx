@@ -102,8 +102,8 @@ export default class HotTopics extends React.Component {
     return(date - xDaysAgo >= 0);
   }
 
-  getCount(value) {
-    var commentsOneCommentPerUser = this.getTeilnehmer();
+  getCount(item, value) {
+    var commentsOneCommentPerUser = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar);
     var countValue = commentsOneCommentPerUser.filter(comment => {
       return comment.meinung === this.state.meinungArr[value - 1];
     }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
@@ -248,6 +248,54 @@ export default class HotTopics extends React.Component {
     console.log(this.state.latest); // TODO entfernen
   }
 
+  getStyle(item, value) {
+          var countValue = this.getCount(item, value);
+          var count = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar).length;
+          var width = (countValue * 100 / count) + '%';
+          console.log(count);
+          return {
+              width: width
+          };
+      }
+
+      getBalken(item) {
+          let balken = <div className="balken"></div>;
+          if (item.ring === "einsetzen" && (!(this.getCount(item, 4) === 0 && this.getCount(item, 1) === 0 && this.getCount(item,2) === 0))) {
+              balken = (<div className="balken">
+
+                  <div className="innen tooltip" style={this.getStyle(item,4)}>Einsetzen<span
+                      className="tooltiptext">{this.getCount(item,4)}</span></div>
+
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>Evaluieren<span
+                      className="tooltiptext">{this.getCount(item,1)}</span></div>
+
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>Überdenken<span
+                      className="tooltiptext">{this.getCount(item,2)}</span></div>
+              </div>);
+
+          } else if (item.ring === "evaluieren" && (!(this.getCount(item,5) === 0 && this.getCount(item,2) === 0 && this.getCount(item,3) === 0))) {
+              balken = (<div className="balken">
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>Einsetzen<span
+                      className="tooltiptext">{this.getCount(item,3)}</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,5)}>Evaluieren<span
+                      className="tooltiptext">{this.getCount(item,5)}</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>Überdenken<span
+                      className="tooltiptext">{this.getCount(item,2)}</span></div>
+              </div>);
+          } else if (item.ring === "überdenken" && (!(this.getCount(item,6) === 0 && this.getCount(item,1) === 0 && this.getCount(item,3) === 0))) {
+              balken = (<div className="balken">
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>Einsetzen<span
+                      className="tooltiptext">{this.getCount(item,3)}</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>Evaluieren<span
+                      className="tooltiptext">{this.getCount(item,1)}</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,6)}>Überdenken<span
+                      className="tooltiptext">{this.getCount(item,6)}</span></div>
+              </div>);
+          }
+          return balken;
+      }
+
+
   render() {
     return (
         <div className="container">
@@ -264,12 +312,13 @@ export default class HotTopics extends React.Component {
                           <div className="icon"><Icon>forum</Icon></div>
                        </div>
                        <div className="column">
-                              <div className="">
+                              <div className="trending">
                                  <div className="title">{item.technologie}</div>
                                  <div>{item.ring} | {item.radar} </div>
                                  <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
+                                  <div>{this.getBalken(item)}</div>
                               </div>
-                              <div className="comment"></div>
+
                        </div>
                     </div>)
                                 })}</div>

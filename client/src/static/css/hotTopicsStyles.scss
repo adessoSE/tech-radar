@@ -10,7 +10,7 @@
   width: 50%;
 }
 .card{
-  border: 2px grey solid;
+  border: 1px grey solid;
   border-radius: 10px;
   min-height: 70vh;
   width: 50%;
@@ -117,6 +117,9 @@ h3{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+.trending{
+  width:100%;
 }
 .icon{
   position: absolute;
