@@ -263,33 +263,33 @@ export default class HotTopics extends React.Component {
           if (item.ring === "einsetzen" && (!(this.getCount(item, 4) === 0 && this.getCount(item, 1) === 0 && this.getCount(item,2) === 0))) {
               balken = (<div className="balken">
 
-                  <div className="innen tooltip" style={this.getStyle(item,4)}>Einsetzen<span
-                      className="tooltiptext">{this.getCount(item,4)}</span></div>
+                  <div className="innen tooltip" style={this.getStyle(item,4)}>{this.getCount(item,4)}<span
+                      className="tooltiptext">Einsetzen</span></div>
 
-                  <div className="mitte tooltip" style={this.getStyle(item,1)}>Evaluieren<span
-                      className="tooltiptext">{this.getCount(item,1)}</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
+                      className="tooltiptext">Evaluieren</span></div>
 
-                  <div className="aussen tooltip" style={this.getStyle(item,2)}>Überdenken<span
-                      className="tooltiptext">{this.getCount(item,2)}</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
+                      className="tooltiptext">Überdenken</span></div>
               </div>);
 
           } else if (item.ring === "evaluieren" && (!(this.getCount(item,5) === 0 && this.getCount(item,2) === 0 && this.getCount(item,3) === 0))) {
               balken = (<div className="balken">
-                  <div className="innen tooltip" style={this.getStyle(item,3)}>Einsetzen<span
-                      className="tooltiptext">{this.getCount(item,3)}</span></div>
-                  <div className="mitte tooltip" style={this.getStyle(item,5)}>Evaluieren<span
-                      className="tooltiptext">{this.getCount(item,5)}</span></div>
-                  <div className="aussen tooltip" style={this.getStyle(item,2)}>Überdenken<span
-                      className="tooltiptext">{this.getCount(item,2)}</span></div>
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
+                      className="tooltiptext">Einsetzen</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,5)}>{this.getCount(item,5)}<span
+                      className="tooltiptext">Evaluieren</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
+                      className="tooltiptext">Überdenken</span></div>
               </div>);
           } else if (item.ring === "überdenken" && (!(this.getCount(item,6) === 0 && this.getCount(item,1) === 0 && this.getCount(item,3) === 0))) {
               balken = (<div className="balken">
-                  <div className="innen tooltip" style={this.getStyle(item,3)}>Einsetzen<span
-                      className="tooltiptext">{this.getCount(item,3)}</span></div>
-                  <div className="mitte tooltip" style={this.getStyle(item,1)}>Evaluieren<span
-                      className="tooltiptext">{this.getCount(item,1)}</span></div>
-                  <div className="aussen tooltip" style={this.getStyle(item,6)}>Überdenken<span
-                      className="tooltiptext">{this.getCount(item,6)}</span></div>
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
+                      className="tooltiptext">Einsetzen</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
+                      className="tooltiptext">Evaluieren</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,6)}>{this.getCount(item,6)}<span
+                      className="tooltiptext">Überdenken</span></div>
               </div>);
           }
           return balken;
