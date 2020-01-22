@@ -150,7 +150,9 @@ export default class HotTopics extends React.Component {
         kommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsWithinXDays),
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsAllSorted),
         radar: "java",
+        radarAnzeigen: "Java",
         ring: javaJSON[i].ring,
+        ringAnzeigen: javaJSON[i].ring.charAt(0).toUpperCase() + javaJSON[i].ring.slice(1),
         teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, javaJSON[i].name, "java").length,
       });
     }
@@ -160,7 +162,9 @@ export default class HotTopics extends React.Component {
         kommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsWithinXDays),
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsAllSorted),
         radar: "javascript",
+        radarAnzeigen: "Javascript",
         ring: jsJSON[j].ring,
+        ringAnzeigen: jsJSON[j].ring.charAt(0).toUpperCase() + jsJSON[j].ring.slice(1),
         teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, jsJSON[j].name, "javascript").length,
       });
     }
@@ -170,7 +174,9 @@ export default class HotTopics extends React.Component {
         kommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsWithinXDays),
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsAllSorted),
         radar: "microsoft",
+        radarAnzeigen: "Microsoft",
         ring: msJSON[k].ring,
+        ringAnzeigen: msJSON[k].ring.charAt(0).toUpperCase() + msJSON[k].ring.slice(1),
         teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, msJSON[k].name, "microsoft").length
       });
     }
@@ -232,8 +238,8 @@ export default class HotTopics extends React.Component {
         discussedTechs.push({
           technologie: name,
           gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar, this.state.commentsAllSorted),
-          radar: radar,
-          ring: this.getRingForTechnology(name, radar),
+          radar: radar.charAt(0).toUpperCase() + radar.slice(1),
+          ring: this.getRingForTechnology(name, radar).charAt(0).toUpperCase() + this.getRingForTechnology(name, radar).slice(1),
           lastComment: this.getLatestComment(name, radar),
           lastCommentAutor: this.getLatestComment(name, radar).autor,
           lastCommentText: this.getLatestComment(name, radar).text,
@@ -314,7 +320,7 @@ export default class HotTopics extends React.Component {
                        <div className="column">
                               <div className="trending">
                                  <div className="title">{item.technologie}</div>
-                                 <div>{item.ring} | {item.radar} </div>
+                                 <div>{item.ringAnzeigen} | {item.radarAnzeigen} </div>
                                  <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
                                   <div>{this.getBalken(item)}</div>
                               </div>
