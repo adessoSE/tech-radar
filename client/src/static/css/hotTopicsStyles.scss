@@ -1,0 +1,131 @@
+.container{
+  width: 100%;
+
+}
+.row{
+  display: flex;
+  padding: 10px 60px 0px
+}
+.column{
+  width: 50%;
+}
+.card{
+  border: 1px grey solid;
+  border-radius: 10px;
+  min-height: 70vh;
+  width: 50%;
+}
+.cardT{
+  margin-right: 20px;
+}
+
+
+.cardL{
+  margin-left: 20px;
+}
+h3{
+  margin-bottom: 0px;
+}
+.titleT{
+  padding-right: 20px;
+}
+.titleL{
+  padding-left: 20px;
+}
+.cardRow{
+  display: flex;
+  width:100%;
+  height:20%;
+
+  .timeStamp{
+    background-color: grey;
+    color: white;
+    width: 17%;
+    margin: 2px 4px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    .time{
+      font-weight: 500;
+      font-size: 28px;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    .date{
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+  .column{
+    border-top: grey 1px solid;
+    width: 80%;
+    padding: 5px 0px 5px 5px;
+    display: flex;
+    .infos {
+      width: 50%;}
+      .title {
+        font-size: 16px;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0.02em;
+      }
+
+      .autor {
+        font-size: 10px;
+        line-height: 15px;
+      }
+
+      .meinung {
+        font-size: 10px;
+        line-height: 15px;
+      }
+
+    .comment{
+      width: 50%;
+      font-size: 10px;
+      line-height: 15px;
+      padding-top: 36px;
+    }
+  }
+
+}
+.cardRow:nth-child(1) .box,
+.cardRow:nth-child(1) .column{
+  border-top: none !important;
+}
+
+
+.box {
+  width: 17%;
+  border-top: grey 1px solid;
+  text-align: center;
+  position: relative;
+  margin-left: 5px;
+}
+.anzahl{
+  font-weight: 500;
+  font-size: 28px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.trending{
+  width:100%;
+}
+.icon{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: grey;
+}
