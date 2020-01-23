@@ -181,15 +181,26 @@ svg {
     float: right;
   }
 
-  textarea {
-
+  .inputTextValid {
+    width: 80%;
+    min-height: 38.8px;
+    height: 100%;
+    padding: 5px;
     border-radius: 5px;
     border-color: #C0C0C0;
     border-width: 1px;
     margin-left: 40px;
-
   }
-
+  .inputTextError {
+    width: 80%;
+    min-height: 38.8px;
+    height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border-color: red;
+    margin-left: 40px;
+    border-width: 1px;
+  }
 }
 
 .desc {
@@ -217,6 +228,7 @@ svg {
 
 .MuiInputBase-input {
   font-size: 0.7rem !important;
+
 }
 
 .meinung.innen {
@@ -291,6 +303,7 @@ svg {
     visibility: visible;
     opacity: 1;
   }
+
 
   .tooltip:nth-child(1) {
     border-radius: 5px 0px 0px 5px;

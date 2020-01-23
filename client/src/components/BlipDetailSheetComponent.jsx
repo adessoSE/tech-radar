@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 class BlipDetailSheetComponent extends React.Component {
     wrapperRef = createRef();
 
@@ -34,8 +35,11 @@ class BlipDetailSheetComponent extends React.Component {
                 "In Einsetzen belassen!",
                 "In Evaluieren belassen!",
                 "In Überdenken belassen!"],
-            test: new Array({})
+            test: new Array({}),
+            validationTextArea: "inputTextValid",
+            validationColor:"black"
         };
+
         this.addNewComment = this.addNewComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleNewMeinung = this.handleNewMeinung.bind(this);
@@ -148,7 +152,7 @@ class BlipDetailSheetComponent extends React.Component {
         let dropdown = null;
         if (this.props.ring === "einsetzen") {
             dropdown = (<div><FormControl>
-                <InputLabel id="demo-customized-select-label">Wähle...</InputLabel>
+                <InputLabel  style={{color: this.state.validationColor}} id="demo-customized-select-label">Wähle...</InputLabel>
                 <Select
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
@@ -163,7 +167,7 @@ class BlipDetailSheetComponent extends React.Component {
             </FormControl></div>);
         } else if (this.props.ring === "evaluieren") {
             dropdown = (<div><FormControl>
-                <InputLabel id="demo-customized-select-label">Wähle...</InputLabel>
+                <InputLabel  style={{color: this.state.validationColor}} id="demo-customized-select-label">Wähle...</InputLabel>
                 <Select
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
@@ -178,7 +182,7 @@ class BlipDetailSheetComponent extends React.Component {
             </FormControl></div>);
         } else if (this.props.ring === "überdenken") {
             dropdown = (<div><FormControl>
-                <InputLabel id="demo-customized-select-label">Wähle...</InputLabel>
+                <InputLabel   style={{color: this.state.validationColor}} id="demo-customized-select-label">Wähle...</InputLabel>
                 <Select
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
@@ -335,8 +339,12 @@ class BlipDetailSheetComponent extends React.Component {
                 );
             });
         let error;
-        if (this.state.valid === false && this.state.clicked === true) {
-            error = (<div>Bitte alle Felder ausfüllen.</div>);
+
+        const validationColor="black";
+        if (this.state.valid == false && this.state.clicked == true) {
+            error = (<div className="error">Bitte alle Felder ausfüllen.</div>);
+            this.state.validationTextArea="inputTextError";
+            this.state.validationColor="red";
         } else {
             error = ""
         }
@@ -345,19 +353,20 @@ class BlipDetailSheetComponent extends React.Component {
         if (this.state.showDiscussion === true) {
             discussion = (<div>
                 <div>{commentListItems}</div>
-                <div>{error}</div>
                 <hr/>
                 <h4>Beteilige Dich an der Diskussion</h4>
                 <div className="discussionContainer">
 
                     <span>Möchtest Du, dass diese Technologie innerhalb des Radars verschoben wird?
                         {this.getDropdownStatus()}</span>
-                    <span><textarea type="text" value={this.state.newCommentText} maxLength="500"
-                                    onChange={this.handleChange} className="inputText"
+                    <span><textarea id="textarea" type="text" value={this.state.newCommentText} maxLength="500"
+                                    onChange={this.handleChange} className={this.state.validationTextArea}
                                     placeholder="Hinterlasse Deinen Kommentar hier..."/>
                     <Button size="large" color="primary" onClick={this.addNewComment} className="sendButton">
                         Senden
                     </Button></span>
+                    <div>{error}</div>
+
                 </div>
             </div>);
             discussionButton = (
