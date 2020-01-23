@@ -3,11 +3,10 @@ import commentService from "../services/commentService";
 import javaJSON from '../components/java-radar.json';
 import jsJSON from "./javascript-radar.json";
 import msJSON from "./microsoft-radar.json";
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import "../static/css/hotTopicsStyles.scss";
 import Icon from "@material-ui/core/Icon";
+import Tooltip from "@material-ui/core/Tooltip";
+import {withStyles} from "@material-ui/core/styles";
 
 export default class HotTopics extends React.Component {
   constructor(props) {
@@ -303,11 +302,22 @@ export default class HotTopics extends React.Component {
 
 
   render() {
+      const CustomizeTooltip = withStyles({
+          tooltip: {
+              color: "white",
+              fontSize: "1em",
+              margin:"-35px",
+          }
+      })(Tooltip);
     return (
         <div className="container">
             <div className="row">
+                <CustomizeTooltip className="hover_trending" title="Diskussionen mit den meisten neuen Kommentaren innerhalb der letzten 2 Monate" aria-label="hover_trending" placement="bottom" arrow >
                 <h3 className="column titleT">Trending</h3>
+                </CustomizeTooltip>
+                <CustomizeTooltip title="Diskussionen mit den neusten Kommentaren" aria-label="hover_latest" placement="bottom" arrow>
                 <h3 className="column titleL">Latest</h3>
+                </CustomizeTooltip>
             </div>
             <div className="row">
             <div className="card cardT">
