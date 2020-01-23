@@ -3,9 +3,6 @@ import commentService from "../services/commentService";
 import javaJSON from '../components/java-radar.json';
 import jsJSON from "./javascript-radar.json";
 import msJSON from "./microsoft-radar.json";
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import "../static/css/hotTopicsStyles.scss";
 import Icon from "@material-ui/core/Icon";
 
@@ -34,6 +31,7 @@ export default class HotTopics extends React.Component {
     this.getTeilnehmer = this.getTeilnehmer.bind(this);
     this.getCount = this.getCount.bind(this);
     this.getLatestComment = this.getLatestComment.bind(this);
+    this.shortenText = this.shortenText.bind(this);
     this.getAllComments = async () => {
       const data = await commentService.getByRadarType();
       const commentsAllSorted = [];
@@ -80,8 +78,6 @@ export default class HotTopics extends React.Component {
         commentsWithinXDays: commentsWithinXDays,
         commentsAllSorted: commentsAllSorted
       });
-      console.log(this.state.commentsAllSorted); // TODO entfernen
-      console.log(this.state.commentsWithinXDays); // TODO entfernen
     };
     this.getAllComments().then(()=>{
       this.getAllTechnologies();
@@ -200,7 +196,6 @@ export default class HotTopics extends React.Component {
     this.setState({
       trending: trending
     });
-    console.log(this.state.trending); // TODO entfernen
   }
 
   getRingForTechnology(technologie, radar) {
@@ -230,35 +225,42 @@ export default class HotTopics extends React.Component {
   }
 
   getTop5LatestDiscussions() {
-    var discussedTechs = [];
+    const discussedTechs = [];
+    const latest = [];
     for (var l = 0; l < this.state.commentsAllSorted.length; l++) {
-      var name = this.state.commentsAllSorted[l].technologie;
-      var radar = this.state.commentsAllSorted[l].radar;
+      const name = this.state.commentsAllSorted[l].technologie;
+      const radar = this.state.commentsAllSorted[l].radar;
       if(!discussedTechs.includes(name) && discussedTechs.length < 5) {
-        discussedTechs.push({
+        discussedTechs.push(name);
+        latest.push({
           technologie: name,
           gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar, this.state.commentsAllSorted),
           radar: radar.charAt(0).toUpperCase() + radar.slice(1),
           ring: this.getRingForTechnology(name, radar).charAt(0).toUpperCase() + this.getRingForTechnology(name, radar).slice(1),
           lastComment: this.getLatestComment(name, radar),
           lastCommentAutor: this.getLatestComment(name, radar).autor,
-          lastCommentText: '"' + this.getLatestComment(name, radar).text.slice(0,150) + ' ..."',
+          lastCommentText: this.shortenText(this.getLatestComment(name, radar).text),
           lastCommentMeinung: this.getLatestComment(name, radar).meinung,
           lastCommentTime: this.getLatestComment(name, radar).zeit
         });
       }
     }
     this.setState(({
-      latest: discussedTechs
+      latest: latest
     }));
-    console.log(this.state.latest); // TODO entfernen
+  }
+
+  shortenText(text) {
+    if (text.length > 150) {
+      text = text.slice(0,150);
+    }
+    return '"' + text + ' ..."';
   }
 
   getStyle(item, value) {
           var countValue = this.getCount(item, value);
           var count = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar).length;
           var width = (countValue * 100 / count) + '%';
-          console.log(count);
           return {
               width: width
           };
