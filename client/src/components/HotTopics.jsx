@@ -3,6 +3,11 @@ import commentService from "../services/commentService";
 import javaJSON from '../components/java-radar.json';
 import jsJSON from "./javascript-radar.json";
 import msJSON from "./microsoft-radar.json";
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import "../static/css/hotTopicsStyles.scss";
+import Icon from "@material-ui/core/Icon";
 
 export default class HotTopics extends React.Component {
   constructor(props) {
@@ -26,6 +31,9 @@ export default class HotTopics extends React.Component {
     this.withinTheLastXDays = this.withinTheLastXDays.bind(this);
     this.getTop5TrendingDiscussions = this.getTop5TrendingDiscussions.bind(this);
     this.getRingForTechnology = this.getRingForTechnology.bind(this);
+    this.getTeilnehmer = this.getTeilnehmer.bind(this);
+    this.getCount = this.getCount.bind(this);
+    this.getLatestComment = this.getLatestComment.bind(this);
     this.getAllComments = async () => {
       const data = await commentService.getByRadarType();
       const commentsAllSorted = [];
@@ -94,6 +102,46 @@ export default class HotTopics extends React.Component {
     return(date - xDaysAgo >= 0);
   }
 
+  getCount(item, value) {
+    var commentsOneCommentPerUser = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar);
+    var countValue = commentsOneCommentPerUser.filter(comment => {
+      return comment.meinung === this.state.meinungArr[value - 1];
+    }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
+      return comment.meinung === this.state.meinungArr[value - 1];
+    }).length : 0;
+    return countValue;
+  }
+
+  getTeilnehmer(com, tech, radar) {
+    var comments = com.filter(comment => {
+      return comment.technologie === tech &&
+          comment.radar === radar
+    });
+    var commentsOneCommentPerUser = [];
+    comments.forEach(comment => {
+      if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
+        var commentsWithSameName = comments.filter(item => {
+          return item.autor === comment.autor;
+        });
+        commentsWithSameName.sort((a, b) => {
+          var partsA = a.zeit.split(', ');
+          var datesA = partsA[0].split('/');
+          var timeA = partsA[1].split(':');
+          var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
+
+          var partsB = b.zeit.split(', ');
+          var datesB = partsB[0].split('/');
+          var timeB = partsB[1].split(':');
+          var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
+
+          return dateB - dateA;
+        });
+        commentsOneCommentPerUser.push(commentsWithSameName[0]);
+      }
+    });
+    return commentsOneCommentPerUser;
+  }
+
   getAllTechnologies() {
     const techs = [];
     for (var i = 0; i < javaJSON.length; i++) {
@@ -102,8 +150,10 @@ export default class HotTopics extends React.Component {
         kommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsWithinXDays),
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(javaJSON[i].name, "java", this.state.commentsAllSorted),
         radar: "java",
+        radarAnzeigen: "Java",
         ring: javaJSON[i].ring,
-        // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+        ringAnzeigen: javaJSON[i].ring.charAt(0).toUpperCase() + javaJSON[i].ring.slice(1),
+        teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, javaJSON[i].name, "java").length,
       });
     }
     for (var j = 0; j < jsJSON.length; j++) {
@@ -112,8 +162,10 @@ export default class HotTopics extends React.Component {
         kommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsWithinXDays),
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(jsJSON[j].name, "javascript", this.state.commentsAllSorted),
         radar: "javascript",
+        radarAnzeigen: "Javascript",
         ring: jsJSON[j].ring,
-        // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+        ringAnzeigen: jsJSON[j].ring.charAt(0).toUpperCase() + jsJSON[j].ring.slice(1),
+        teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, jsJSON[j].name, "javascript").length,
       });
     }
     for (var k = 0; k < msJSON.length; k++) {
@@ -122,8 +174,10 @@ export default class HotTopics extends React.Component {
         kommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsWithinXDays),
         gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(msJSON[k].name, "microsoft", this.state.commentsAllSorted),
         radar: "microsoft",
+        radarAnzeigen: "Microsoft",
         ring: msJSON[k].ring,
-        // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+        ringAnzeigen: msJSON[k].ring.charAt(0).toUpperCase() + msJSON[k].ring.slice(1),
+        teilnehmer: this.getTeilnehmer(this.state.commentsAllSorted, msJSON[k].name, "microsoft").length
       });
     }
     this.setState({
@@ -167,6 +221,14 @@ export default class HotTopics extends React.Component {
     }
   }
 
+  getLatestComment(tech, radar) {
+    var comments = this.state.commentsAllSorted.filter(comment => {
+      return comment.technologie === tech &&
+          comment.radar === radar
+    });
+    return comments[0]
+  }
+
   getTop5LatestDiscussions() {
     var discussedTechs = [];
     for (var l = 0; l < this.state.commentsAllSorted.length; l++) {
@@ -176,9 +238,13 @@ export default class HotTopics extends React.Component {
         discussedTechs.push({
           technologie: name,
           gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar, this.state.commentsAllSorted),
-          radar: radar,
-          ring: this.getRingForTechnology(name, radar)
-          // TODO anzahl der diskussioneteilnehmer und voting/ tendenz erfassen, sobald vorhanden
+          radar: radar.charAt(0).toUpperCase() + radar.slice(1),
+          ring: this.getRingForTechnology(name, radar).charAt(0).toUpperCase() + this.getRingForTechnology(name, radar).slice(1),
+          lastComment: this.getLatestComment(name, radar),
+          lastCommentAutor: this.getLatestComment(name, radar).autor,
+          lastCommentText: this.getLatestComment(name, radar).text,
+          lastCommentMeinung: this.getLatestComment(name, radar).meinung,
+          lastCommentTime: this.getLatestComment(name, radar).zeit
         });
       }
     }
@@ -188,11 +254,101 @@ export default class HotTopics extends React.Component {
     console.log(this.state.latest); // TODO entfernen
   }
 
+  getStyle(item, value) {
+          var countValue = this.getCount(item, value);
+          var count = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar).length;
+          var width = (countValue * 100 / count) + '%';
+          console.log(count);
+          return {
+              width: width
+          };
+      }
+
+      getBalken(item) {
+          let balken = <div className="balken"></div>;
+          if (item.ring === "einsetzen" && (!(this.getCount(item, 4) === 0 && this.getCount(item, 1) === 0 && this.getCount(item,2) === 0))) {
+              balken = (<div className="balken">
+
+                  <div className="innen tooltip" style={this.getStyle(item,4)}>{this.getCount(item,4)}<span
+                      className="tooltiptext">Einsetzen</span></div>
+
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
+                      className="tooltiptext">Evaluieren</span></div>
+
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
+                      className="tooltiptext">Überdenken</span></div>
+              </div>);
+
+          } else if (item.ring === "evaluieren" && (!(this.getCount(item,5) === 0 && this.getCount(item,2) === 0 && this.getCount(item,3) === 0))) {
+              balken = (<div className="balken">
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
+                      className="tooltiptext">Einsetzen</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,5)}>{this.getCount(item,5)}<span
+                      className="tooltiptext">Evaluieren</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
+                      className="tooltiptext">Überdenken</span></div>
+              </div>);
+          } else if (item.ring === "überdenken" && (!(this.getCount(item,6) === 0 && this.getCount(item,1) === 0 && this.getCount(item,3) === 0))) {
+              balken = (<div className="balken">
+                  <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
+                      className="tooltiptext">Einsetzen</span></div>
+                  <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
+                      className="tooltiptext">Evaluieren</span></div>
+                  <div className="aussen tooltip" style={this.getStyle(item,6)}>{this.getCount(item,6)}<span
+                      className="tooltiptext">Überdenken</span></div>
+              </div>);
+          }
+          return balken;
+      }
+
+
   render() {
     return (
-        <div >
-        HotTopics
-      </div>
+        <div className="container">
+            <div className="row">
+                <h3 className="column titleT">Trending</h3>
+                <h3 className="column titleL">Latest</h3>
+            </div>
+            <div className="row">
+            <div className="card cardT">
+                {this.state.trending.map(item => {
+                    return (<div className="cardRow">
+                       <div className="box">
+                          <div className="anzahl">{item.gesamtkommentaranzahl}</div>
+                          <div className="icon"><Icon>forum</Icon></div>
+                       </div>
+                       <div className="column">
+                              <div className="trending">
+                                 <div className="title">{item.technologie}</div>
+                                 <div>{item.ringAnzeigen} | {item.radarAnzeigen} </div>
+                                 <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
+                                  <div>{this.getBalken(item)}</div>
+                              </div>
+
+                       </div>
+                    </div>)
+                                })}</div>
+            <div className="card cardL">
+                {this.state.latest.map(item => {
+                    return (<div className="cardRow">
+                        <div className="timeStamp">
+                        <div className="time">{item.lastCommentTime ? item.lastCommentTime.slice(0, -3).slice(item.lastCommentTime.indexOf(',')+1) : ""}</div>
+                        <div className="date">{item.lastCommentTime ? item.lastCommentTime.slice(0,item.lastCommentTime.indexOf(',')).slice(0,-2).replace('/','.').replace('/','.') : ""}</div>
+                        </div>
+                        <div className="column">
+                            <div className="infos">
+                                <div className="title">{item.technologie}</div>
+                                <div>{item.ring} | {item.radar} </div>
+                                <div className="autor">{item.lastCommentAutor}</div>
+                                <div className="meinung">{item.lastCommentMeinung}</div>
+                            </div>
+                            <div className="comment">{item.lastCommentText}</div>
+                        </div>
+                    </div>)
+                })}
+            </div>
+            </div>
+        </div>
     );
   }
 }

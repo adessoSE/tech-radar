@@ -204,8 +204,14 @@ svg {
 }
 
 .desc {
-  padding-bottom: 15px;
+
+
+  h4 {
+    font-size: 25px;
+
+  }
 }
+
 
 .diskussionButton {
   padding: 8px 0px !important;
@@ -256,7 +262,7 @@ svg {
   .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px  black;
 
     height: 20px;
     text-align: center;
@@ -298,5 +304,12 @@ svg {
     opacity: 1;
   }
 
+
+  .tooltip:nth-child(1) {
+    border-radius: 5px 0px 0px 5px;
+  }
+  .tooltip:last-child {
+    border-radius: 0px 5px 5px 0px ;
+  }
 }
 

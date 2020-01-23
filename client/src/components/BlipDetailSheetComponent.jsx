@@ -77,7 +77,7 @@ class BlipDetailSheetComponent extends React.Component {
 
     addNewComment() {
         this.setState({clicked: true});
-        if (this.state.newMeinung === "" || this.state.newCommentText == "") {
+        if (this.state.newMeinung === "" || this.state.newCommentText === "") {
             this.setState({valid: false});
         } else {
             this.setState({valid: true});
@@ -124,25 +124,24 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     handleChange(e) {
-        if (e.target.value == "") {
+        if (e.target.value === "") {
             this.setState({valid: false})
-
-        } else if (e.target.value != "" && this.state.newMeinung != "") {
+        } else if (e.target.value !== "" && this.state.newMeinung !== "") {
             this.setState({valid: true})
         }
         this.setState({newCommentText: e.target.value});
     }
 
     handleNewMeinung(e) {
-        this.setState({newMeinung: e.target.value})
-        if (this.state.newMeinung == "") {
+        this.setState({newMeinung: e.target.value});
+        if (this.state.newMeinung === "") {
             this.setState({
                 valid: false
             })
-        } else if (this.state.newMeinung != "" && this.state.newCommentText != "") {
+        } else if (this.state.newMeinung !== "" && this.state.newCommentText !== "") {
             this.setState({
                 valid: true
-            })
+            });
             console.log(e.target.value)
         }
         this.setState({newMeinung: e.target.value});
@@ -205,7 +204,6 @@ class BlipDetailSheetComponent extends React.Component {
             return comment.technologie === this.props.name &&
                 comment.radar === this.props.radar
         });
-        console.log("COMMENTS", comments);
         var commentsOneCommentPerUser = [];
         comments.forEach(comment => {
              if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
@@ -213,12 +211,23 @@ class BlipDetailSheetComponent extends React.Component {
                      return item.autor === comment.autor;
                  });
                  commentsWithSameName.sort((a, b) => {
-                     return new Date(b.zeit) - new Date(a.zeit);
+                     var partsA = a.zeit.split(', ');
+                     var datesA = partsA[0].split('/');
+                     var timeA = partsA[1].split(':');
+                     var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
+
+                     var partsB = b.zeit.split(', ');
+                     var datesB = partsB[0].split('/');
+                     var timeB = partsB[1].split(':');
+                     var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
+
+                     return dateB - dateA;
                  });
+                 console.log("Kommentare gleicher User: ", commentsWithSameName);
                  commentsOneCommentPerUser.push(commentsWithSameName[0]);
              }
         });
-        console.log("RESULT", commentsOneCommentPerUser);
+        console.log("Kommentare pro User: ", commentsOneCommentPerUser);
         return commentsOneCommentPerUser;
     }
 
@@ -229,7 +238,7 @@ class BlipDetailSheetComponent extends React.Component {
         }).length > 0 ? commentsOneCommentPerUser.filter(comment => {
             return comment.meinung === this.state.meinungArr[value - 1];
         }).length : 0;
-        console.log("Countvalue", countValue);
+        console.log("Anzahl pro Meinung: ", countValue);
         return countValue;
     }
 
@@ -330,17 +339,15 @@ class BlipDetailSheetComponent extends React.Component {
                 );
             });
         let error;
+
         const validationColor="black";
         if (this.state.valid == false && this.state.clicked == true) {
             error = (<div className="error">Bitte alle Felder ausfüllen.</div>);
             this.state.validationTextArea="inputTextError";
             this.state.validationColor="red";
-
-
         } else {
             error = ""
         }
-        ;
         let discussion;
         let discussionButton;
         if (this.state.showDiscussion === true) {
@@ -395,8 +402,11 @@ class BlipDetailSheetComponent extends React.Component {
                             <h3>{this.props.ring.charAt(0).toUpperCase() + this.props.ring.slice(1)} | {this.props.radar.charAt(0).toUpperCase() + this.props.radar.slice(1)}</h3>
                         </div>
 
-                        <div className="desc">{this.props.desc}</div>
-                        {this.getBalken()}
+                        <div className="desc">
+                            <div>{this.props.desc}</div>
+                            <h4>Meinungsverteilung</h4>
+                        </div>
+                            {this.getBalken()}
                         {discussionButton}
 
                         {discussion}

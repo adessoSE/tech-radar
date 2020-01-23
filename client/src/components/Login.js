@@ -41,8 +41,9 @@ class Login extends Component {
             this.props.history.push('/');
             this.setState({loginSuccess: true})
         } else {
-            this.setState({loginSuccess: false})
-          console.log("no matching")
+            this.setState({
+                loginSuccess: false,
+            });
         }
     };
 
@@ -59,17 +60,19 @@ class Login extends Component {
                             <h3 align="center">Willkommen beim adesso Technologie-Radar</h3>
                             <div>{error}</div>
                             <FormGroup controlId="email">
-                                <TextField error id="name" errorstyling type="email" required name="email"
+                                <TextField error id="name"
+                                           type="email" required name="email"
                                            variant="outlined"
                                            label="E-Mail"
+                                           value={this.state.email}
+                                           defaultValue=""
                                            onChange={this.handleEmailChanged}/>
                             </FormGroup>
                             <FormGroup controlId="passwort">
                                 <TextField error id="passwort" name="passwort" required variant="outlined"
-                                           label="Passwort" type="password"
+                                           label="Passwort" type="password" value="" defaultValue=""
                                            onChange={this.handlePasswortChanged}/>
                             </FormGroup>
-
                             <div className="button">
                                 <FormGroup controlId="submit">
                                     <Button variant="contained" onClick={this.verifyUserInput}
@@ -89,13 +92,13 @@ class Login extends Component {
                             <h3 align="center">Willkommen beim adesso Technologie-Radar</h3>
                         </div>
                         <FormGroup controlId="email">
-                            <TextField id="name" errorstyling type="email" required name="E-mail" variant="outlined"
+                            <TextField id="name"  type="email" required name="email" variant="outlined"
                                        label="E-Mail"
                                        onChange={this.handleEmailChanged}/>
                         </FormGroup>
                         <FormGroup controlId="passwort">
-                            <TextField id="passwort" name="passwort" required variant="outlined" label="Passwort"
-                                       type="password"
+                            <TextField id="passwort" name="passwort" required variant="outlined"
+                                       label="Passwort" type="password"
                                        onChange={this.handlePasswortChanged}/>
                         </FormGroup>
                         <div className="button">
