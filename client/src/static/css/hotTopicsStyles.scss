@@ -201,12 +201,14 @@ h3{
     opacity: 1;
   }
 
-
   .tooltip:nth-child(1) {
     border-radius: 5px 0px 0px 5px;
   }
   .tooltip:last-child {
-    border-radius: 0px 5px 5px 0px ;
+    border-radius: 0px 5px 5px 0px;
+  }
+  .tooltip:only-child {
+    border-radius: 5px;
   }
 }
 .balkenDiv{

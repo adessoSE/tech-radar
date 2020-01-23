@@ -261,38 +261,52 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     getBalken() {
-        let balken = <div className="balken"></div>;
-        if (this.props.ring === "einsetzen" && (!(this.getCount(4) === 0 && this.getCount(1) === 0 && this.getCount(2) === 0))) {
-            balken = (<div className="balken">
-
-                <div className="innen tooltip" style={this.getStyle(4)}>Einsetzen<span
-                    className="tooltiptext">{this.getCount(4)}</span></div>
-
-                <div className="mitte tooltip" style={this.getStyle(1)}>Evaluieren<span
-                    className="tooltiptext">{this.getCount(1)}</span></div>
-
-                <div className="aussen tooltip" style={this.getStyle(2)}>Überdenken<span
-                    className="tooltiptext">{this.getCount(2)}</span></div>
-            </div>);
-
+        let balken = "";
+        let d1 = "";
+        let d2 = "";
+        let d3 = "";
+        if (this.props.ring === "einsetzen" && (!(this.getCount( 4) === 0 && this.getCount( 1) === 0 && this.getCount(2) === 0))) {
+            if(parseFloat(this.getStyle(4).width) > 0) {
+                d1 = <div className="innen tooltip" style={this.getStyle(4)}>{this.getCount(4)}<span
+                    className="tooltiptext">Einsetzen</span></div>;
+            }
+            if(parseFloat(this.getStyle(1).width) > 0) {
+                d2 = <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
+                    className="tooltiptext">Evaluieren</span></div>
+            }
+            if(parseFloat(this.getStyle(2).width) > 0) {
+                d3 = <div className="aussen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Überdenken</span></div>
+            }
+            balken = (<div className="balken">{d1}{d2}{d3}</div>);
         } else if (this.props.ring === "evaluieren" && (!(this.getCount(5) === 0 && this.getCount(2) === 0 && this.getCount(3) === 0))) {
-            balken = (<div className="balken">
-                <div className="innen tooltip" style={this.getStyle(3)}>Einsetzen<span
-                    className="tooltiptext">{this.getCount(3)}</span></div>
-                <div className="mitte tooltip" style={this.getStyle(5)}>Evaluieren<span
-                    className="tooltiptext">{this.getCount(5)}</span></div>
-                <div className="aussen tooltip" style={this.getStyle(2)}>Überdenken<span
-                    className="tooltiptext">{this.getCount(2)}</span></div>
-            </div>);
+            if(parseFloat(this.getStyle(3).width) > 0) {
+                d1 = <div className="innen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Einsetzen</span></div>
+            }
+            if(parseFloat(this.getStyle(5).width) > 0) {
+                d2 = <div className="mitte tooltip" style={this.getStyle(5)}>{this.getCount(5)}<span
+                    className="tooltiptext">Evaluieren</span></div>
+            }
+            if(parseFloat(this.getStyle(2).width) > 0) {
+                d3 = <div className="aussen tooltip" style={this.getStyle(2)}>{this.getCount(2)}<span
+                    className="tooltiptext">Überdenken</span></div>
+            }
+            balken = (<div className="balken">{d1}{d2}{d3}</div>);
         } else if (this.props.ring === "überdenken" && (!(this.getCount(6) === 0 && this.getCount(1) === 0 && this.getCount(3) === 0))) {
-            balken = (<div className="balken">
-                <div className="innen tooltip" style={this.getStyle(3)}>Einsetzen<span
-                    className="tooltiptext">{this.getCount(3)}</span></div>
-                <div className="mitte tooltip" style={this.getStyle(1)}>Evaluieren<span
-                    className="tooltiptext">{this.getCount(1)}</span></div>
-                <div className="aussen tooltip" style={this.getStyle(6)}>Überdenken<span
-                    className="tooltiptext">{this.getCount(6)}</span></div>
-            </div>);
+            if(parseFloat(this.getStyle(3).width) > 0) {
+                d1 = <div className="innen tooltip" style={this.getStyle(3)}>{this.getCount(3)}<span
+                    className="tooltiptext">Einsetzen</span></div>
+            }
+            if(parseFloat(this.getStyle(1).width) > 0) {
+                d2 = <div className="mitte tooltip" style={this.getStyle(1)}>{this.getCount(1)}<span
+                    className="tooltiptext">Evaluieren</span></div>
+            }
+            if(parseFloat(this.getStyle(6).width) > 0) {
+                d3 = <div className="aussen tooltip" style={this.getStyle(6)}>{this.getCount(6)}<span
+                    className="tooltiptext">Überdenken</span></div>
+            }
+            balken = (<div className="balken">{d1}{d2}{d3}</div>);
         }
         return balken;
     }
@@ -322,7 +336,7 @@ class BlipDetailSheetComponent extends React.Component {
                     (item.meinung === "Nach Evaluieren verschieben!" || item.meinung === "In Evaluieren belassen!") ?
                         <div className="meinung mitte">{item.meinung}</div> :
                         (item.meinung === "Nach Überdenken verschieben!" || item.meinung === "In Überdenken belassen!") ?
-                            <div className="meinung aussen">{item.meinung}</div> : ""
+                            <div className="meinung aussen">{item.meinung}</div> : "";
                 return (<div className="discussionItem mitte">
 
                         <div className="discussionContainer">
