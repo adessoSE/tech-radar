@@ -393,8 +393,11 @@ class BlipDetailSheetComponent extends React.Component {
                             <h3>{this.props.ring.charAt(0).toUpperCase() + this.props.ring.slice(1)} | {this.props.radar.charAt(0).toUpperCase() + this.props.radar.slice(1)}</h3>
                         </div>
 
-                        <div className="desc">{this.props.desc}</div>
-                        {this.getBalken()}
+                        <div className="desc">
+                            <div>{this.props.desc}</div>
+                            <h4>Meinungsverteilung</h4>
+                        </div>
+                            {this.getBalken()}
                         {discussionButton}
 
                         {discussion}
