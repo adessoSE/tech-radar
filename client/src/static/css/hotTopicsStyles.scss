@@ -68,7 +68,9 @@ h3{
     padding: 5px 0px 5px 5px;
     display: flex;
     .infos {
-      width: 50%;}
+      width: 30%;
+      padding-right: 25px;
+    }
       .title {
         font-size: 16px;
         font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -88,10 +90,13 @@ h3{
       }
 
     .comment{
-      width: 50%;
+      width: 70%;
       font-size: 10px;
+      color: #808080;
+      font-style: italic;
       line-height: 15px;
       padding-top: 36px;
+      padding-right: 25px;
     }
   }
 

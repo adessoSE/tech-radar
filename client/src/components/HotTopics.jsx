@@ -242,7 +242,7 @@ export default class HotTopics extends React.Component {
           ring: this.getRingForTechnology(name, radar).charAt(0).toUpperCase() + this.getRingForTechnology(name, radar).slice(1),
           lastComment: this.getLatestComment(name, radar),
           lastCommentAutor: this.getLatestComment(name, radar).autor,
-          lastCommentText: this.getLatestComment(name, radar).text,
+          lastCommentText: '"' + this.getLatestComment(name, radar).text.slice(0,150) + ' ..."',
           lastCommentMeinung: this.getLatestComment(name, radar).meinung,
           lastCommentTime: this.getLatestComment(name, radar).zeit
         });
