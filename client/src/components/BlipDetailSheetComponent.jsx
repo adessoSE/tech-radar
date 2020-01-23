@@ -68,7 +68,7 @@ class BlipDetailSheetComponent extends React.Component {
     }
 
     getTrailingZeroIfNeeded(number) {
-        return number<10?'0':'';
+        return number < 10 ? '0' : '';
     }
 
     addNewComment() {
@@ -81,7 +81,7 @@ class BlipDetailSheetComponent extends React.Component {
             var month = (datestorage.getMonth() + 1);
             var date = this.getTrailingZeroIfNeeded(datestorage.getDate()) + datestorage.getDate() + "/"
                 + this.getTrailingZeroIfNeeded(month) + month + "/"
-                + datestorage.getFullYear().toString().slice(2,4) + ", "
+                + datestorage.getFullYear().toString().slice(2, 4) + ", "
                 + this.getTrailingZeroIfNeeded(datestorage.getHours()) + datestorage.getHours() + ":"
                 + this.getTrailingZeroIfNeeded(datestorage.getMinutes()) + datestorage.getMinutes() + ":"
                 + this.getTrailingZeroIfNeeded(datestorage.getSeconds()) + datestorage.getSeconds();
@@ -94,14 +94,14 @@ class BlipDetailSheetComponent extends React.Component {
                 technologie: this.props.name,
                 radar: this.props.radar,
             }).then(
-            modifiedComments.push({
-                autor: this.state.newCommentAutor,
-                text: this.state.newCommentText,
-                meinung: this.state.meinungArr[this.state.newMeinung - 1],
-                zeit: date,
-                technologie: this.props.name,
-                radar: this.props.radar,
-            }));
+                modifiedComments.push({
+                    autor: this.state.newCommentAutor,
+                    text: this.state.newCommentText,
+                    meinung: this.state.meinungArr[this.state.newMeinung - 1],
+                    zeit: date,
+                    technologie: this.props.name,
+                    radar: this.props.radar,
+                }));
             this.setState({
                 comments: modifiedComments,
                 newCommentAutor: localStorage.getItem("name"),
@@ -202,26 +202,26 @@ class BlipDetailSheetComponent extends React.Component {
         });
         var commentsOneCommentPerUser = [];
         comments.forEach(comment => {
-             if((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor))===-1){
-                 var commentsWithSameName = comments.filter(item => {
-                     return item.autor === comment.autor;
-                 });
-                 commentsWithSameName.sort((a, b) => {
-                     var partsA = a.zeit.split(', ');
-                     var datesA = partsA[0].split('/');
-                     var timeA = partsA[1].split(':');
-                     var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
+            if ((commentsOneCommentPerUser.findIndex(element => element.autor === comment.autor)) === -1) {
+                var commentsWithSameName = comments.filter(item => {
+                    return item.autor === comment.autor;
+                });
+                commentsWithSameName.sort((a, b) => {
+                    var partsA = a.zeit.split(', ');
+                    var datesA = partsA[0].split('/');
+                    var timeA = partsA[1].split(':');
+                    var dateA = new Date('20' + datesA[2], datesA[1], datesA[0], timeA[0], timeA[1], timeA[2]);
 
-                     var partsB = b.zeit.split(', ');
-                     var datesB = partsB[0].split('/');
-                     var timeB = partsB[1].split(':');
-                     var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
+                    var partsB = b.zeit.split(', ');
+                    var datesB = partsB[0].split('/');
+                    var timeB = partsB[1].split(':');
+                    var dateB = new Date('20' + datesB[2], datesB[1], datesB[0], timeB[0], timeB[1], timeB[2]);
 
-                     return dateB - dateA;
-                 });
-                 console.log("Kommentare gleicher User: ", commentsWithSameName);
-                 commentsOneCommentPerUser.push(commentsWithSameName[0]);
-             }
+                    return dateB - dateA;
+                });
+                console.log("Kommentare gleicher User: ", commentsWithSameName);
+                commentsOneCommentPerUser.push(commentsWithSameName[0]);
+            }
         });
         console.log("Kommentare pro User: ", commentsOneCommentPerUser);
         return commentsOneCommentPerUser;
@@ -322,7 +322,8 @@ class BlipDetailSheetComponent extends React.Component {
                 return (<div className="discussionItem mitte">
 
                         <div className="discussionContainer">
-                            <div className="name"><p>{item.autor}</p><p><span className="timestamp">{item.zeit}</span></p></div>
+                            <div className="name"><p>{item.autor}</p><p><span className="timestamp">{item.zeit}</span>
+                            </p></div>
                             <div><p>{item.text}</p><p>{meinung}</p></div>
                         </div>
                         <div className="discussionContainer">
@@ -397,7 +398,17 @@ class BlipDetailSheetComponent extends React.Component {
                             <div>{this.props.desc}</div>
                             <h4>Meinungsverteilung</h4>
                         </div>
+                        <div className="balkenDiv">
                             {this.getBalken()}
+                            <div className="anzahlDiv">
+                                <Icon className="center">forum</Icon>
+                                <span className="center2">{this.getTotalCount()}</span>
+                            </div>
+                            <div className="anzahlDiv">
+                                <Icon className="center">perm_identity</Icon>
+                                <span className="center2">{this.getTeilnehmer().length}</span>
+                            </div>
+                        </div>
                         {discussionButton}
 
                         {discussion}

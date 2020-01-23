@@ -209,6 +209,10 @@ svg {
 
 .blip-overlay {
   overflow-y: auto;
+
+  .balken{
+    width: 70% !important;
+  }
 }
 
 .MuiFormControl-root {
@@ -224,7 +228,7 @@ svg {
 }
 
 .meinung.mitte {
- color: $mitte
+  color: $mitte
 }
 
 .meinung.aussen {
@@ -297,6 +301,29 @@ svg {
   }
   .tooltip:last-child {
     border-radius: 0px 5px 5px 0px ;
+  }
+}
+.balkenDiv{
+  display: flex !important;
+  .anzahlDiv{
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    position: relative;
+    .center{
+      vertical-align: middle;
+      top: 50%;
+      left: 40%;
+      position: absolute;
+      transform: translate(-40%, -50%);
+    }
+    .center2{
+      vertical-align: middle;
+      top: 50%;
+      left: 60%;
+      position: absolute;
+      transform: translate(-60%, -50%);
+    }
   }
 }
 
