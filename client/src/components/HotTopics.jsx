@@ -33,6 +33,7 @@ export default class HotTopics extends React.Component {
     this.getTeilnehmer = this.getTeilnehmer.bind(this);
     this.getCount = this.getCount.bind(this);
     this.getLatestComment = this.getLatestComment.bind(this);
+    this.shortenText = this.shortenText.bind(this);
     this.getAllComments = async () => {
       const data = await commentService.getByRadarType();
       const commentsAllSorted = [];
@@ -79,8 +80,6 @@ export default class HotTopics extends React.Component {
         commentsWithinXDays: commentsWithinXDays,
         commentsAllSorted: commentsAllSorted
       });
-      console.log(this.state.commentsAllSorted); // TODO entfernen
-      console.log(this.state.commentsWithinXDays); // TODO entfernen
     };
     this.getAllComments().then(()=>{
       this.getAllTechnologies();
@@ -199,7 +198,6 @@ export default class HotTopics extends React.Component {
     this.setState({
       trending: trending
     });
-    console.log(this.state.trending); // TODO entfernen
   }
 
   getRingForTechnology(technologie, radar) {
@@ -229,73 +227,94 @@ export default class HotTopics extends React.Component {
   }
 
   getTop5LatestDiscussions() {
-    var discussedTechs = [];
+    const discussedTechs = [];
+    const latest = [];
     for (var l = 0; l < this.state.commentsAllSorted.length; l++) {
-      var name = this.state.commentsAllSorted[l].technologie;
-      var radar = this.state.commentsAllSorted[l].radar;
+      const name = this.state.commentsAllSorted[l].technologie;
+      const radar = this.state.commentsAllSorted[l].radar;
       if(!discussedTechs.includes(name) && discussedTechs.length < 5) {
-        discussedTechs.push({
+        discussedTechs.push(name);
+        latest.push({
           technologie: name,
           gesamtkommentaranzahl: this.getTotalCommentCountPerTechnology(name, radar, this.state.commentsAllSorted),
           radar: radar.charAt(0).toUpperCase() + radar.slice(1),
           ring: this.getRingForTechnology(name, radar).charAt(0).toUpperCase() + this.getRingForTechnology(name, radar).slice(1),
           lastComment: this.getLatestComment(name, radar),
           lastCommentAutor: this.getLatestComment(name, radar).autor,
-          lastCommentText: this.getLatestComment(name, radar).text,
+          lastCommentText: this.shortenText(this.getLatestComment(name, radar).text),
           lastCommentMeinung: this.getLatestComment(name, radar).meinung,
           lastCommentTime: this.getLatestComment(name, radar).zeit
         });
       }
     }
     this.setState(({
-      latest: discussedTechs
+      latest: latest
     }));
-    console.log(this.state.latest); // TODO entfernen
+  }
+
+  shortenText(text) {
+    if (text.length > 150) {
+      text = text.slice(0,150);
+    }
+    return '"' + text + ' ..."';
   }
 
   getStyle(item, value) {
           var countValue = this.getCount(item, value);
           var count = this.getTeilnehmer(this.state.commentsAllSorted, item.technologie, item.radar).length;
           var width = (countValue * 100 / count) + '%';
-          console.log(count);
           return {
               width: width
           };
       }
 
       getBalken(item) {
-          let balken = <div className="balken"></div>;
+          let balken = "";
+          let d1 = "";
+          let d2 = "";
+          let d3 = "";
           if (item.ring === "einsetzen" && (!(this.getCount(item, 4) === 0 && this.getCount(item, 1) === 0 && this.getCount(item,2) === 0))) {
-              balken = (<div className="balken">
-
-                  <div className="innen tooltip" style={this.getStyle(item,4)}>{this.getCount(item,4)}<span
-                      className="tooltiptext">Einsetzen</span></div>
-
-                  <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
-                      className="tooltiptext">Evaluieren</span></div>
-
-                  <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
-                      className="tooltiptext">Überdenken</span></div>
-              </div>);
-
+            if(parseFloat(this.getStyle(item,4).width) > 0) {
+              d1 = <div className="innen tooltip" style={this.getStyle(item,4)}>{this.getCount(item,4)}<span
+                  className="tooltiptext">Einsetzen</span></div>;
+            }
+            if(parseFloat(this.getStyle(item,1).width) > 0) {
+              d2 = <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
+                  className="tooltiptext">Evaluieren</span></div>
+            }
+            if(parseFloat(this.getStyle(item,2).width) > 0) {
+              d3 = <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
+                  className="tooltiptext">Überdenken</span></div>
+            }
+            balken = (<div className="balkenH">{d1}{d2}{d3}</div>);
           } else if (item.ring === "evaluieren" && (!(this.getCount(item,5) === 0 && this.getCount(item,2) === 0 && this.getCount(item,3) === 0))) {
-              balken = (<div className="balken">
-                  <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
-                      className="tooltiptext">Einsetzen</span></div>
-                  <div className="mitte tooltip" style={this.getStyle(item,5)}>{this.getCount(item,5)}<span
-                      className="tooltiptext">Evaluieren</span></div>
-                  <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
-                      className="tooltiptext">Überdenken</span></div>
-              </div>);
+            if(parseFloat(this.getStyle(item,3).width) > 0) {
+              d1 = <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
+                  className="tooltiptext">Einsetzen</span></div>
+            }
+            if(parseFloat(this.getStyle(item,5).width) > 0) {
+              d2 = <div className="mitte tooltip" style={this.getStyle(item,5)}>{this.getCount(item,5)}<span
+                  className="tooltiptext">Evaluieren</span></div>
+            }
+            if(parseFloat(this.getStyle(item,2).width) > 0) {
+              d3 = <div className="aussen tooltip" style={this.getStyle(item,2)}>{this.getCount(item,2)}<span
+                  className="tooltiptext">Überdenken</span></div>
+            }
+            balken = (<div className="balkenH">{d1}{d2}{d3}</div>);
           } else if (item.ring === "überdenken" && (!(this.getCount(item,6) === 0 && this.getCount(item,1) === 0 && this.getCount(item,3) === 0))) {
-              balken = (<div className="balken">
-                  <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
-                      className="tooltiptext">Einsetzen</span></div>
-                  <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
-                      className="tooltiptext">Evaluieren</span></div>
-                  <div className="aussen tooltip" style={this.getStyle(item,6)}>{this.getCount(item,6)}<span
-                      className="tooltiptext">Überdenken</span></div>
-              </div>);
+            if(parseFloat(this.getStyle(item,3).width) > 0) {
+              d1 = <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
+                  className="tooltiptext">Einsetzen</span></div>
+            }
+            if(parseFloat(this.getStyle(item,1).width) > 0) {
+              d2 = <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
+                  className="tooltiptext">Evaluieren</span></div>
+            }
+            if(parseFloat(this.getStyle(item,6).width) > 0) {
+              d3 = <div className="aussen tooltip" style={this.getStyle(item,6)}>{this.getCount(item,6)}<span
+                  className="tooltiptext">Überdenken</span></div>
+            }
+            balken = (<div className="balkenH">{d1}{d2}{d3}</div>);
           }
           return balken;
       }
@@ -332,7 +351,7 @@ export default class HotTopics extends React.Component {
                                  <div className="title">{item.technologie}</div>
                                  <div>{item.ringAnzeigen} | {item.radarAnzeigen} </div>
                                  <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
-                                  <div>{this.getBalken(item)}</div>
+                                  <div className="voting">{this.getBalken(item)}</div>
                               </div>
 
                        </div>

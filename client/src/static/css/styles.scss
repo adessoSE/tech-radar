@@ -315,6 +315,9 @@ svg {
   .tooltip:last-child {
     border-radius: 0px 5px 5px 0px ;
   }
+  .tooltip:only-child {
+    border-radius: 5px;
+  }
 }
 .balkenDiv{
   display: flex !important;

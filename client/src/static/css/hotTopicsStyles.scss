@@ -1,3 +1,7 @@
+$innen: #0275d8;
+$mitte: #378fdd;
+$aussen: #71acdf;
+
 .container{
   width: 100%;
 
@@ -18,7 +22,6 @@
 .cardT{
   margin-right: 20px;
 }
-
 
 .cardL{
   margin-left: 20px;
@@ -68,7 +71,9 @@ h3{
     padding: 5px 0px 5px 5px;
     display: flex;
     .infos {
-      width: 50%;}
+      width: 30%;
+      padding-right: 25px;
+    }
       .title {
         font-size: 16px;
         font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -88,10 +93,13 @@ h3{
       }
 
     .comment{
-      width: 50%;
-      font-size: 10px;
+      width: 70%;
+      font-size: 12px;
+      color: #808080;
+      font-style: italic;
       line-height: 15px;
       padding-top: 36px;
+      padding-right: 25px;
     }
   }
 
@@ -128,4 +136,101 @@ h3{
   transform: translate(-50%, -50%);
   font-size: 2rem;
   color: grey;
+}
+
+
+.balkenH {
+  width: 85%;
+  padding-top: 4px;
+  display: flex;
+
+  .innen {
+    background-color: $innen;
+  }
+
+  .mitte {
+    background-color: $mitte;
+  }
+
+  .aussen {
+    background-color: $aussen;
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px  black;
+
+    height: 25px;
+    text-align: center;
+    color: white;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tooltip:nth-child(1) {
+    border-radius: 5px 0px 0px 5px;
+  }
+  .tooltip:last-child {
+    border-radius: 0px 5px 5px 0px;
+  }
+  .tooltip:only-child {
+    border-radius: 5px;
+  }
+}
+.balkenDiv{
+  display: flex !important;
+  .anzahlDiv{
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    position: relative;
+    .center{
+      vertical-align: middle;
+      top: 50%;
+      left: 40%;
+      position: absolute;
+      transform: translate(-40%, -50%);
+    }
+    .center2{
+      vertical-align: middle;
+      top: 50%;
+      left: 60%;
+      position: absolute;
+      transform: translate(-60%, -50%);
+    }
+  }
 }
