@@ -44,7 +44,6 @@ class Login extends Component {
             this.setState({
                 loginSuccess: false,
             });
-          console.log(this.state.email)
         }
     };
 
