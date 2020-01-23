@@ -9,13 +9,13 @@ import {FormGroup, Button, TextField} from '@material-ui/core';
 class Login extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             email: '',
             passwort: '',
             loginSuccess: '',
-        }
+        };
         this.handleEmailChanged = this.handleEmailChanged.bind(this);
         this.handlePasswortChanged = this.handlePasswortChanged.bind(this);
         this.verifyUserInput = this.verifyUserInput.bind(this);
@@ -70,7 +70,7 @@ class Login extends Component {
                             </FormGroup>
                             <FormGroup controlId="passwort">
                                 <TextField error id="passwort" name="passwort" required variant="outlined"
-                                           label="Passwort" type="password" value="" defaultValue=""
+                                           label="Passwort" type="password" defaultValue=""
                                            onChange={this.handlePasswortChanged}/>
                             </FormGroup>
                             <div className="button">
