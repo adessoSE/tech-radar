@@ -267,9 +267,9 @@ export default class HotTopics extends React.Component {
       }
 
       getBalken(item) {
-          let balken = <div className="balken"></div>;
+          let balken = <div className="balkenH"></div>;
           if (item.ring === "einsetzen" && (!(this.getCount(item, 4) === 0 && this.getCount(item, 1) === 0 && this.getCount(item,2) === 0))) {
-              balken = (<div className="balken">
+              balken = (<div className="balkenH">
 
                   <div className="innen tooltip" style={this.getStyle(item,4)}>{this.getCount(item,4)}<span
                       className="tooltiptext">Einsetzen</span></div>
@@ -282,7 +282,7 @@ export default class HotTopics extends React.Component {
               </div>);
 
           } else if (item.ring === "evaluieren" && (!(this.getCount(item,5) === 0 && this.getCount(item,2) === 0 && this.getCount(item,3) === 0))) {
-              balken = (<div className="balken">
+              balken = (<div className="balkenH">
                   <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
                       className="tooltiptext">Einsetzen</span></div>
                   <div className="mitte tooltip" style={this.getStyle(item,5)}>{this.getCount(item,5)}<span
@@ -291,7 +291,7 @@ export default class HotTopics extends React.Component {
                       className="tooltiptext">Überdenken</span></div>
               </div>);
           } else if (item.ring === "überdenken" && (!(this.getCount(item,6) === 0 && this.getCount(item,1) === 0 && this.getCount(item,3) === 0))) {
-              balken = (<div className="balken">
+              balken = (<div className="balkenH">
                   <div className="innen tooltip" style={this.getStyle(item,3)}>{this.getCount(item,3)}<span
                       className="tooltiptext">Einsetzen</span></div>
                   <div className="mitte tooltip" style={this.getStyle(item,1)}>{this.getCount(item,1)}<span
@@ -324,7 +324,7 @@ export default class HotTopics extends React.Component {
                                  <div className="title">{item.technologie}</div>
                                  <div>{item.ringAnzeigen} | {item.radarAnzeigen} </div>
                                  <div className="autor">Teilnehmeranzahl: {item.teilnehmer}</div>
-                                  <div>{this.getBalken(item)}</div>
+                                  <div className="voting">{this.getBalken(item)}</div>
                               </div>
 
                        </div>
