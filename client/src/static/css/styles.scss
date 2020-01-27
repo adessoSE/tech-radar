@@ -250,6 +250,7 @@ svg {
 .balken {
   width: 70%;
   display: flex;
+  line-height: 30px;
 
   .innen {
     background-color: $innen;
